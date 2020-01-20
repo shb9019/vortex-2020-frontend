@@ -1,0 +1,58 @@
+.register-form {
+    background-color: #F1F1F1;
+    padding: 40px 0px;
+    font-family: axiforma;
+}
+
+.register-title {
+    width: 100%;
+    font-family: axiforma;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    font-size: 40px;
+}
+
+.input-field {
+    border: 0;
+    width: 100%;
+    min-width: 330px;
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: #E1E1E2;
+    transition: border, background-color;
+    transition-duration: 0.3s;
+}
+
+.input-field:focus {
+    background-color: transparent;
+    outline: none;
+    border: 1px solid #F25075;
+}
+
+@media only screen and (max-width: 800px) {
+    .register-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .register-form {
+        min-width: 0px;
+    }
+
+    .input-field {
+        width: 100%;
+
+    }
+
+    .input-field-col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.forgot-password {
+    margin-left: 15px;
+    padding-top: 30px;
+}

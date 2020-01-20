@@ -1,0 +1,43 @@
+.hamburger:hover {
+    background-color: transparent;
+}
+
+.hamburger:active {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.hamburger:focus {
+    box-shadow: none !important;
+}
+
+.vortex-navbar {
+    background-color: white;
+    z-index: 10000;
+}
+
+.hamburger-box {
+    display: block;
+}
+
+.hamburger-inner {
+    width: 20px;
+    height: 2px;
+}
+
+.hamburger-inner::before {
+    width: 20px;
+    height: 2px;
+}
+
+.hamburger-inner::after {
+    width: 20px;
+    height: 2px;
+}
+
+@media only screen and (min-width: 600px) {
+    .vortex-navbar {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}

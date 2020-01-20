@@ -1,0 +1,67 @@
+.profile-title {
+    width: 100%;
+    font-family: axiforma;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    font-size: 40px;
+}
+
+.profile-title-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-row .input-field-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-row .input-field-col .input-field {
+    width: 80%;
+    text-align: center;
+}
+
+.profile-row .input-field-col .input-field:disabled {
+    background-color: #FFFAF6;
+    color: black;
+}
+
+.profile-row .input-field-tag {
+    font-family: axiforma;
+    font-size: 20px;
+    text-align: center;
+}
+
+.profile-row {
+    padding-bottom: 15px;
+    margin: 0;
+    width: 100%;
+}
+
+.btn-edit {
+    background-color: #FCAD31;
+}
+
+.btn-edit:hover {
+    background-color: #EFA42E;
+}
+
+.btn-edit:before {
+    font-size: 25px;
+}
+
+.edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+textarea:disabled {
+    background-color: #FFFAF6 !important;
+}
+
+.profile-row .input-field-col .input-field:focus {
+    border: 1px solid #1C222F;
+}

@@ -1,0 +1,115 @@
+.sponsors-div {
+    background-color: #1C222F;
+    color: white;
+    padding-bottom: 40px;
+}
+
+.sponsors-title {
+    width: 100%;
+    font-family: axiforma;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    font-size: 50px;
+}
+
+.sponsor-carousel-row {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    padding: 50px;
+    padding-bottom: 20px;
+    overflow-x: hidden;
+    overflow-y: visible !important;
+}
+
+.sponsor-carousel {
+    position: absolute;
+    width: 1000%;
+    transition: left;
+    transition-duration: 0.5s;
+}
+
+.logo-div {
+    transition: padding, height;
+    transition-duration: 0.5s;
+}
+
+.logo-img {
+    transition: width;
+    transition-duration: 0.5s;
+}
+
+.arrow {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    margin: 10px 0 0 10px;
+    width: 60px;
+    height: 60px;
+    z-index: 1;
+    transition: all .2s linear;
+}
+.arrow-right:before, .arrow-right:after {
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 5%;
+    top: 41%;
+    left: 55%;
+    background: white;
+    z-index: 2;
+    -webkit-transform: translate(-50%, -50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: all .2s linear;
+}
+.arrow-right:after {
+    z-index: 3;
+    top: 64%;
+    left: 55%;
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.arrow-left:before, .arrow-left:after {
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 5%;
+    top: 41%;
+    left: 55%;
+    background: white;
+    z-index: 2;
+    -webkit-transform: translate(-50%, -50%) rotate(-225deg);
+    transform: translate(-50%, -50%) rotate(-225deg);
+    transition: all .2s linear;
+}
+.arrow-left:after {
+    z-index: 3;
+    top: 64%;
+    left: 55%;
+    -webkit-transform: translate(-50%, -50%) rotate(-135deg);
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.arrow:hover:after, .arrow:hover:before {
+    background: #DDD;
+}
+
+.arrow:active:after, .arrow:active:before {
+    background: white;
+}
+
+.arrow-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sponsor-name {
+    font-family: axiforma;
+    font-size: 40px;
+    margin-bottom: 0;
+}

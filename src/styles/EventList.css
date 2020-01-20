@@ -1,0 +1,15 @@
+.event-list-wrapper {
+    color: white;
+    background-color: #1C222F;
+}
+
+.event-list-title {
+    width: 100%;
+    font-family: axiforma;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    font-size: 50px;
+}

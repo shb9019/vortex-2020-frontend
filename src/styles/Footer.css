@@ -1,0 +1,14 @@
+.footer-div {
+    padding-top: 45px;
+    padding-bottom: 45px;
+    background-color: #1C222F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-text {
+    color: white;
+    margin: 0;
+    font-family: axiforma;
+}
