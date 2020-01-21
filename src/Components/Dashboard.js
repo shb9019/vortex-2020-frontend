@@ -23,7 +23,7 @@ export default class Dashboard extends React.Component {
                     </Row>
                     <Row style={{width: '100%'}} className={'vortex-description'}>
                         <Col sm={1}/>
-                        <Col sm={5}>
+                        <Col sm={5} style={{ textAlign: 'center' }}>
                             Annual symposium of <b>CSEA</b>, NIT Trichy
                         </Col>
                         <Col sm={6}/>

@@ -40,7 +40,19 @@
     width: 100%;
     height: auto;
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.3;
+}
+
+@media only screen and (max-width: 600px) {
+    .dashboard-title-background {
+        width: 0px;
+        height: auto;
+        opacity: 0.2;
+    }
+
+    .dashboard-name {
+
+    }
 }
 
 .dashboard-login-button {

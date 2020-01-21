@@ -53,7 +53,7 @@ export default class Sponsor extends React.Component {
 
         return (
             <div className={'sponsors-div'}>
-                <Row style={{width: '100%'}}>
+                <Row style={{width: '100%', margin: 0}}>
                     <Col sm={12}>
                         <div className={'sponsors-title'}>Our&nbsp;<b>Sponsors</b></div>
                     </Col>

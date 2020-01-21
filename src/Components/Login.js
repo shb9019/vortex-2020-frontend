@@ -3,35 +3,111 @@ import Footer from "./Footer";
 import Navbar from './Navbar';
 import {Col, Row} from "react-bootstrap";
 import '../styles/Login.css';
+import {
+    Redirect,
+} from "react-router-dom";
+
 
 export default class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: "",
+            errorMessage: ""
+        };
+    }
+
+    login = () => {
+        const {username, password} = this.state;
+
+        fetch('http://localhost:8000/api/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+            if (!data.success) {
+                this.changeErrorMessage(data.error);
+            } else {
+                this.props.login();
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
+
+    changeUsername = (e) => {
+        this.setState({
+            username: e.target.value,
+            errorMessage: ""
+        });
+    };
+
+    changePassword = (e) => {
+        this.setState({
+            password: e.target.value,
+            errorMessage: ""
+        });
+    };
+
+    changeErrorMessage = (msg) => {
+        this.setState({
+            errorMessage: msg
+        });
+    };
+
     render() {
+        const {isLoggedIn} = this.props;
+        const {username, password, errorMessage} = this.state;
+
+        console.log(isLoggedIn);
+
+        if (isLoggedIn) {
+            return <Redirect to='/'/>;
+        }
+
         return (
             <div>
                 <Navbar/>
-                <section className={'login-form'} style={{ minHeight: '100vh' }}>
-                    <Row style={{ width: '100%', margin: 0}}>
+                <section className={'login-form'} style={{minHeight: '100vh'}}>
+                    <Row style={{width: '100%', margin: 0}}>
                         <Col md={1}/>
                         <Col md={8}>
                             <div className={'login-title'}><b>Login</b></div>
                         </Col>
                     </Row>
-                    <Row style={{ width: '100%', paddingBottom: 30, margin: 0 }}>
+                    <Row style={{width: '100%', paddingBottom: 30, margin: 0}}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-col'}>
-                            <input className={'input-field'} placeholder={'Email Id / Username *'} type="text"/>
+                            <input className={'input-field'} placeholder={'Username*'} value={username}
+                                   onChange={this.changeUsername} type="text"/>
                         </Col>
                     </Row>
-                    <Row style={{ width: '100%', paddingBottom: 30, margin: 0}}>
+                    <Row style={{width: '100%', paddingBottom: 30, margin: 0}}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-col'}>
-                            <input className={'input-field'} placeholder={'Password*'} type="text"/>
+                            <input className={'input-field'} placeholder={'Password*'} value={password}
+                                   onChange={this.changePassword} type="password"/>
                         </Col>
                     </Row>
-                    <Row style={{ width: '100%', paddingBottom: 20 }}>
+                    <Row style={{width: '100%', margin: 0}}>
+                        <Col md={1}/>
+                        <Col md={6} className={'links'}>
+                            <p style={{color: 'red'}}>{errorMessage !== "" ? `*${errorMessage}` : null}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{width: '100%', paddingBottom: 20, margin: 0}}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-col'}>
-                            <button className="sbtn sbtn-3 sbtn-3e icon-arrow-right">Enter</button>
+                            <button onClick={this.login} className="sbtn sbtn-3 sbtn-3e icon-arrow-right login-btn">Enter</button>
                         </Col>
                     </Row>
                     <Row style={{width: '100%'}}>
