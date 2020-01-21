@@ -10,6 +10,7 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" href="css/loader.css"/>
     <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -30,10 +31,19 @@
     -->
     <title>Vortex 2020</title>
   </head>
-  <body>
+  <body onload="myFun()">
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    
+    <div id="loader" class="a-transition" >
+      <div style="opacity: 1;">
+          <div class="load">	
+          <img style="width:150px; height: 150px;" src="./images/dashboard-vortex-logo.png"/>
+          </div> 
+      </div>
+    </div>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -46,5 +56,12 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script src="../node_modules/codyhouse-framework/main/assets/js/util.js"></script>
+    <script>
+      function myFun(){
+        setTimeout(function(){
+            document.getElementById('loader').style.top = '-100%'; 
+        }, 2000); 
+      }
+  </script>
   </body>
 </html>
