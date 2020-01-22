@@ -634,6 +634,11 @@
 }
 
 /* Button 4c */
+.sbtn-4c {
+    min-width: 250px;
+    text-align: center;
+}
+
 .sbtn-4c:before {
     left: 70%;
     opacity: 0;

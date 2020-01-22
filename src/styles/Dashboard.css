@@ -55,14 +55,42 @@
     }
 }
 
-.dashboard-login-button {
+.dashboard-buttons {
     width: 100%;
     position: absolute;
     top: 75vh;
     z-index: 100;
+    margin: 0;
+}
+
+.dashboard-register-button {
+    float: left;
+}
+
+.dashboard-login-button {
+    float: right;
+}
+
+.dashboard-buttons-col-2 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media only screen and (max-width: 750px) {
+    .dashboard-register-button, .dashboard-login-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .dashboard-buttons {
+        top: 65vh;
+    }
+    .dashboard-buttons-col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .sbtn-4c:hover {

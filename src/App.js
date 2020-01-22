@@ -16,14 +16,26 @@ class App extends Component {
         };
     }
 
+    componentDidMount() {
+        this.setState({
+            isLoggedIn: this.getIsLoggedIn()
+        });
+    }
+
     changeIsLoggedIn = (isLoggedIn) => {
         this.setState({
             isLoggedIn
         });
+        localStorage.setItem("isLoggedIn", isLoggedIn);
+    };
+
+    getIsLoggedIn = () => {
+        return (localStorage.getItem("isLoggedIn") === "true");
     };
 
     render() {
         const {isLoggedIn} = this.state;
+        console.log("Inside App, ", isLoggedIn);
 
         return (
             <div className="App">

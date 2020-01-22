@@ -10,43 +10,64 @@ import Sponsor from "./Sponsor";
 
 export default class Dashboard extends React.Component {
     render() {
-        return <div>
-            <Navbar/>
-            <section>
-                <div className={'dashboard-title'}>
-                    <Row className={'vortex-title'} style={{width: '100%'}}>
-                        <Col sm={1}/>
-                        <Col sm={5}>
-                            <img className={'dashboard-name'} src={'images/dashboard-name.png'}/>
-                        </Col>
-                        <Col sm={6}/>
-                    </Row>
-                    <Row style={{width: '100%'}} className={'vortex-description'}>
-                        <Col sm={1}/>
-                        <Col sm={5} style={{ textAlign: 'center' }}>
-                            Annual symposium of <b>CSEA</b>, NIT Trichy
-                        </Col>
-                        <Col sm={6}/>
-                    </Row>
-                </div>
-                <div className={'dashboard-title-background'}>
-                    <img src={'images/dashboard-logo.png'} style={{float: 'right'}} alt={'logo'} height={'100%'}
-                         width={950}/>
-                </div>
-                <div className={'dashboard-login-button'}>
-                    <a href={'/register'} className="sbtn sbtn-4 sbtn-4c icon-arrow-right">Register</a>
-                </div>
-            </section>
-            <section>
-                <AboutUs/>
-            </section>
-            <section>
-                <Sponsor/>
-            </section>
-            <section>
-                <ContactUs/>
-            </section>
-            <Footer/>
-        </div>;
+        const {isLoggedIn} = this.props;
+
+        return (
+            <div>
+                <Navbar/>
+                <section>
+                    <div className={'dashboard-title'}>
+                        <Row className={'vortex-title'} style={{width: '100%'}}>
+                            <Col sm={1}/>
+                            <Col sm={5}>
+                                <img className={'dashboard-name'} src={'images/dashboard-name.png'}/>
+                            </Col>
+                            <Col sm={6}/>
+                        </Row>
+                        <Row style={{width: '100%'}} className={'vortex-description'}>
+                            <Col sm={1}/>
+                            <Col sm={5} style={{textAlign: 'center'}}>
+                                Annual symposium of <b>CSEA</b>, NIT Trichy
+                            </Col>
+                            <Col sm={6}/>
+                        </Row>
+                    </div>
+                    <div className={'dashboard-title-background'}>
+                        <img src={'images/dashboard-logo.png'} style={{float: 'right'}} alt={'logo'} height={'100%'}
+                             width={950}/>
+                    </div>
+                    {!isLoggedIn ?
+                        <Row className={'dashboard-buttons'}>
+                            <Col sm={6} className={'dashboard-buttons-col'}>
+                                <div className={'dashboard-login-button'}>
+                                    <a href={'/login'} className="sbtn sbtn-4 sbtn-4c icon-arrow-right">Login</a>
+                                </div>
+                            </Col>
+                            <Col sm={6} className={'dashboard-buttons-col'}>
+                                <div className={'dashboard-register-button'}>
+                                    <a href={'/register'} className="sbtn sbtn-4 sbtn-4c icon-arrow-right">Register</a>
+                                </div>
+                            </Col>
+                        </Row>
+                        : <Row className={'dashboard-buttons'}>
+                            <Col sm={12} className={'dashboard-buttons-col-2'}>
+                                <div className={'dashboard-profile-button'}>
+                                    <a href={'/profile'} className="sbtn sbtn-4 sbtn-4c icon-arrow-right">Profile</a>
+                                </div>
+                            </Col>
+                        </Row>}
+                </section>
+                <section>
+                    <AboutUs/>
+                </section>
+                <section>
+                    <Sponsor/>
+                </section>
+                <section>
+                    <ContactUs/>
+                </section>
+                <Footer/>
+            </div>
+        );
     }
 }
