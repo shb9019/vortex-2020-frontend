@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import '../styles/Dashboard.css';
 import '../styles/styled-buttons.css';
 import {Col, Container, Row} from "react-bootstrap";
-import ContactUs from "./ContactUs.";
+import ContactUs from "./ContactUs";
 import AboutUs from "./AboutUs";
 import Footer from "./Footer";
 import Sponsor from "./Sponsor";

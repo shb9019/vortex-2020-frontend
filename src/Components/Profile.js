@@ -35,18 +35,23 @@ export default class Profile extends React.Component {
     }
 
     getIsLoggedIn = async () => {
-        const response = await fetch("http://localhost:8000/api/user/isLoggedIn", {
-            credentials: "include",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        this.setState({
-            isLoggedIn: data.isLoggedIn
-        });
-        console.log("Profile ", data);
+        try {
+            const response = await fetch("http://localhost:8000/api/user/isLoggedIn", {
+                credentials: "include",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            this.setState({
+                isLoggedIn: data.isLoggedIn
+            });
+        } catch (err) {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
     };
 
     getUser = () => {
