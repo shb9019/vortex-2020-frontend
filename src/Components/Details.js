@@ -32,7 +32,7 @@ export default class Details extends React.Component {
                         slide[index].style.display='none';
                         slide[index].lastElementChild.style.opacity=0;
 
-                        document.getElementById('head'+id).style='';
+                        // document.getElementById('head'+id).style='';
                     }
                     
                     else{
@@ -43,7 +43,7 @@ export default class Details extends React.Component {
                         slide[index].style.display='';
                         slide[index].lastElementChild.style.opacity=1;
 
-                        document.getElementById('head'+id).style='transform:translate(0%, 100%) matrix(1, 0, 0, 1, 0, 0)';
+                        // document.getElementById('head'+id).style='transform:translate(0%, 100%) matrix(1, 0, 0, 1, 0, 0)';
                     }
         });
 
