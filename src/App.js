@@ -8,6 +8,8 @@ import EventList from "./Components/EventList";
 import Profile from "./Components/Profile";
 import WorkshopList from "./Components/WorkshopList";
 import VerifyEmail from "./Components/VerifyEmail";
+import ForgotPassword from "./Components/ForgotPassword";
+import ResetPassword from "./Components/ResetPassword";
 
 class App extends Component {
     constructor(props) {
@@ -60,6 +62,8 @@ class App extends Component {
                             this.changeIsLoggedIn(false);
                         }}/>)}/>
                         <Route path="/verifyuser/:code" render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>
+                        <Route path="/forgotpassword" render={() => (<ForgotPassword/>)}/>
+                        <Route path="/resetpassword/:code" render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
                     </div>
                 </Router>
             </div>
