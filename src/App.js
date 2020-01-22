@@ -47,32 +47,6 @@ class App extends Component {
 
   render() {
     const { isLoggedIn } = this.state;
-
-<<<<<<< HEAD
-        return (
-            <div className="App">
-                <Router>
-                    <div>
-                        <Route exact path="/" render={() => (<Dashboard isLoggedIn={isLoggedIn}/>)}/>
-                        <Route exact path="/login" render={() => (<Login isLoggedIn={isLoggedIn} login={() => {
-                            this.changeIsLoggedIn(true);
-                        }}/>)}/>
-                        <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
-                        <Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>
-                        <Route exact path="/details/:id" render={({match}) => (<Details id={match.params.id} isLoggedIn={isLoggedIn}/>)}/>
-                        <Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>
-                        <Route exact path="/profile" render={() => (<Profile logout={() => {
-                            this.changeIsLoggedIn(false);
-                        }}/>)}/>
-                        <Route path="/verifyuser/:code" render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>
-                        <Route path="/forgotpassword" render={() => (<ForgotPassword/>)}/>
-                        <Route path="/resetpassword/:code" render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
-                    </div>
-                </Router>
-            </div>
-        );
-    }
-=======
     return (
       <div className="App">
         <Router>
@@ -106,8 +80,10 @@ class App extends Component {
             />
             <Route
               exact
-              path="/details"
-              render={() => <Details isLoggedIn={isLoggedIn} />}
+              path="/details/:id"
+              render={({ match }) => (
+                <Details id={match.params.id} isLoggedIn={isLoggedIn} />
+              )}
             />
             <Route
               exact
@@ -139,7 +115,6 @@ class App extends Component {
       </div>
     );
   }
->>>>>>> added google analytics
 }
 
 export default App;
