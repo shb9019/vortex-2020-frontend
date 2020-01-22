@@ -7,6 +7,7 @@ import Register from "./Components/Register";
 import EventList from "./Components/EventList";
 import Profile from "./Components/Profile";
 import WorkshopList from "./Components/WorkshopList";
+import VerifyEmail from "./Components/VerifyEmail";
 
 class App extends Component {
     constructor(props) {
@@ -17,25 +18,32 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            isLoggedIn: this.getIsLoggedIn()
-        });
+        this.getIsLoggedIn();
     }
 
     changeIsLoggedIn = (isLoggedIn) => {
         this.setState({
             isLoggedIn
         });
-        localStorage.setItem("isLoggedIn", isLoggedIn);
     };
 
-    getIsLoggedIn = () => {
-        return (localStorage.getItem("isLoggedIn") === "true");
+    getIsLoggedIn = async () => {
+        const response = await fetch("http://localhost:8000/api/user/isLoggedIn", {
+            credentials: "include",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+        const data = await response.json();
+        this.setState({
+            isLoggedIn: data.isLoggedIn
+        });
+        console.log(data);
     };
 
     render() {
         const {isLoggedIn} = this.state;
-        console.log("Inside App, ", isLoggedIn);
 
         return (
             <div className="App">
@@ -48,7 +56,10 @@ class App extends Component {
                         <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
                         <Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>
                         <Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>
-                        <Route exact path="/profile" render={() => (<Profile isLoggedIn={isLoggedIn}/>)}/>
+                        <Route exact path="/profile" render={() => (<Profile logout={() => {
+                            this.changeIsLoggedIn(false);
+                        }}/>)}/>
+                        <Route path="/verifyuser/:code" render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>
                     </div>
                 </Router>
             </div>

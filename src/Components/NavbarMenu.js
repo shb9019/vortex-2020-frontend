@@ -4,12 +4,20 @@ import {Col, Container, Row} from "react-bootstrap";
 
 export default class NavbarMenu extends React.Component {
     getIsLoggedIn = () => {
-        return (localStorage.getItem("isLoggedIn") === "true");
+        fetch("http://localhost:8000/api/user/isLoggedIn", {
+            method: 'GET',
+            credentials: "include",
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            return data.isLoggedIn;
+        }).catch((err) => {
+            console.log(err);
+        });
     };
 
     render() {
         const {isOpen} = this.props;
-        const isLoggedIn = this.getIsLoggedIn();
 
         return (
             <div className={'navbar-menu'} style={{top: (isOpen ? 0 : '-100%')}}>

@@ -23,6 +23,7 @@ export default class Login extends React.Component {
 
         fetch('http://localhost:8000/api/user/login', {
             method: 'POST',
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },
