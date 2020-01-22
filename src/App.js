@@ -5,6 +5,7 @@ import './styles/App.css';
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import EventList from "./Components/EventList";
+import Details from "./Components/Details";
 import Profile from "./Components/Profile";
 import WorkshopList from "./Components/WorkshopList";
 import VerifyEmail from "./Components/VerifyEmail";
@@ -57,6 +58,7 @@ class App extends Component {
                         }}/>)}/>
                         <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
                         <Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>
+                        <Route exact path="/details" render={() => (<Details isLoggedIn={isLoggedIn}/>)}/>
                         <Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>
                         <Route exact path="/profile" render={() => (<Profile logout={() => {
                             this.changeIsLoggedIn(false);

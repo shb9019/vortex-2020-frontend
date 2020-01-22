@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import {Col, Row} from "react-bootstrap";
 import '../styles/EventList.css';
 import EventCard from "./EventCard";
+import PopUp from "./PopUp";
 
 export default class WorkshopList extends React.Component {
     render() {
@@ -14,7 +15,7 @@ export default class WorkshopList extends React.Component {
                     <section>
                         <Row style={{width: '100%', paddingTop: 60}}>
                             <Col sm={12}>
-                                <div className={'event-list-title'}><b>Workshops</b></div>
+                                <div className={'event-list-title'}><b><PopUp  text="WorkShops"/></b></div>
                             </Col>
                         </Row>
                         <Row style={{width: '100%'}}><br/><br/><br/></Row>
