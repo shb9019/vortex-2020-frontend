@@ -148,9 +148,9 @@ export default class Profile extends React.Component {
             phone, state, year
         } = this.state;
 
-        if (!isLoggedIn) {
-            return <Redirect to={'/'}/>
-        }
+        // if (!isLoggedIn) {
+        //     return <Redirect to={'/'}/>
+        // }
 
         return (
             <div>
@@ -307,21 +307,22 @@ export default class Profile extends React.Component {
                         <Col md={1}/>
                     </Row>
                     <Row className={'profile-row edit-button'}>
-                        <Col sm={6} className={'profile-button-col'}>
+                        <Col sm={4}></Col>
+                        <Col sm={4} className={'profile-button-col'}>
                             {isEditing
                                 ? <button onClick={() => {
                                     this.setState({isEditing: false});
                                     this.update();
-                                }} className={'sbtn sbtn-3'}>SAVE</button>
+                                }} className={'sbtn sbtn-3 profileBtn'}>SAVE</button>
                                 : <button onClick={() => {
                                     this.setState({isEditing: true})
-                                }} className={'btn-edit sbtn sbtn-3'}>EDIT</button>
+                                }} className={'btn-edit sbtn sbtn-3 profileBtn'}>EDIT</button>
                             }
-                        </Col>
-                        <Col sm={6} className={'profile-button-col'}>
-                            <button onClick={this.logout} className={'btn-logout sbtn sbtn-3'}>LOGOUT
+                        
+                            <button onClick={this.logout} className={'btn-logout sbtn sbtn-3 profileBtn'}>LOGOUT
                             </button>
                         </Col>
+                        <Col sm={4}></Col>
                     </Row>
                 </section>
                 <Footer/>
