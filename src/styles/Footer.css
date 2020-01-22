@@ -12,3 +12,13 @@
     margin: 0;
     font-family: axiforma;
 }
+
+.footer-easter-egg {
+    color: white;
+}
+
+.footer-easter-egg:hover {
+    color: white;
+    cursor: default;
+    text-decoration: none;
+}

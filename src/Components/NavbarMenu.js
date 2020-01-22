@@ -28,17 +28,17 @@ export default class NavbarMenu extends React.Component {
                                 top: (isOpen ? 0 : 80),
                                 opacity: (isOpen ? 1 : 0),
                                 transitionDelay: '0.5s'
-                            }}><a class="size" href={'/events'}>Events</a></Col>
+                            }}><a className="size" href={'/events'}>Events</a></Col>
                             <Col sm={4} className={'navbar-link'} style={{
                                 top: (isOpen ? 0 : 80),
                                 opacity: (isOpen ? 1 : 0),
                                 transitionDelay: '0.7s'
-                            }}><a class="size" href={'/workshops'}>Workshops</a></Col>
+                            }}><a className="size" href={'/workshops'}>Workshops</a></Col>
                             <Col sm={4} className={'navbar-link'} style={{
                                 top: (isOpen ? 0 : 80),
                                 opacity: (isOpen ? 1 : 0),
                                 transitionDelay: '0.9s'
-                            }}><a class="size">Accommodation</a></Col>
+                            }}><a className="size" href={'/accommodation'}>Accommodation</a></Col>
                         </Row>
                     </Container>
                 </div>

@@ -1,0 +1,27 @@
+.coming-soon-section {
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.coming-soon-section h1 {
+    margin: 0;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4em;
+    color: #333;
+    -webkit-text-shadow: 0 2px 1px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.7);
+    -moz-text-shadow: 0 2px 1px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.7);
+    word-spacing: 16px;
+}
+
+.coming-soon-section p {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+}
