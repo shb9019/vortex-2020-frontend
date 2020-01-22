@@ -1,77 +1,74 @@
 .card-sec-1 {
-    min-height: 120px;
-    background-color: #141822;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  min-height: 120px;
+  background-color: #141822;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-sec-2 {
-    min-height: 280px;
-    background-color: #FFFAF6;
+  min-height: 280px;
+  background-color: #fffaf6;
 }
 
 .card-sec-3 {
-    min-height: 90px;
-    background-color: #F0E9E3;
-    font-size: 16px;
-    color: white;
-    font-family: axiforma;
-    overflow-y: hidden;
+  min-height: 90px;
+  background-color: #f0e9e3;
+  font-size: 16px;
+  color: white;
+  font-family: axiforma;
+  overflow-y: hidden;
 }
 
 .card-sec-3 .sbtn {
-    position: absolute;
-    left: calc(50% - 100px);
-    padding: 15px 40px;
-    top: calc(100% - 90px);
-    margin: 0;
-    background-color: #1C222F;
-    border-radius: 40px;
+  position: absolute;
+  left: calc(50% - 100px);
+  padding: 15px 40px;
+  top: calc(100% - 90px);
+  margin: 0;
+  background-color: #1c222f;
+  border-radius: 40px;
 }
 
 .card-sec-3 .sbtn:hover {
-    position: absolute;
-    left: calc(50% - 220px);
-    padding: 40px 160px;
-    top: calc(100% - 115px);
-    margin: 0;
-    background-color: #1C222F;
-    border-radius: 0;
-}
-
-.card-sec-3 .sbtn:hover {
+  position: absolute;
+  left: calc(50% - 105px);
+  padding: 18px 45px;
+  top: calc(100% - 93px);
+  margin: 0;
+  background-color: #1c222f;
+  border-radius: 40px;
 }
 
 .event-title {
-    font-family: axiforma;
-    font-size: 25px;
+  font-family: axiforma;
+  font-size: 25px;
 }
 
 .event-info {
-    width: 100%;
-    color: black;
-    padding: 60px 50px 10px;
-    font-family: axiforma;
+  width: 100%;
+  color: black;
+  padding: 60px 50px 10px;
+  font-family: axiforma;
 }
 
 .event-points-row {
-    padding: 20px 30px;
-    color: #F25075;
-    font-family: axiforma;
-    font-size: 14px;
+  padding: 20px 30px;
+  color: #f25075;
+  font-family: axiforma;
+  font-size: 14px;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 ul li::before {
-    content: "\2022";
-    color: black;
-    font-weight: bold; /* If you want it to be bold */
-    display: inline-block; /* Needed to add space between the bullet and the text */
-    width: 1em; /* Also needed for space (tweak if needed) */
-    margin-left: -1em; /* Also needed for space (tweak if needed) */
-    margin-right: 1em;
+  content: "\2022";
+  color: black;
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+  margin-right: 1em;
 }
