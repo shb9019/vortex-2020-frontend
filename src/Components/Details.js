@@ -4,6 +4,7 @@ import {Col, Row} from "react-bootstrap";
 import Footer from "./Footer";
 import Navbar from './Navbar';
 import PopUp from "./PopUp";
+import Button from "./Button";
 import axios from 'axios';
 
 
@@ -18,7 +19,7 @@ export default class Details extends React.Component {
             l1:'Description',
             l2:'Rules',
             l3:'Format',
-            r1:'Pragyan Premier League is an online fantasy cricket league that lets you manage your own team. From buying your squad to deciding the line-ups, your decisions decide the fate of your team. A dynamic environment combined with real, rival managers worldwide forces you to strategize and master the odds to outwit your opponent. Eight days... Eight matches... One team. Do you have what it takes to lead your team to glory?Prizes worth INR 35000/-',
+            r1:'Pragyan Premier League is an online fantasy cricket league that lets you manage your own team. From buying your From buying your From buying your From buying your From buying your From buying your From buying your From buying your From buying your From buying your From buying yourFrom buying yourFrom buying yourFrom buying yourFrom buying yourFrom buying yourFrom buying yourFrom buying yourFrom buying yourFrom buying your squad to deciding the line-ups, your decisions decide the fate of your team. A dynamic environment combined with real, rival managers worldwide forces you to strategize and master the odds to outwit your opponent. Eight days... Eight matches... One team. Do you have what it takes to lead your team to glory?Prizes worth INR 35000/-',
             r2:'One trial round (not counted in the league rankings) to help players familiarize themselves with the game.        One chance to buy squad for the league Eight simulated matches.',
             r3:'Each team is required to buy a squad of minimum 11 players. This squad is retained throughout Round 1.      ',
         };
@@ -26,8 +27,7 @@ export default class Details extends React.Component {
       }
     
       handleClick(e) {
-      let id=e.target.parentElement.id;
-
+      let id=e.currentTarget.parentElement.id;
       let slide=document.getElementsByClassName('c-procedure__slide');
 
         Array.from(document.getElementsByClassName("c-procedure__step")).forEach(
@@ -35,23 +35,18 @@ export default class Details extends React.Component {
                     if(id-1!=index){
                         element.classList.remove("m-active");
                         element.firstElementChild.classList.remove("m-active");
-
                         slide[index].style.display='none';
                         slide[index].lastElementChild.style.opacity=0;
-
                     }
                     
                     else{
                         element.classList.add("m-active");
                         element.firstElementChild.classList.add("m-active");
-
-
                         slide[index].style.display='';
                         slide[index].lastElementChild.style.opacity=1;
 
                     }
         });
-
     }
 
 
@@ -92,6 +87,13 @@ componentDidMount(){
         const styles = { 
             transform: `translate(0%, 100%) matrix(1, 0, 0, 1, 0, 0)` 
         };
+
+
+        const buttonStyle = { 
+            opacity: 0,
+            transform: 'matrix(0, 0, 0, 0, 88.6562, -13)'
+        };
+
         const wordTotal = { 
             '--word-total': `2` 
         };
@@ -110,9 +112,6 @@ componentDidMount(){
         return (
          <div>
             <Navbar/>
-
-
-
             <section id="details" style={{backgroundColor:'#1C222F'}}className="s-game-procedure">
         
             <Row style={{width: '100%', paddingTop: 150}}>
@@ -162,7 +161,7 @@ componentDidMount(){
                              <div className="c-procedure__slide g-full" style={{display: 'none'}}>
                                 <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="01" style={{wordIndex0}}><span >1</span></span></span><h3 className="t-h3"><span className="word" data-word="Briefing" style={{wordIndex1}}><span id="head1" >{this.state.l1}</span></span></h3></div>
                                 <div className="c-procedure__content" style={{opacity: 0}}>
-                                    <p id="first">{this.state.r1}</p><p>&nbsp;</p>
+                                    <p id="first">{this.state.r1}</p>
                             </div>
                             </div>
             
@@ -170,14 +169,14 @@ componentDidMount(){
                                 <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="02" style={{wordIndex0}}><span>2</span></span></span><h3 className="t-h3"><span className="word" data-word="Game" style={{wordIndex1}}><span id="head2">{this.state.l2}</span></span></h3></div>
                                 <div className="c-procedure__content" style={{opacity: 1}}>
                                  <p id="second">{this.state.r2}</p>
-                                <p>&nbsp;</p>
+                                
                                     </div>
                             </div>
                             
                             <div className="c-procedure__slide g-full" style={{display: 'none'}}>
                                 <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="03" style={{wordIndex0}}><span>3</span></span></span><h3 className="t-h3"><span className="word" data-word="Debriefing" style={{wordIndex1}}><span id="head3">{this.state.l3}</span></span></h3></div>
                                 <div className="c-procedure__content" style={{opacity: 0}}>
-                                <p id="third">{this.state.r3}</p><p>&nbsp;</p>
+                                <p id="third">{this.state.r3}</p>
                                 </div>
                             </div>
                             
@@ -190,9 +189,17 @@ componentDidMount(){
         <Col md={1}></Col>
         </Row>
 
+                <Row style={{width: '100%', paddingBottom: 30,paddingTop: 15}}>
+                            <Col sm={12}>
+                                <Button text="Register" href="#"/>
+                            </Col>
+                </Row>
+
        
     </section>
     
+
+
                 <Footer/>
           </div>
       

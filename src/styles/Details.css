@@ -106,6 +106,10 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+#details .c-procedure__slides,.c-procedure__nav {
+  height:500px!important;
+}
+
 #details .s-game-procedure__container{
     width:100%;
 }
@@ -127,7 +131,7 @@
         border-color: rgba(255,255,255,0.2);
     }
 
-#details .c-procedure__slide{
+#details .c-procedure__slides{
     background-color: #181D28;
 
 }
