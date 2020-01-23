@@ -37,13 +37,27 @@
     font-size: 38px;
     cursor: pointer;
 }
-@media (max-width: 767px) {
- .size {
-      font-size:1.4em!important;
+
+.contact-menu-row {
+    width: 100%;
+    margin: 0;
+    top: 80vh;
+    display: block !important;
+    float: right;
+}
+
+@media (max-width: 1000px) {
+    .size {
+        font-size:1.8em!important;
     }
-  }
-  @media (max-width: 575px) {
+}
+@media (max-width: 767px) {
+    .size {
+        font-size:1.4em!important;
+    }
+}
+@media (max-width: 575px) {
     .size {
          font-size:2rem!important;
-       }
-     }
+    }
+}

@@ -63,9 +63,6 @@ export default class Dashboard extends React.Component {
                 {/*<section>*/}
                 {/*    <Sponsor/>*/}
                 {/*</section>*/}
-                <section>
-                    <ContactUs/>
-                </section>
                 <Footer/>
             </div>
         );

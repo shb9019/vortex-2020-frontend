@@ -12,6 +12,7 @@ import VerifyEmail from "./Components/VerifyEmail";
 import ForgotPassword from "./Components/ForgotPassword";
 import ResetPassword from "./Components/ResetPassword";
 import ComingSoon from "./Components/ComingSoon";
+import ContactUs from "./Components/ContactUs";
 
 class App extends Component {
     constructor(props) {
@@ -67,6 +68,7 @@ class App extends Component {
                                 this.changeIsLoggedIn(false);
                             }}/>
                         )}/>
+                        <Route exact path="/contacts" render={() => (<ContactUs/>)}/>
                         <Route path="/verifyuser/:code"
                                render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>
                         <Route path="/forgotpassword" render={() => (<ForgotPassword/>)}/>
