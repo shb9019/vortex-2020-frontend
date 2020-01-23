@@ -4,13 +4,24 @@ import {Col, Row} from "react-bootstrap";
 import Footer from "./Footer";
 import Navbar from './Navbar';
 import PopUp from "./PopUp";
+import axios from 'axios';
+
+
+
 export default class Details extends React.Component {
 
 
 
     constructor(props) {
         super(props);
-        this.state = {active:1};
+        this.state = {
+            l1:'Description',
+            l2:'Rules',
+            l3:'Format',
+            r1:'Pragyan Premier League is an online fantasy cricket league that lets you manage your own team. From buying your squad to deciding the line-ups, your decisions decide the fate of your team. A dynamic environment combined with real, rival managers worldwide forces you to strategize and master the odds to outwit your opponent. Eight days... Eight matches... One team. Do you have what it takes to lead your team to glory?Prizes worth INR 35000/-',
+            r2:'One trial round (not counted in the league rankings) to help players familiarize themselves with the game.        One chance to buy squad for the league Eight simulated matches.',
+            r3:'Each team is required to buy a squad of minimum 11 players. This squad is retained throughout Round 1.      ',
+        };
         this.handleClick = this.handleClick.bind(this);
       }
     
@@ -57,6 +68,24 @@ componentDidMount(){
                         slide[index].lastElementChild.style.opacity=1;
         });
     }
+
+    axios.get('/event/'+this.props.id, {
+        // params: {
+        //   ID: this.props.id
+        // }
+      })
+      .then(function (data) {
+        this.setState = {
+            l1:data.l1,
+            l2:data.l2,
+            l3:data.l3,
+            r1:data.r1,
+            r2:data.r2,
+            r3:data.r3,
+        };
+      })
+
+
 }
 
     render() {
@@ -93,7 +122,7 @@ componentDidMount(){
                         </Row>
 
 
-                        <Row >
+                        <Row style={{width: '100%', paddingLeft: 20, paddingRight: 20, margin: 0}}>
 
                         <Col md={1} >
                         </Col>    
@@ -108,21 +137,21 @@ componentDidMount(){
                             <div id="1" className="c-procedure__step">
                                 <button  onClick={this.handleClick} className="">
                                     <div className="a-plus"></div>
-                                    <span className="t-h6"><b>01. </b>Briefing</span>
+                                    <span className="t-h6"><b>01. </b>{this.state.l1}</span>
                                 </button>
                             </div>
                                 
                             <div id="2" className="c-procedure__step m-active ">
                                 <button onClick={this.handleClick} className="m-active">
                                     <div className="a-plus"></div>
-                                    <span className="t-h6"><b>02. </b>Game</span>
+                                    <span className="t-h6"><b>02. </b>{this.state.l2}</span>
                                 </button>
                             </div>
                                 
                             <div id="3" className="c-procedure__step">
                                 <button  onClick={this.handleClick} className="">
                                     <div className="a-plus"></div>
-                                    <span className="t-h6"><b>03. </b>Debriefing</span>
+                                    <span className="t-h6"><b>03. </b>{this.state.l3}</span>
                                 </button>
                             </div>
                                 
@@ -131,24 +160,24 @@ componentDidMount(){
                     <div className="c-procedure__slides" style={{position: 'relative',height: 576+'px'}}>
                             
                              <div className="c-procedure__slide g-full" style={{display: 'none'}}>
-                                <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="01" style={{wordIndex0}}><span >1</span></span></span><h3 className="t-h3"><span className="word" data-word="Briefing" style={{wordIndex1}}><span id="head1" >Briefing</span></span></h3></div>
+                                <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="01" style={{wordIndex0}}><span >1</span></span></span><h3 className="t-h3"><span className="word" data-word="Briefing" style={{wordIndex1}}><span id="head1" >{this.state.l1}</span></span></h3></div>
                                 <div className="c-procedure__content" style={{opacity: 0}}>
-                                    <p id="first">The <strong>briefing</strong> is the first stage in the activity. The teams have a <strong>briefcase</strong> and a <strong>tablet</strong> on their table: The <strong>Game Master</strong> explains the concept of the game and how the <strong>tablet</strong> works to participants, using visuals and an introductory video.<br/>The presentation time is about 10 minutes.</p>
+                                    <p id="first">{this.state.r1}</p><p>&nbsp;</p>
                             </div>
                             </div>
             
                             <div className="c-procedure__slide g-full">
-                                <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="02" style={{wordIndex0}}><span>2</span></span></span><h3 className="t-h3"><span className="word" data-word="Game" style={{wordIndex1}}><span id="head2">Game</span></span></h3></div>
+                                <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="02" style={{wordIndex0}}><span>2</span></span></span><h3 className="t-h3"><span className="word" data-word="Game" style={{wordIndex1}}><span id="head2">{this.state.l2}</span></span></h3></div>
                                 <div className="c-procedure__content" style={{opacity: 1}}>
-                                 <p id="second">This activity takes on the crazy challenge of fitting a whole “<strong>escape room”</strong> inside a single <strong>briefcase</strong>: the game is <strong>portable and adaptable</strong> <strong>to any location</strong>, and also makes it possible for a <strong>large number of people to play at the same time</strong>. The goal for each team is to effectuate a <strong>radical change</strong> that will <strong>ensure the conservation of pandas in China</strong>.</p>
+                                 <p id="second">{this.state.r2}</p>
                                 <p>&nbsp;</p>
                                     </div>
                             </div>
                             
                             <div className="c-procedure__slide g-full" style={{display: 'none'}}>
-                                <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="03" style={{wordIndex0}}><span>3</span></span></span><h3 className="t-h3"><span className="word" data-word="Debriefing" style={{wordIndex1}}><span id="head3">Debriefing</span></span></h3></div>
+                                <div className="c-procedure__title splitting words" style={wordTotal}><span className="c-procedure__slide-count"><span className="word" data-word="03" style={{wordIndex0}}><span>3</span></span></span><h3 className="t-h3"><span className="word" data-word="Debriefing" style={{wordIndex1}}><span id="head3">{this.state.l3}</span></span></h3></div>
                                 <div className="c-procedure__content" style={{opacity: 0}}>
-                                <p id="third">Once the competitive phase is over, the <strong>debriefing</strong> is an opportunity to <strong>gather</strong> all the teams around for a positive moment, ideal for brainstorming.<br/><strong>Lydia Martin, Digital Learning project leader and change management expert</strong>, will analyze performance indicators throughout the activity to propose a <strong>training plan. </strong></p>
+                                <p id="third">{this.state.r3}</p><p>&nbsp;</p>
                                 </div>
                             </div>
                             
