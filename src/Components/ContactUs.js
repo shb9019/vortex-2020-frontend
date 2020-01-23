@@ -15,7 +15,7 @@ export default class ContactUs extends React.Component {
                         <Col md={4} className={'text-center'}>
                             <p className={'contact-name'}>Vinoth Gulapala</p>
                             <p className={'contact-designation'}>Chairman</p>
-                            <p className={'contact-number'}>+91 78459 44793</p>
+                            <p className={'contact-number'}>+91 89256 59887</p>
                         </Col>
                         <Col md={4} className={'text-center'}>
                             <p className={'contact-name'}>Madhu Naik Kethavath</p>
@@ -30,22 +30,20 @@ export default class ContactUs extends React.Component {
                     </Row>
                     <Row className={'contact-row'}>
                         <Col md={4} className={'text-center'}>
+                            <p className={'contact-name'}>Tarun Kumar Janamaddi</p>
+                            <p className={'contact-designation'}>Technical Secretary</p>
+                            <p className={'contact-number'}>+91 94874 89037</p>
+                        </Col>
+                        <Col md={4} className={'text-center'}>
+                            <p className={'contact-name'}>Navaneshwar Reddy</p>
+                            <p className={'contact-designation'}>Quality Assurance</p>
+                            <p className={'contact-number'}>+91 99445 84859</p>
+                        </Col>
+                        <Col md={4} className={'text-center'}>
                             <p className={'contact-name'}>Vignesh Vishwanathan</p>
                             <p className={'contact-designation'}>Organising Committee</p>
                             <p className={'contact-number'}>org.vortex@gmail.com</p>
                             <p className={'contact-number'}>+91 98451 47872</p>
-                        </Col>
-                        <Col md={4} className={'text-center'}>
-                            <p className={'contact-name'}>Nithish Kumar A</p>
-                            <p className={'contact-designation'}>Marketing Team</p>
-                            <p className={'contact-number'}>vortex.marketing2020@gmail.com</p>
-                            <p className={'contact-number'}>+91 84660 84032</p>
-                        </Col>
-                        <Col md={4} className={'text-center'}>
-                            <p className={'contact-name'}>Sandip</p>
-                            <p className={'contact-designation'}>Content</p>
-                            <p className={'contact-number'}>content.csea@gmail.com</p>
-                            <p className={'contact-number'}>+91 98204 11725</p>
                         </Col>
                     </Row>
                     <Row className={'contact-row'}>
@@ -62,10 +60,10 @@ export default class ContactUs extends React.Component {
                             <p className={'contact-number'}>+91 79811 95665</p>
                         </Col>
                         <Col md={4} className={'text-center'}>
-                            <p className={'contact-name'}>Benedict Florence</p>
-                            <p className={'contact-designation'}>Guest Lectures</p>
-                            <p className={'contact-number'}>vortex.guestlectures@gmail.com</p>
-                            <p className={'contact-number'}>+91 99945 91883</p>
+                            <p className={'contact-name'}>Nithish Kumar A</p>
+                            <p className={'contact-designation'}>Marketing Team</p>
+                            <p className={'contact-number'}>vortex.marketing2020@gmail.com</p>
+                            <p className={'contact-number'}>+91 84660 84032</p>
                         </Col>
                     </Row>
                     <Row className={'contact-row'}>
@@ -76,10 +74,10 @@ export default class ContactUs extends React.Component {
                             <p className={'contact-number'}>+91 97879 55539</p>
                         </Col>
                         <Col md={4} className={'text-center'}>
-                            <p className={'contact-name'}>Ashwin Shankar</p>
-                            <p className={'contact-designation'}>Design and Media</p>
-                            <p className={'contact-number'}>vortex.dandm@gmail.com</p>
-                            <p className={'contact-number'}>+91 96005 82834</p>
+                            <p className={'contact-name'}>Benedict Florence</p>
+                            <p className={'contact-designation'}>Guest Lectures</p>
+                            <p className={'contact-number'}>vortex.guestlectures@gmail.com</p>
+                            <p className={'contact-number'}>+91 99945 91883</p>
                         </Col>
                         <Col md={4} className={'text-center'}>
                             <p className={'contact-name'}>Aishwarya Sarangu</p>
@@ -90,14 +88,16 @@ export default class ContactUs extends React.Component {
                     </Row>
                     <Row className={'contact-row'}>
                         <Col md={4} className={'text-center'}>
-                            <p className={'contact-name'}>Tarun Kumar Janamaddi</p>
-                            <p className={'contact-designation'}>Technical Secretary</p>
-                            <p className={'contact-number'}>+91 94874 89037</p>
+                            <p className={'contact-name'}>Ashwin Shankar</p>
+                            <p className={'contact-designation'}>Design and Media</p>
+                            <p className={'contact-number'}>vortex.dandm@gmail.com</p>
+                            <p className={'contact-number'}>+91 96005 82834</p>
                         </Col>
                         <Col md={4} className={'text-center'}>
-                            <p className={'contact-name'}>Navaneshwar Reddy</p>
-                            <p className={'contact-designation'}>Quality Assurance</p>
-                            <p className={'contact-number'}>+91 99445 84859</p>
+                            <p className={'contact-name'}>Sandip</p>
+                            <p className={'contact-designation'}>Content</p>
+                            <p className={'contact-number'}>content.csea@gmail.com</p>
+                            <p className={'contact-number'}>+91 98204 11725</p>
                         </Col>
                         <Col md={4} className={'text-center'}>
                             <p className={'contact-name'}>Sai Hemanth B</p>

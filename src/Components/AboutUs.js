@@ -29,7 +29,7 @@ export default class AboutUs extends React.Component {
                         </p>
                     </Col>
                     <Col md={6} className={'about-us-image'}>
-                        <img src={'images/vortex_19_logo.jpeg'} className={'about-us-image-img'} alt={'Vortex 19 logo'}/>
+                        <img src={'images/core.jpg'} className={'about-us-image-img'} alt={'Core group photo'}/>
                     </Col>
                 </Row>
             </div>

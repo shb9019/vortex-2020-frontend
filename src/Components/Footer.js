@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
                 <Row className={'footer-row'}>
                     <Col className={'text-center footer-name'}>
                         <p>Vinoth Gulapala</p>
-                        <p>+91 78459 44793</p>
+                        <p>+91 89256 59887</p>
                     </Col>
                     <Col className={'text-center footer-name'}>
                         <p>Madhu Naik</p>
@@ -20,9 +20,14 @@ export default class Footer extends React.Component {
                         <p>+91 99529 42209</p>
                     </Col>
                     <Col className={'text-center'}>
-                        <a href={'https://www.instagram.com/vortex_nitt/'} target={'_blank'}><i className="fa fa-instagram social-icon"/></a>
-                        <a href={'https://www.facebook.com/vortex.nitt/'} target={'_blank'}><i className="fa fa-facebook social-icon"/></a>
-                        <a href={' https://wa.me/918925659887'} target={'_blank'}><i className="fa fa-whatsapp social-icon"/></a>
+                        <Row className={'footer-row'} style={{ padding: 0 }}>
+                            <a href={'https://www.instagram.com/vortex_nitt/'} target={'_blank'}><i className="fa fa-instagram social-icon"/></a>
+                            <a href={'https://www.facebook.com/vortex.nitt/'} target={'_blank'}><i className="fa fa-facebook social-icon"/></a>
+                            <a href={' https://wa.me/918925659887'} target={'_blank'}><i className="fa fa-whatsapp social-icon"/></a>
+                        </Row>
+                        <Row className={'footer-row'} style={{ padding: 0, paddingTop: '6px' }}>
+                            <a href={'mailto:cseanitt@gmail.com'} target={'_blank'} className={'email'}><p>cseanitt@gmail.com</p></a>
+                        </Row>
                     </Col>
                 </Row>
             </div>

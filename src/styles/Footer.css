@@ -1,4 +1,4 @@
-.footer-div {
+.footer-row {
     padding-top: 45px;
     padding-bottom: 45px;
     background-color: #1C222F;
@@ -52,6 +52,17 @@
     margin: 0;
     color: white;
     font-family: Axiforma;
+}
+
+.email {
+    padding-top: 2px;
+    color: white;
+}
+
+.email:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
 }
 
 
