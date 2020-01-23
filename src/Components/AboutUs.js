@@ -25,7 +25,7 @@ export default class AboutUs extends React.Component {
                             events and outreach events to reach more students, Vortex truly believes in diverging
                             from the stereotypical route, to better understand the need of the hour, and to bridge
                             students to the industry better, to help them better understand and employ industry
-                            approaches. Vortex ’19 marks the opening of the 27th edition of Vortex.
+                            approaches. Vortex ’20 marks the opening of the 28th edition of Vortex.
                         </p>
                     </Col>
                     <Col md={6} className={'about-us-image'}>

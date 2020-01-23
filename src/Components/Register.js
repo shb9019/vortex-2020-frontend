@@ -108,7 +108,7 @@ export default class Register extends React.Component {
       <div>
         <Navbar />
         <section className={"register-form"} style={{ minHeight: "100vh" }}>
-          <Row style={{ width: "100%", margin: 0 }}>
+          <Row className={'register-row'} style={{ width: "100%" }}>
             <Col md={1} />
             <Col md={8}>
               <div className={"register-title"}>
@@ -116,7 +116,7 @@ export default class Register extends React.Component {
               </div>
             </Col>
           </Row>
-          <Row style={{ width: "100%", paddingBottom: 20, margin: 0 }}>
+          <Row className={'register-row'} style={{ width: "100%", paddingBottom: 20 }}>
             <Col md={1} />
             <Col md={4} className={"input-field-col"}>
               <input
@@ -128,7 +128,7 @@ export default class Register extends React.Component {
               />
             </Col>
           </Row>
-          <Row style={{ width: "100%", paddingBottom: 20, margin: 0 }}>
+          <Row className={'register-row'} style={{ width: "100%", paddingBottom: 20 }}>
             <Col md={1} />
             <Col md={4} className={"input-field-col"}>
               <input
@@ -140,7 +140,7 @@ export default class Register extends React.Component {
               />
             </Col>
           </Row>
-          <Row style={{ width: "100%", paddingBottom: 20, margin: 0 }}>
+          <Row className={'register-row'} style={{ width: "100%", paddingBottom: 20 }}>
             <Col md={1} />
             <Col md={4} className={"input-field-col"}>
               <input
@@ -152,7 +152,7 @@ export default class Register extends React.Component {
               />
             </Col>
           </Row>
-          <Row style={{ width: "100%", paddingBottom: 20, margin: 0 }}>
+          <Row className={'register-row'} style={{ width: "100%", paddingBottom: 20 }}>
             <Col md={1} />
             <Col md={4} className={"input-field-col"}>
               <input
@@ -164,25 +164,25 @@ export default class Register extends React.Component {
               />
             </Col>
           </Row>
-          <Row style={{ width: "100%", margin: 0 }}>
+          {(errorMessage !== "") ? <Row className={'register-row'} style={{ width: "100%" }}>
             <Col md={1} />
             <Col md={6} className={"links"}>
               <p style={{ color: "red" }}>
-                {errorMessage !== "" ? `*${errorMessage}` : null}
+                *${errorMessage}
               </p>
             </Col>
-          </Row>
-          <Row style={{ width: "100%", margin: 0 }}>
+          </Row> : null}
+          {(successMessage !== "") ? <Row className={'register-row'} style={{ width: "100%" }}>
             <Col md={1} />
             <Col md={6} className={"links"}>
               <p style={{ color: "#5ecd72" }}>
-                {successMessage !== "" ? `*${successMessage}` : null}
+                {successMessage}
               </p>
             </Col>
-          </Row>
-          <Row style={{ width: "100%" }}>
+          </Row> : null}
+          <Row className={'register-row'} style={{ width: "100%" }}>
             <Col md={1} />
-            <Col md={4} className={"input-field-col"}>
+            <Col md={4} className={"input-field-col"} style={{ padding: 0 }}>
               <button
                 className="sbtn sbtn-3 sbtn-3e icon-arrow-right"
                 onClick={this.register}
@@ -191,7 +191,7 @@ export default class Register extends React.Component {
               </button>
             </Col>
           </Row>
-          <Row style={{ width: "100%" }}>
+          <Row className={'register-row'} style={{ width: "100%" }}>
             <Col md={1} />
             <Col md={6} className={"forgot-password"}>
               <p>

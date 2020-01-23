@@ -17,7 +17,7 @@ export default class Profile extends React.Component {
             fullName: "",
             username: "",
             email: "",
-            gender: "",
+            gender: null,
             college: "",
             degree: "",
             year: "",
@@ -114,7 +114,6 @@ export default class Profile extends React.Component {
         }).catch((err) => {
             console.log(err);
         });
-
     };
 
     logout = () => {
@@ -142,16 +141,22 @@ export default class Profile extends React.Component {
         });
     };
 
+    changeGender = (value) => {
+        this.setState({
+            gender: value
+        });
+    };
+
 
     render() {
         const {
-            isEditing, isLoggedIn, fullName, username, email, address, branch, city, college, degree, nationality,
+            isEditing, isLoggedIn, fullName, username, email, address, gender, branch, city, college, degree, nationality,
             phone, state, year
         } = this.state;
 
-        // if (!isLoggedIn) {
-        //     return <Redirect to={'/'}/>
-        // }
+        if (!isLoggedIn) {
+            return <Redirect to={'/'}/>
+        }
 
         return (
             <div>
@@ -201,14 +206,14 @@ export default class Profile extends React.Component {
                         <Col md={6} className={'input-field-col'}>
                             <div className="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline1" name="customRadioInline1"
-                                       className="custom-control-input" disabled={!isEditing}/>
+                                       className="custom-control-input" disabled={!isEditing} onChange={() => this.changeGender('M')}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline1">
                                     Male
                                 </label>
                             </div>
                             <div className="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline2" name="customRadioInline1"
-                                       className="custom-control-input" disabled={!isEditing}/>
+                                       className="custom-control-input" disabled={!isEditing} onChange={() => this.changeGender('F')}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline2">
                                     Female
                                 </label>
