@@ -71,7 +71,7 @@ export default class Register extends React.Component {
       .then(data => {
         if (data.success) {
           this.setState({
-            successMessage: "Registered Successfully"
+            successMessage: "Registered Successfully! Please check your email."
           });
         } else {
           this.setState({
