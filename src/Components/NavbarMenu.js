@@ -1,10 +1,11 @@
 import * as React from 'react';
 import '../styles/NavbarMenu.css';
 import {Col, Container, Row} from "react-bootstrap";
+import {SERVER_BASE_URL} from "../config/config";
 
 export default class NavbarMenu extends React.Component {
     getIsLoggedIn = () => {
-        fetch("http://localhost:8000/api/user/isLoggedIn", {
+        fetch(`${SERVER_BASE_URL}/api/user/isLoggedIn`, {
             method: 'GET',
             credentials: "include",
         }).then((response) => {

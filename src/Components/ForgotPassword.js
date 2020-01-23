@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import "../styles/ForgotPassword.css";
 import { Col, Row } from "react-bootstrap";
+import {SERVER_BASE_URL} from "../config/config";
 
 export default function ForgotPassword() {
   const [email, changeEmail] = React.useState("");
@@ -10,7 +11,7 @@ export default function ForgotPassword() {
   const [errorMessage, changeError] = React.useState("");
 
   const sendResetLink = () => {
-    fetch("http://localhost:8000/api/user/forgotPassword", {
+    fetch(`${SERVER_BASE_URL}/api/user/forgotPassword`, {
       method: "POST",
       credentials: "include",
       headers: {

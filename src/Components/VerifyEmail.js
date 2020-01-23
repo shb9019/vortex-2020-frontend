@@ -7,6 +7,7 @@ import '../styles/Dashboard.css';
 import {
     Redirect,
 } from "react-router-dom";
+import {SERVER_BASE_URL} from "../config/config";
 
 
 export default class VerifyEmail extends React.Component {
@@ -33,7 +34,7 @@ export default class VerifyEmail extends React.Component {
     verifyEmail = () => {
         const {code} = this.props;
         console.log(code);
-        fetch(`http://localhost:8000/api/user/verifyUser/${code}`, {
+        fetch(`${SERVER_BASE_URL}/api/user/verifyUser/${code}`, {
             method: 'GET',
             credentials: "include",
         }).then((response) => {

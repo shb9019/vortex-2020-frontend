@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { Col, Row } from "react-bootstrap";
 import "../styles/Register.css";
 import { Redirect } from "react-router-dom";
+import {SERVER_BASE_URL} from "../config/config";
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -52,7 +53,7 @@ export default class Register extends React.Component {
   register = () => {
     const { fullName, email, password, username } = this.state;
 
-    fetch("http://localhost:8000/api/user/register", {
+    fetch(`${SERVER_BASE_URL}/api/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

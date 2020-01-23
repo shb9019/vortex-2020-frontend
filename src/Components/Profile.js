@@ -5,6 +5,7 @@ import {Col, Row} from "react-bootstrap";
 import '../styles/Profile.css';
 import '../styles/styled-buttons.css';
 import {Redirect} from "react-router-dom";
+import {SERVER_BASE_URL} from "../config/config";
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -36,7 +37,7 @@ export default class Profile extends React.Component {
 
     getIsLoggedIn = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/user/isLoggedIn", {
+            const response = await fetch(`${SERVER_BASE_URL}/api/user/isLoggedIn`, {
                 credentials: "include",
                 headers: {
                     'Accept': 'application/json',
@@ -55,7 +56,7 @@ export default class Profile extends React.Component {
     };
 
     getUser = () => {
-        fetch("http://localhost:8000/api/user/getUserData", {
+        fetch(`${SERVER_BASE_URL}/api/user/getUserData`, {
             method: 'GET',
             credentials: "include",
         }).then((response) => {
@@ -85,7 +86,7 @@ export default class Profile extends React.Component {
 
     update = () => {
         console.log("College ", this.state["college"]);
-        fetch("http://localhost:8000/api/user/update", {
+        fetch(`${SERVER_BASE_URL}/api/user/update`, {
             method: 'PUT',
             credentials: "include",
             headers: {
@@ -119,7 +120,7 @@ export default class Profile extends React.Component {
     logout = () => {
         const {logout} = this.props;
 
-        fetch("http://localhost:8000/api/user/logout", {
+        fetch(`${SERVER_BASE_URL}/api/user/logout`, {
             method: 'GET',
             credentials: "include",
         }).then((response) => {

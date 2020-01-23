@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { Col, Row } from "react-bootstrap";
 import "../styles/Login.css";
 import { Redirect } from "react-router-dom";
+import {SERVER_BASE_URL} from "../config/config";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class Login extends React.Component {
   login = () => {
     const { username, password } = this.state;
 
-    fetch("http://localhost:8000/api/user/login", {
+    fetch(`${SERVER_BASE_URL}/api/user/login`, {
       method: "POST",
       credentials: "include",
       headers: {
