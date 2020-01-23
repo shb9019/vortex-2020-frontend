@@ -17,7 +17,7 @@ export default class Profile extends React.Component {
             fullName: "",
             username: "",
             email: "",
-            gender: null,
+            gender: "",
             college: "",
             degree: "",
             year: "",
@@ -26,7 +26,8 @@ export default class Profile extends React.Component {
             address: "",
             city: "",
             state: "",
-            nationality: ""
+            nationality: "",
+            errorMessage: ""
         };
     }
 
@@ -62,30 +63,38 @@ export default class Profile extends React.Component {
         }).then((response) => {
             return response.json();
         }).then((data) => {
-            const user = data.user;
-            this.setState({
-                fullName: user.fullname,
-                username: user.username,
-                email: user.email,
-                gender: user.sex,
-                college: user.college,
-                degree: user.degree,
-                year: user.year,
-                branch: user.branch,
-                phone: user.phone,
-                address: user.address,
-                city: user.city,
-                state: user.state,
-                nationality: user.nationality
-            });
-            console.log(data);
+            if (data.success) {
+                const user = data.user;
+                this.setState({
+                    fullName: user.fullname,
+                    username: user.username,
+                    email: user.email,
+                    gender: user.sex,
+                    college: user.college,
+                    degree: user.degree,
+                    year: user.year,
+                    branch: user.branch,
+                    phone: user.phone,
+                    address: user.address,
+                    city: user.city,
+                    state: user.state,
+                    nationality: user.nationality
+                });
+                console.log(data);
+            } else {
+                this.setState({
+                    errorMessage: data.error
+                });
+            }
         }).catch((err) => {
             console.log(err);
         });
     };
 
     update = () => {
-        console.log("College ", this.state["college"]);
+        this.setState({
+            errorMessage: ""
+        });
         fetch(`${SERVER_BASE_URL}/api/user/update`, {
             method: 'PUT',
             credentials: "include",
@@ -150,8 +159,8 @@ export default class Profile extends React.Component {
 
     render() {
         const {
-            isEditing, isLoggedIn, fullName, username, email, address, gender, branch, city, college, degree, nationality,
-            phone, state, year
+            isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,
+            degree, nationality, phone, state, year
         } = this.state;
 
         if (!isLoggedIn) {
@@ -196,6 +205,7 @@ export default class Profile extends React.Component {
                             <input className={'input-field'} disabled value={email}
                                    onChange={(e) => this.changeField('email', e.target.value)}
                                    placeholder={'Email Id'}
+                                   checked={gender === 'F'}
                                    type="text"/>
                         </Col>
                         <Col md={1}/>
@@ -206,14 +216,20 @@ export default class Profile extends React.Component {
                         <Col md={6} className={'input-field-col'}>
                             <div className="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline1" name="customRadioInline1"
-                                       className="custom-control-input" disabled={!isEditing} onChange={() => this.changeGender('M')}/>
+                                       className="custom-control-input"
+                                       disabled={!isEditing}
+                                       onChange={() => this.changeGender('M')}
+                                       checked={gender === 'M'}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline1">
                                     Male
                                 </label>
                             </div>
                             <div className="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline2" name="customRadioInline1"
-                                       className="custom-control-input" disabled={!isEditing} onChange={() => this.changeGender('F')}/>
+                                       className="custom-control-input"
+                                       disabled={!isEditing}
+                                       onChange={() => this.changeGender('F')}
+                                       checked={gender === 'F'}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline2">
                                     Female
                                 </label>
@@ -312,8 +328,15 @@ export default class Profile extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
+                    {errorMessage !== "" ? <Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={10} className={'input-field-tag'} style={{ color: 'red', fontSize: 14 }}>
+                            <p>*{errorMessage}</p>
+                        </Col>
+                        <Col md={1}/>
+                    </Row> : null}
                     <Row className={'profile-row edit-button'}>
-                        <Col sm={4}></Col>
+                        <Col sm={4}/>
                         <Col sm={4} className={'profile-button-col'}>
                             {isEditing
                                 ? <button onClick={() => {
@@ -324,11 +347,11 @@ export default class Profile extends React.Component {
                                     this.setState({isEditing: true})
                                 }} className={'btn-edit sbtn sbtn-3 profileBtn'}>EDIT</button>
                             }
-                        
+
                             <button onClick={this.logout} className={'btn-logout sbtn sbtn-3 profileBtn'}>LOGOUT
                             </button>
                         </Col>
-                        <Col sm={4}></Col>
+                        <Col sm={4}/>
                     </Row>
                 </section>
                 <Footer/>
