@@ -29,7 +29,7 @@ export default class Profile extends React.Component {
             nationality: "",
             errorMessage: "",
             vortexId:"",
-            areYouCampusAmbassador:"",
+            campusAmbassador:"",
             campusAmbassadorID:""
         }
     }
@@ -83,7 +83,7 @@ export default class Profile extends React.Component {
                     state: user.state,
                     nationality: user.nationality,
                     vortexId:user.vortexId,
-                    areYouCampusAmbassador:user.areYouCampusAmbassador,
+                    campusAmbassador:user.campusAmbassador,
                     campusAmbassadorID:user.campusAmbassadorID
                 });
                 console.log(data);
@@ -122,7 +122,7 @@ export default class Profile extends React.Component {
                 state: this.state.state,
                 nationality: this.state.nationality,
                 vortexId:this.state.vortexId,
-                areYouCampusAmbassador:this.state.areYouCampusAmbassador,
+                campusAmbassador:this.state.campusAmbassador,
                 campusAmbassadorID:this.state.campusAmbassadorID
             })
         }).then((response) => {
@@ -167,19 +167,19 @@ export default class Profile extends React.Component {
 
     changeCampus = (value) => {
         this.setState({
-            areYouCampusAmbassador: value
+            campusAmbassador: value
         });
     };
 
     render() {
         const {
             isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,
-            degree, nationality, phone, state, year,vortexId,areYouCampusAmbassador,campusAmbassadorID
+            degree, nationality, phone, state, year,vortexId,campusAmbassador,campusAmbassadorID
         } = this.state;
 
-        // if (!isLoggedIn) {
-        //     return <Redirect to={'/'}/>
-        // }
+        if (!isLoggedIn) {
+            return <Redirect to={'/'}/>
+        }
 
         return (
             <div>
@@ -397,7 +397,7 @@ export default class Profile extends React.Component {
                                        className="custom-control-input"
                                        disabled={!isEditing}
                                        onChange={() => this.changeCampus('N')}
-                                       checked={areYouCampusAmbassador === 'N'}/>
+                                       checked={campusAmbassador === 'N'}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline3">
                                     No
                                 </label>
@@ -407,7 +407,7 @@ export default class Profile extends React.Component {
                                        className="custom-control-input"
                                        disabled={!isEditing}
                                        onChange={() => this.changeCampus('Y')}
-                                       checked={areYouCampusAmbassador === 'Y'}/>
+                                       checked={campusAmbassador === 'Y'}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline4">
                                     Yes
                                 </label>
@@ -416,7 +416,7 @@ export default class Profile extends React.Component {
                         <Col md={1}/>
                     </Row>
 
-                    {areYouCampusAmbassador === 'N'?<Row className={'profile-row'}>
+                    {campusAmbassador === 'N'?<Row className={'profile-row'}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>Vortex ID of College Campus Ambassador</p></Col>
                         <Col md={6} className={'input-field-col'}>
