@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Dashboard from "./Components/Dashboard";
 import "./styles/App.css";
 import Login from "./Components/Login";
@@ -54,29 +54,32 @@ class App extends Component {
             <div className="App">
                 <Router>
                     <div>
-                        <Route exact path="/" render={() => (<Dashboard isLoggedIn={isLoggedIn}/>)}/>
-                        <Route exact path="/login" render={() => (<Login isLoggedIn={isLoggedIn} login={() => {
-                            this.changeIsLoggedIn(true);
-                        }}/>)}/>
-                        <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
-                        {/*<Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>*/}
-                        <Route exact path="/events" render={() => (<ComingSoon/>)}/>
-                        <Route exact path="/details/:id" render={({match}) => (<Details id={match.params.id} isLoggedIn={isLoggedIn}/>)}/>
-                        {/*<Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>*/}
-                        <Route exact path="/workshops" render={() => (<ComingSoon/>)}/>
-                        <Route exact path="/profile" render={() => (
-                            <Profile logout={() => {
-                                this.changeIsLoggedIn(false);
-                            }}/>
-                        )}/>
-                        <Route exact path="/contacts" render={() => (<ContactUs/>)}/>
-                        <Route path="/verifyuser/:code"
-                               render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>
-                        <Route path="/forgotpassword" render={() => (<ForgotPassword/>)}/>
-                        <Route path="/changepassword/:code"
-                               render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
-                        <Route path="/accommodation" render={() => (<ComingSoon/>)}/>
-                        <Route path="*" exact render={() => (<NotFound/>)}/>
+                        <Switch>
+                            <Route exact path="/" render={() => (<Dashboard isLoggedIn={isLoggedIn}/>)}/>
+                            <Route exact path="/login" render={() => (<Login isLoggedIn={isLoggedIn} login={() => {
+                                this.changeIsLoggedIn(true);
+                            }}/>)}/>
+                            <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
+                            {/*<Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>*/}
+                            <Route exact path="/events" render={() => (<ComingSoon/>)}/>
+                            <Route exact path="/details/:id"
+                                   render={({match}) => (<Details id={match.params.id} isLoggedIn={isLoggedIn}/>)}/>
+                            {/*<Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>*/}
+                            <Route exact path="/workshops" render={() => (<ComingSoon/>)}/>
+                            <Route exact path="/profile" render={() => (
+                                <Profile logout={() => {
+                                    this.changeIsLoggedIn(false);
+                                }}/>
+                            )}/>
+                            <Route exact path="/contacts" render={() => (<ContactUs/>)}/>
+                            <Route path="/verifyuser/:code"
+                                   render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>
+                            <Route path="/forgotpassword" render={() => (<ForgotPassword/>)}/>
+                            <Route path="/changepassword/:code"
+                                   render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
+                            <Route path="/accommodation" render={() => (<ComingSoon/>)}/>
+                            <Route path="*" exact render={() => (<NotFound/>)}/>
+                        </Switch>
                     </div>
                 </Router>
             </div>
