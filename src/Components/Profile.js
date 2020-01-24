@@ -29,8 +29,8 @@ export default class Profile extends React.Component {
             nationality: "",
             errorMessage: "",
             vortexId:"",
-            Cam:"",
-            CamID:""
+            areYouCampusAmbassador:"",
+            campusAmbassadorID:""
         }
     }
 
@@ -83,8 +83,8 @@ export default class Profile extends React.Component {
                     state: user.state,
                     nationality: user.nationality,
                     vortexId:user.vortexId,
-                    Cam:user.Cam,
-                    CamID:user.CamID
+                    areYouCampusAmbassador:user.areYouCampusAmbassador,
+                    campusAmbassadorID:user.campusAmbassadorID
                 });
                 console.log(data);
             } else {
@@ -122,8 +122,8 @@ export default class Profile extends React.Component {
                 state: this.state.state,
                 nationality: this.state.nationality,
                 vortexId:this.state.vortexId,
-                Cam:this.state.Cam,
-                CamID:this.state.CamID
+                areYouCampusAmbassador:this.state.areYouCampusAmbassador,
+                campusAmbassadorID:this.state.campusAmbassadorID
             })
         }).then((response) => {
             return response.json();
@@ -167,19 +167,19 @@ export default class Profile extends React.Component {
 
     changeCampus = (value) => {
         this.setState({
-            Cam: value
+            areYouCampusAmbassador: value
         });
     };
 
     render() {
         const {
             isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,
-            degree, nationality, phone, state, year,vortexId,Cam,CamID
+            degree, nationality, phone, state, year,vortexId,areYouCampusAmbassador,campusAmbassadorID
         } = this.state;
 
-        if (!isLoggedIn) {
-            return <Redirect to={'/'}/>
-        }
+        // if (!isLoggedIn) {
+        //     return <Redirect to={'/'}/>
+        // }
 
         return (
             <div>
@@ -397,7 +397,7 @@ export default class Profile extends React.Component {
                                        className="custom-control-input"
                                        disabled={!isEditing}
                                        onChange={() => this.changeCampus('N')}
-                                       checked={Cam === 'N'}/>
+                                       checked={areYouCampusAmbassador === 'N'}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline3">
                                     No
                                 </label>
@@ -407,7 +407,7 @@ export default class Profile extends React.Component {
                                        className="custom-control-input"
                                        disabled={!isEditing}
                                        onChange={() => this.changeCampus('Y')}
-                                       checked={Cam === 'Y'}/>
+                                       checked={areYouCampusAmbassador === 'Y'}/>
                                 <label className="custom-control-label" htmlFor="customRadioInline4">
                                     Yes
                                 </label>
@@ -416,12 +416,12 @@ export default class Profile extends React.Component {
                         <Col md={1}/>
                     </Row>
 
-                    {Cam === 'N'?<Row className={'profile-row'}>
+                    {areYouCampusAmbassador === 'N'?<Row className={'profile-row'}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>Vortex ID of College Campus Ambassador</p></Col>
                         <Col md={6} className={'input-field-col'}>
-                            <input disabled={!isEditing} className={'input-field'} value={CamID}
-                                   onChange={(e) => this.changeField('CamID', e.target.value)}
+                            <input disabled={!isEditing} className={'input-field'} value={campusAmbassadorID}
+                                   onChange={(e) => this.changeField('campusAmbassadorID', e.target.value)}
                                    placeholder={'Vortex ID of College Campus Ambassador'}
                           type="text"/>
                         </Col>
