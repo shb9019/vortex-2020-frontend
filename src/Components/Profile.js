@@ -187,9 +187,9 @@ export default class Profile extends React.Component {
             degree, nationality, phone, state, year,vortexId,campusAmbassador,campusAmbassadorID
         } = this.state;
 
-        // if (!isLoggedIn) {
-        //     return <Redirect to={'/'}/>
-        // }
+        if (!isLoggedIn) {
+            return <Redirect to={'/'}/>
+        }
 
         return (
             <div>
