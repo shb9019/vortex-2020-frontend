@@ -11,6 +11,8 @@ export default function ForgotPassword() {
   const [errorMessage, changeError] = React.useState("");
 
   const sendResetLink = () => {
+    changeSuccess("");
+    changeError("");
     fetch(`${SERVER_BASE_URL}/api/user/forgotPassword`, {
       method: "POST",
       credentials: "include",

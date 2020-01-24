@@ -73,7 +73,7 @@ class App extends Component {
                         <Route path="/verifyuser/:code"
                                render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>
                         <Route path="/forgotpassword" render={() => (<ForgotPassword/>)}/>
-                        <Route path="/resetpassword/:code"
+                        <Route path="/changepassword/:code"
                                render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
                         <Route path="/accommodation" render={() => (<ComingSoon/>)}/>
                         <Route path="*" exact render={() => (<NotFound/>)}/>

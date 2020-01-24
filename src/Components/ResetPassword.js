@@ -12,8 +12,10 @@ export default function ResetPassword(props) {
     const [errorMessage, changeError] = React.useState("");
 
     const sendResetPassword = () => {
+        changeSuccess("");
+        changeError("");
         fetch(`${SERVER_BASE_URL}/api/user/changePassword/${code}`, {
-            method: 'POST',
+            method: 'PUT',
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +52,7 @@ export default function ResetPassword(props) {
                     <Col md={1}/>
                     <Col md={4} className={'input-field-col'}>
                         <input className={'input-field'} placeholder={'New Password*'} value={password}
-                               onChange={(e) => changePassword(e.target.value)} type="text"/>
+                               onChange={(e) => changePassword(e.target.value)} type="password"/>
                     </Col>
                 </Row>
                 <Row style={{width: '100%', paddingBottom: 30, margin: 0}}>
