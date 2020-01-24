@@ -67,7 +67,7 @@ class App extends Component {
                             <Profile logout={() => {
                                 this.changeIsLoggedIn(false);
                             }}/>
-                        )}/>
+                        )}/>                                          
                         <Route exact path="/contacts" render={() => (<ContactUs/>)}/>
                         <Route path="/verifyuser/:code"
                                render={({match}) => (<VerifyEmail code={match.params.code}/>)}/>

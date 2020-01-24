@@ -27,8 +27,11 @@ export default class Profile extends React.Component {
             city: "",
             state: "",
             nationality: "",
-            errorMessage: ""
-        };
+            errorMessage: "",
+            vortexId:"",
+            Cam:"",
+            CamID:""
+        }
     }
 
     componentDidMount() {
@@ -78,7 +81,10 @@ export default class Profile extends React.Component {
                     address: user.address,
                     city: user.city,
                     state: user.state,
-                    nationality: user.nationality
+                    nationality: user.nationality,
+                    vortexId:user.vortexId,
+                    Cam:user.Cam,
+                    CamID:user.CamID
                 });
                 console.log(data);
             } else {
@@ -114,7 +120,10 @@ export default class Profile extends React.Component {
                 address: this.state.address,
                 city: this.state.city,
                 state: this.state.state,
-                nationality: this.state.nationality
+                nationality: this.state.nationality,
+                vortexId:this.state.vortexId,
+                Cam:this.state.Cam,
+                CamID:this.state.CamID
             })
         }).then((response) => {
             return response.json();
@@ -156,11 +165,16 @@ export default class Profile extends React.Component {
         });
     };
 
+    changeCampus = (value) => {
+        this.setState({
+            Cam: value
+        });
+    };
 
     render() {
         const {
             isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,
-            degree, nationality, phone, state, year
+            degree, nationality, phone, state, year,vortexId,Cam,CamID
         } = this.state;
 
         if (!isLoggedIn) {
@@ -171,11 +185,41 @@ export default class Profile extends React.Component {
             <div>
                 <Navbar/>
                 <section className={'profile-page'} style={{minHeight: '100vh'}}>
-                    <Row style={{width: '100%', margin: 0, paddingTop: 40, paddingBottom: 40}}>
+                    <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
                         <Col sm={12}>
                             <div className={'profile-title profile-title-col'}><b>Profile</b></div>
                         </Col>
                     </Row>
+                    
+                    <Row style={{ marginBottom: 0, paddingBottom: 40}} className={'profile-row edit-button'}>
+                        <Col sm={4}/>
+                        <Col sm={4} className={'profile-button-col'}>
+                            {isEditing
+                                ? <button onClick={() => {
+                                    this.setState({isEditing: false});
+                                    this.update();
+                                }} className={'sbtn sbtn-3 profileBtn'}>SAVE</button>
+                                : <button onClick={() => {
+                                    this.setState({isEditing: true})
+                                }} className={'btn-edit sbtn sbtn-3 profileBtn'}>EDIT</button>
+                            }
+
+                            <button onClick={this.logout} className={'btn-logout sbtn sbtn-3 profileBtn'}>LOGOUT
+                            </button>
+                        </Col>
+                        <Col sm={4}/>
+                    </Row>
+
+                    
+                    {errorMessage !== "" ? <Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={10} className={'input-field-tag'} style={{ color: 'red', fontSize: 14 }}>
+                            <p>*{errorMessage}</p>
+                        </Col>
+                        <Col md={1}/>
+                    </Row> : null}
+
+
                     <Row className={'profile-row'}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>Full Name</p></Col>
@@ -210,6 +254,19 @@ export default class Profile extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
+
+                    <Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={4} className={'input-field-tag'}><p>Vortex ID</p></Col>
+                        <Col md={6} className={'input-field-col'}>
+                            <input className={'input-field'} disabled value={vortexId}
+                                   placeholder={'Vortex Id'}
+                                   type="text"/>
+                        </Col>
+                        <Col md={1}/>
+                    </Row>
+
+
                     <Row className={'profile-row'}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>Gender</p></Col>
@@ -225,7 +282,7 @@ export default class Profile extends React.Component {
                                 </label>
                             </div>
                             <div className="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="customRadioInline1"
+                                <input type="radio" id="customRadioInline2" name="customRadioInline2"
                                        className="custom-control-input"
                                        disabled={!isEditing}
                                        onChange={() => this.changeGender('F')}
@@ -317,6 +374,7 @@ export default class Profile extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
+
                     <Row className={'profile-row'}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>Nationality</p></Col>
@@ -328,31 +386,49 @@ export default class Profile extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
-                    {errorMessage !== "" ? <Row className={'profile-row'}>
+
+
+                    <Row className={'profile-row'}>
                         <Col md={1}/>
-                        <Col md={10} className={'input-field-tag'} style={{ color: 'red', fontSize: 14 }}>
-                            <p>*{errorMessage}</p>
+                        <Col md={4} className={'input-field-tag'}><p>Are you a Campus Ambassador?</p></Col>
+                        <Col md={6} className={'input-field-col'}>
+                            <div className="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline3" name="customRadioInline3"
+                                       className="custom-control-input"
+                                       disabled={!isEditing}
+                                       onChange={() => this.changeCampus('N')}
+                                       checked={Cam === 'N'}/>
+                                <label className="custom-control-label" htmlFor="customRadioInline3">
+                                    No
+                                </label>
+                            </div>
+                            <div className="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline4" name="customRadioInline4"
+                                       className="custom-control-input"
+                                       disabled={!isEditing}
+                                       onChange={() => this.changeCampus('Y')}
+                                       checked={Cam === 'Y'}/>
+                                <label className="custom-control-label" htmlFor="customRadioInline4">
+                                    Yes
+                                </label>
+                            </div>
+                        </Col>
+                        <Col md={1}/>
+                    </Row>
+
+                    {Cam === 'N'?<Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={4} className={'input-field-tag'}><p>Vortex ID of College Campus Ambassador</p></Col>
+                        <Col md={6} className={'input-field-col'}>
+                            <input disabled={!isEditing} className={'input-field'} value={CamID}
+                                   onChange={(e) => this.changeField('CamID', e.target.value)}
+                                   placeholder={'Vortex ID of College Campus Ambassador'}
+                          type="text"/>
                         </Col>
                         <Col md={1}/>
                     </Row> : null}
-                    <Row className={'profile-row edit-button'}>
-                        <Col sm={4}/>
-                        <Col sm={4} className={'profile-button-col'}>
-                            {isEditing
-                                ? <button onClick={() => {
-                                    this.setState({isEditing: false});
-                                    this.update();
-                                }} className={'sbtn sbtn-3 profileBtn'}>SAVE</button>
-                                : <button onClick={() => {
-                                    this.setState({isEditing: true})
-                                }} className={'btn-edit sbtn sbtn-3 profileBtn'}>EDIT</button>
-                            }
 
-                            <button onClick={this.logout} className={'btn-logout sbtn sbtn-3 profileBtn'}>LOGOUT
-                            </button>
-                        </Col>
-                        <Col sm={4}/>
-                    </Row>
+
                 </section>
                 <Footer/>
             </div>
