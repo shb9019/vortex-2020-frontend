@@ -27,8 +27,11 @@ export default class Profile extends React.Component {
             city: "",
             state: "",
             nationality: "",
-            errorMessage: ""
-        };
+            errorMessage: "",
+            vortexId:"",
+            campusAmbassador: false,
+            campusAmbassadorID: null
+        }
     }
 
     componentDidMount() {
@@ -78,7 +81,10 @@ export default class Profile extends React.Component {
                     address: user.address,
                     city: user.city,
                     state: user.state,
-                    nationality: user.nationality
+                    nationality: user.nationality,
+                    vortexId: user.vId,
+                    campusAmbassador: user.isCA,
+                    campusAmbassadorID: user.vIdOfCA
                 });
                 console.log(data);
             } else {
@@ -95,6 +101,13 @@ export default class Profile extends React.Component {
         this.setState({
             errorMessage: ""
         });
+
+        if (this.state.campusAmbassadorID === "" || this.state.campusAmbassador) {
+            this.setState({
+                campusAmbassadorID: null
+            });
+        }
+
         fetch(`${SERVER_BASE_URL}/api/user/update`, {
             method: 'PUT',
             credentials: "include",
@@ -104,7 +117,6 @@ export default class Profile extends React.Component {
             body: JSON.stringify({
                 fullname: this.state.fullName,
                 username: this.state.username,
-                email: this.state.email,
                 sex: this.state.gender,
                 college: this.state.college,
                 degree: this.state.degree,
@@ -114,7 +126,9 @@ export default class Profile extends React.Component {
                 address: this.state.address,
                 city: this.state.city,
                 state: this.state.state,
-                nationality: this.state.nationality
+                nationality: this.state.nationality,
+                isCA: this.state.campusAmbassador,
+                vIdOfCA: this.state.campusAmbassadorID
             })
         }).then((response) => {
             return response.json();
@@ -144,7 +158,6 @@ export default class Profile extends React.Component {
     };
 
     changeField = (fieldName, value) => {
-        console.log(this.state);
         this.setState({
             [fieldName]: value
         });
@@ -156,25 +169,69 @@ export default class Profile extends React.Component {
         });
     };
 
+    changeIsCampusAmbassador = (value) => {
+        this.setState({
+            campusAmbassador: value
+        });
+    };
 
     render() {
         const {
             isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,
-            degree, nationality, phone, state, year
+            degree, nationality, phone, state, year,vortexId,campusAmbassador,campusAmbassadorID
         } = this.state;
 
-        if (!isLoggedIn) {
-            return <Redirect to={'/'}/>
-        }
+        // if (!isLoggedIn) {
+        //     return <Redirect to={'/'}/>
+        // }
 
         return (
             <div>
                 <Navbar/>
                 <section className={'profile-page'} style={{minHeight: '100vh'}}>
-                    <Row style={{width: '100%', margin: 0, paddingTop: 40, paddingBottom: 40}}>
+                    <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
                         <Col sm={12}>
                             <div className={'profile-title profile-title-col'}><b>Profile</b></div>
                         </Col>
+                    </Row>
+
+                    <Row style={{ marginBottom: 0, paddingBottom: 40}} className={'profile-row edit-button'}>
+                        <Col sm={4}/>
+                        <Col sm={4} className={'profile-button-col'}>
+                            {isEditing
+                                ? <button onClick={() => {
+                                    this.setState({isEditing: false});
+                                    this.update();
+                                }} className={'sbtn sbtn-3 profileBtn'}>SAVE</button>
+                                : <button onClick={() => {
+                                    this.setState({isEditing: true})
+                                }} className={'btn-edit sbtn sbtn-3 profileBtn'}>EDIT</button>
+                            }
+
+                            <button onClick={this.logout} className={'btn-logout sbtn sbtn-3 profileBtn'}>LOGOUT
+                            </button>
+                        </Col>
+                        <Col sm={4}/>
+                    </Row>
+
+
+                    {errorMessage !== "" ? <Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={10} className={'input-field-tag'} style={{ color: 'red', fontSize: 14 }}>
+                            <p>*{errorMessage}</p>
+                        </Col>
+                        <Col md={1}/>
+                    </Row> : null}
+
+                    <Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={4} className={'input-field-tag'}><p>Vortex ID</p></Col>
+                        <Col md={6} className={'input-field-col'}>
+                            <input className={'input-field'} disabled value={vortexId}
+                                   placeholder={'Vortex Id'}
+                                   type="text"/>
+                        </Col>
+                        <Col md={1}/>
                     </Row>
                     <Row className={'profile-row'}>
                         <Col md={1}/>
@@ -225,7 +282,7 @@ export default class Profile extends React.Component {
                                 </label>
                             </div>
                             <div className="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="customRadioInline1"
+                                <input type="radio" id="customRadioInline2" name="customRadioInline2"
                                        className="custom-control-input"
                                        disabled={!isEditing}
                                        onChange={() => this.changeGender('F')}
@@ -317,6 +374,7 @@ export default class Profile extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
+
                     <Row className={'profile-row'}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>Nationality</p></Col>
@@ -328,31 +386,47 @@ export default class Profile extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
-                    {errorMessage !== "" ? <Row className={'profile-row'}>
-                        <Col md={1}/>
-                        <Col md={10} className={'input-field-tag'} style={{ color: 'red', fontSize: 14 }}>
-                            <p>*{errorMessage}</p>
-                        </Col>
-                        <Col md={1}/>
-                    </Row> : null}
-                    <Row className={'profile-row edit-button'}>
-                        <Col sm={4}/>
-                        <Col sm={4} className={'profile-button-col'}>
-                            {isEditing
-                                ? <button onClick={() => {
-                                    this.setState({isEditing: false});
-                                    this.update();
-                                }} className={'sbtn sbtn-3 profileBtn'}>SAVE</button>
-                                : <button onClick={() => {
-                                    this.setState({isEditing: true})
-                                }} className={'btn-edit sbtn sbtn-3 profileBtn'}>EDIT</button>
-                            }
 
-                            <button onClick={this.logout} className={'btn-logout sbtn sbtn-3 profileBtn'}>LOGOUT
-                            </button>
+
+                    <Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={4} className={'input-field-tag'}><p>Are you a Campus Ambassador?</p></Col>
+                        <Col md={6} className={'input-field-col'}>
+                            <div className="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline3" name="customRadioInline3"
+                                       className="custom-control-input"
+                                       disabled={!isEditing}
+                                       onChange={() => this.changeIsCampusAmbassador(true)}
+                                       checked={campusAmbassador}/>
+                                <label className="custom-control-label" htmlFor="customRadioInline3">
+                                    Yes
+                                </label>
+                            </div>
+                            <div className="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline4" name="customRadioInline4"
+                                       className="custom-control-input"
+                                       disabled={!isEditing}
+                                       onChange={() => this.changeIsCampusAmbassador(false)}
+                                       checked={!campusAmbassador}/>
+                                <label className="custom-control-label" htmlFor="customRadioInline4">
+                                    No
+                                </label>
+                            </div>
                         </Col>
-                        <Col sm={4}/>
+                        <Col md={1}/>
                     </Row>
+
+                    {!campusAmbassador && <Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={4} className={'input-field-tag'}><p>Vortex ID of College Campus Ambassador</p></Col>
+                        <Col md={6} className={'input-field-col'}>
+                            <input disabled={!isEditing} className={'input-field'} value={campusAmbassadorID}
+                                   onChange={(e) => this.changeField('campusAmbassadorID', e.target.value)}
+                                   placeholder={'Vortex ID'}
+                                   type="text"/>
+                        </Col>
+                        <Col md={1}/>
+                    </Row>}
                 </section>
                 <Footer/>
             </div>
