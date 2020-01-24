@@ -13,6 +13,7 @@ import ForgotPassword from "./Components/ForgotPassword";
 import ResetPassword from "./Components/ResetPassword";
 import ComingSoon from "./Components/ComingSoon";
 import ContactUs from "./Components/ContactUs";
+import NotFound from "./Components/NotFound";
 
 class App extends Component {
     constructor(props) {
@@ -75,6 +76,7 @@ class App extends Component {
                         <Route path="/resetpassword/:code"
                                render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
                         <Route path="/accommodation" render={() => (<ComingSoon/>)}/>
+                        <Route path="*" exact render={() => (<NotFound/>)}/>
                     </div>
                 </Router>
             </div>

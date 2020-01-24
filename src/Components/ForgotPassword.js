@@ -25,10 +25,10 @@ export default function ForgotPassword() {
         return response.json();
       })
       .then(data => {
-        if (data.success == true) {
-          changeSuccess("Mail sent successfully!");
+        if (data.success === true) {
+          changeSuccess("Reset link has been sent to your email!");
         } else {
-          changeError("Mail ID is incorrect!");
+          changeError("Email is not registered");
         }
         console.log(data);
       })
@@ -74,22 +74,22 @@ export default function ForgotPassword() {
             </div>
           </Col>
         </Row>
-        <Row style={{ width: "100%", paddingBottom: 30, margin: 0 }}>
+        {successMessage !== "" ? <Row style={{ width: "100%", paddingBottom: 30, margin: 0 }}>
           <Col md={1} />
           <Col md={4}>
             <p style={{ color: "#5ecd72", fontSize: "18px" }}>
-              Woah, what is dis?{successMessage}
+              {successMessage}
             </p>
           </Col>
-        </Row>
-        <Row style={{ width: "100%", paddingBottom: 30, margin: 0 }}>
+        </Row> : null}
+        {errorMessage !== ""  ? <Row style={{ width: "100%", paddingBottom: 30, margin: 0 }}>
           <Col md={1} />
           <Col md={4}>
             <p style={{ color: "#ff0000", fontSize: "18px" }}>
-              Hello there fellow human!{errorMessage}
+              *{errorMessage}
             </p>
           </Col>
-        </Row>
+        </Row> : null}
       </section>
       <Footer />
     </div>
