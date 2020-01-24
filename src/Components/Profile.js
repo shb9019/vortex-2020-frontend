@@ -133,6 +133,12 @@ export default class Profile extends React.Component {
         }).then((response) => {
             return response.json();
         }).then((data) => {
+            if (!data.success) {
+                this.setState({
+                    errorMessage: data.error
+                });
+                this.getUser();
+            }
             console.log(data);
         }).catch((err) => {
             console.log(err);
