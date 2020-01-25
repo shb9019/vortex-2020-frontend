@@ -7,7 +7,7 @@ export default class AboutUs extends React.Component {
             <div className={'about-us'}>
                 <Row style={{overflow: 'hidden', width: '100%'}}>
                     <Col md={6} className={'about-us-content'}>
-                        <div className={'about-us-title'}><b>About</b></div>
+                        <div className={'about-us-title'}><b>About</b> Us</div>
                         <p>
                             The Computer Science and Engineering Association (CSEA) of NIT Trichy hosts its annual
                             national level technical symposium, Vortex, to showcase the talents of enthusiasts of
