@@ -14,6 +14,7 @@ export default class Register extends React.Component {
       email: "",
       username: "",
       password: "",
+      confirmPassword: "",
       isRegistered: false,
       errorMessage: "",
       successMessage: ""
@@ -22,36 +23,60 @@ export default class Register extends React.Component {
 
   changeFullName = e => {
     this.setState({
+      errorMessage: "",
+      successMessage: "",
       fullName: e.target.value
     });
   };
 
   changeEmail = e => {
     this.setState({
+      errorMessage: "",
+      successMessage: "",
       email: e.target.value
     });
   };
 
   changeUsername = e => {
     this.setState({
+      errorMessage: "",
+      successMessage: "",
       username: e.target.value
     });
   };
 
   changePassword = e => {
     this.setState({
+      errorMessage: "",
+      successMessage: "",
       password: e.target.value
+    });
+  };
+
+  changeConfirmPassword = e => {
+    this.setState({
+      errorMessage: "",
+      successMessage: "",
+      confirmPassword: e.target.value
     });
   };
 
   changeErrorMessage = msg => {
     this.setState({
+      successMessage: "",
       errorMessage: msg
     });
   };
 
   register = () => {
-    const { fullName, email, password, username } = this.state;
+    const { fullName, email, password, confirmPassword, username } = this.state;
+
+    if (password !== confirmPassword) {
+      this.setState({
+        errorMessage: "Passwords do not match"
+      });
+      return;
+    }
 
     fetch(`${SERVER_BASE_URL}/api/user/register`, {
       method: "POST",
@@ -89,6 +114,7 @@ export default class Register extends React.Component {
       fullName,
       email,
       username,
+      confirmPassword,
       password,
       isRegistered,
       errorMessage,
@@ -164,11 +190,23 @@ export default class Register extends React.Component {
               />
             </Col>
           </Row>
+          <Row className={'register-row'} style={{ width: "100%", paddingBottom: 20 }}>
+            <Col md={1} />
+            <Col md={4} className={"input-field-col"}>
+              <input
+                className={"input-field"}
+                value={confirmPassword}
+                onChange={this.changeConfirmPassword}
+                placeholder={"Confirm Password*"}
+                type="password"
+              />
+            </Col>
+          </Row>
           {(errorMessage !== "") ? <Row className={'register-row'} style={{ width: "100%" }}>
             <Col md={1} />
             <Col md={6} className={"links"}>
               <p style={{ color: "red" }}>
-                *${errorMessage}
+                *{errorMessage}
               </p>
             </Col>
           </Row> : null}

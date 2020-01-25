@@ -48,10 +48,10 @@ export default class ContactUs extends React.Component {
                     </Row>
                     <Row className={'contact-row'}>
                         <Col md={4} className={'text-center'}>
-                            <p className={'contact-name'}>Vyshnavi Rongali</p>
+                            <p className={'contact-name'}>Rakesh Mahanthi</p>
                             <p className={'contact-designation'}>Publicity</p>
                             <p className={'contact-number'}>vortex.publi@gmail.com</p>
-                            <p className={'contact-number'}>+91 96268 84205</p>
+                            <p className={'contact-number'}>+91 89850 48245</p>
                         </Col>
                         <Col md={4} className={'text-center'}>
                             <p className={'contact-name'}>Ranga Vamsi</p>
