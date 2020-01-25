@@ -6,7 +6,7 @@ export default class Footer extends React.Component {
     render() {
         return (
             <div className={'footer-div'}>
-                <Row className={'footer-row'}>
+                <Row className={'footer-row'} style={{ paddingBottom: 25 }}>
                     <Col className={'text-center footer-name'}>
                         <p>Vinoth Gulapala</p>
                         <p>+91 89256 59887</p>
@@ -28,6 +28,11 @@ export default class Footer extends React.Component {
                         <Row className={'footer-row'} style={{ padding: 0, paddingTop: '6px' }}>
                             <a href={'mailto:cseanitt@gmail.com'} target={'_blank'} className={'email'}><p>cseanitt@gmail.com</p></a>
                         </Row>
+                    </Col>
+                </Row>
+                <Row className={'footer-row'} style={{padding: 0}}>
+                    <Col sm={12} className={'text-center'}>
+                        <p>Made with &#10084;&#65039; by CSG/Vortex, NIT Trichy</p>
                     </Col>
                 </Row>
             </div>
