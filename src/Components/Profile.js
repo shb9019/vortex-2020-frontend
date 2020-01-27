@@ -6,6 +6,7 @@ import '../styles/Profile.css';
 import '../styles/styled-buttons.css';
 import {Redirect} from "react-router-dom";
 import {SERVER_BASE_URL} from "../config/config";
+import collegeList from "../utils/CollegeList";
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -304,9 +305,13 @@ export default class Profile extends React.Component {
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>College</p></Col>
                         <Col md={6} className={'input-field-col'}>
-                            <input className={'input-field'} disabled={!isEditing} value={college}
+                            {isEditing
+                                ? <select className={'input-field'} disabled={!isEditing} value={college}
                                    onChange={(e) => this.changeField('college', e.target.value)}
-                                   placeholder={'College'} type="text"/>
+                                    placeholder={'Select College'}>
+                                {collegeList.map((college) =>  <option style={{maxWidth: '100%'}}  value={college}>{college}</option>)}
+                            </select>
+                                : <input className={'input-field'} disabled value={college} placeholder={'College'} type="text"/>}
                         </Col>
                         <Col md={1}/>
                     </Row>
