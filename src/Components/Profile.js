@@ -20,6 +20,7 @@ export default class Profile extends React.Component {
             email: "",
             gender: "",
             college: "",
+            otherCollege: "",
             degree: "",
             year: "",
             branch: "",
@@ -75,6 +76,7 @@ export default class Profile extends React.Component {
                     email: user.email,
                     gender: user.sex,
                     college: user.college,
+                    otherCollege: user.otherCollege,
                     degree: user.degree,
                     year: user.year,
                     branch: user.branch,
@@ -120,6 +122,7 @@ export default class Profile extends React.Component {
                 username: this.state.username,
                 sex: this.state.gender,
                 college: this.state.college,
+                otherCollege:this.state.otherCollege,
                 degree: this.state.degree,
                 year: this.state.year,
                 branch: this.state.branch,
@@ -184,10 +187,10 @@ export default class Profile extends React.Component {
 
     render() {
         const {
-            isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,
+            isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,otherCollege,
             degree, nationality, phone, state, year,vortexId,campusAmbassador,campusAmbassadorID
         } = this.state;
-
+        
         if (!isLoggedIn) {
             return <Redirect to={'/'}/>
         }
@@ -306,7 +309,7 @@ export default class Profile extends React.Component {
                         <Col md={4} className={'input-field-tag'}><p>College</p></Col>
                         <Col md={6} className={'input-field-col'}>
                             {isEditing
-                                ? <select className={'input-field'} disabled={!isEditing} value={college}
+                                ? <select className={'input-field'} disabled={!isEditing} placeholder="select" value={college}
                                    onChange={(e) => this.changeField('college', e.target.value)}
                                     placeholder={'Select College'}>
                                 {collegeList.map((college) =>  <option style={{maxWidth: '100%'}}  value={college}>{college}</option>)}
@@ -315,6 +318,19 @@ export default class Profile extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
+
+
+                    {college=="Others"?<Row className={'profile-row'}>
+                        <Col md={1}/>
+                        <Col md={4} className={'input-field-tag'}><p>If Others,Enter College</p></Col>
+                        <Col md={6} className={'input-field-col'}>
+                            <input className={'input-field'} disabled={!isEditing} value={otherCollege} placeholder={'College Name'}
+                                   onChange={(e) => this.changeField('otherCollege', e.target.value)}
+                                   type="text"/>
+                        </Col>
+                        <Col md={1}/>
+                    </Row>:null}
+
                     <Row className={'profile-row'}>
                         <Col md={1}/>
                         <Col md={4} className={'input-field-tag'}><p>Degree</p></Col>
