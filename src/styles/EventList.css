@@ -27,6 +27,13 @@
     padding-bottom: 20px;
 }
 
+@media (max-width: 700px) {
+    .event-list-card {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 .detail-name {
     min-height: 180px;
 }
