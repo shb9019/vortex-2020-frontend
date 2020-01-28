@@ -7,7 +7,7 @@ export default function PopUp(prop){
         to: {opacity: 1, color: 'white',marginTop: 0 },
         from: {opacity: 0, color: 'white',marginTop:-500},
         config:{duration:4000}
-    })
+    });
     return <animated.div style={props}>{text}</animated.div>
 }
 

@@ -5,8 +5,59 @@ import {Col, Row} from "react-bootstrap";
 import '../styles/EventList.css';
 import EventCard from "./EventCard";
 import PopUp from "./PopUp";
+import {SERVER_BASE_URL} from '../config/config';
+
 export default class EventList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            workshops: []
+        };
+    }
+
+    componentDidMount() {
+        this.fetchWorkshopDetails();
+    }
+
+    fetchWorkshopDetails = () => {
+        console.log(SERVER_BASE_URL);
+        fetch(`${SERVER_BASE_URL}/api/workshops/getAll`, {
+            method: 'GET',
+            credentials: "include",
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            if (data.success) {
+                this.setState({
+                    workshops: data.workshops
+                });
+            } else {
+                console.log(data.error);
+            }
+        })
+    };
+
     render() {
+        const {workshops} = this.state;
+
+        let rows = [];
+
+        let index = 0;
+        while (index < workshops.length) {
+            rows.push(<Row className={'event-list-row'}>
+                <Col md={4} className={'event-list-card'}>
+                    <EventCard details={workshops[index]}/>
+                </Col>
+                {(index + 1 < workshops.length) ? <Col md={4} className={'event-list-card'}>
+                    <EventCard details={workshops[index+1]}/>
+                </Col> : null}
+                {(index + 2 < workshops.length) ? <Col md={4} className={'event-list-card'}>
+                    <EventCard details={workshops[index+2]}/>
+                </Col> : null}
+            </Row>);
+            index += 3;
+        }
+
         return (
             <div>
                 <Navbar/>
@@ -18,17 +69,7 @@ export default class EventList extends React.Component {
                             </Col>
                         </Row>
                         <Row style={{width: '100%'}}><br/><br/><br/></Row>
-                        <Row style={{width: '100%', paddingLeft: 20, paddingRight: 20, margin: 0}}>
-                            <Col md={4} style={{ paddingLeft: 10, paddingRight: 10, paddingBottom: 20 }}>
-                                <EventCard/>
-                            </Col>
-                            <Col md={4} style={{ paddingLeft: 10, paddingRight: 10, paddingBottom: 20 }}>
-                                <EventCard/>
-                            </Col>
-                            <Col md={4} style={{ paddingLeft: 10, paddingRight: 10, paddingBottom: 20 }}>
-                                <EventCard/>
-                            </Col>
-                        </Row>
+                        {rows}
                     </section>
                 </div>
                 <Footer/>

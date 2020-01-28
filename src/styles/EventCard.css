@@ -45,6 +45,12 @@
   font-size: 25px;
 }
 
+@media (max-width: 700px) {
+  .event-title {
+    text-align: center;
+  }
+}
+
 .event-info {
   width: 100%;
   color: black;
@@ -71,4 +77,12 @@ ul li::before {
   width: 1em; /* Also needed for space (tweak if needed) */
   margin-left: -1em; /* Also needed for space (tweak if needed) */
   margin-right: 1em;
+}
+
+.card-sec-3 div a {
+  color: white;
+}
+
+.card-sec-3 div a:hover {
+  color: white;
 }

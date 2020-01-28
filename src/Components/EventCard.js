@@ -5,35 +5,40 @@ import "../styles/styled-buttons.css";
 
 export default class EventCard extends React.Component {
   render() {
+    const {details, isWorkshop} = this.props;
+    console.log(details);
+
+    const shortDescription = details.shortDescription.split("|");
+    console.log(shortDescription);
+
     return (
       <div className={"card-wrapper"}>
         <div className={"card-sec-1"}>
           <Row style={{ width: "100%" }}>
             <Col sm={1} />
             <Col sm={8} className={"event-title"}>
-              <p style={{ margin: 0 }}>Minecraft</p>
+              <p style={{ margin: 0 }}>{details.name}</p>
             </Col>
-            <Col sm={4}></Col>
+            <Col sm={4}/>
           </Row>
         </div>
         <div className={"card-sec-2"}>
           <Row className={"event-info"}>
             <p>
-              This team-building game brings coworkers together in an activity
-              combining police investigation and...
+              {shortDescription[0]}
             </p>
           </Row>
           <Row className={"event-points-row"}>
             <ul className={"event-points"}>
-              <li>Static</li>
-              <li>Adaptable</li>
-              <li>Indoors</li>
+              <li>{shortDescription[1]}</li>
+              <li>{shortDescription[2]}</li>
+              <li>{shortDescription[3]}</li>
             </ul>
           </Row>
         </div>
         <div className={"card-sec-3"}>
           <div>
-            <button className="sbtn">Know More</button>
+            <a href={`/${isWorkshop ? 'workshop' : 'event'}/${details.id}`}><button className="sbtn">Know More</button></a>
           </div>
         </div>
       </div>

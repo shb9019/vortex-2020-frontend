@@ -10,7 +10,6 @@ export default class ComingSoon extends React.Component {
                 <Navbar/>
                 <section style={{minHeight: '100vh'}} className={'coming-soon-section'}>
                     <h1>COMING SOON</h1>
-                    <p>That's what she said.</p>
                 </section>
                 <Footer/>
             </div>

@@ -60,12 +60,10 @@ class App extends Component {
                                 this.changeIsLoggedIn(true);
                             }}/>)}/>
                             <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
-                            {/*<Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>*/}
                             <Route exact path="/events" render={() => (<ComingSoon/>)}/>
-                            <Route exact path="/details/:id"
-                                   render={({match}) => (<Details id={match.params.id} isLoggedIn={isLoggedIn}/>)}/>
-                            {/*<Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>*/}
-                            <Route exact path="/workshops" render={() => (<ComingSoon/>)}/>
+                            {/*<Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>*/}
+                            <Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>
+                            <Route exact path="/workshop/:id" render={({match}) => (<Details isWorkshop={true} id={match.params.id}/>)}/>
                             <Route exact path="/profile" render={() => (
                                 <Profile logout={() => {
                                     this.changeIsLoggedIn(false);
