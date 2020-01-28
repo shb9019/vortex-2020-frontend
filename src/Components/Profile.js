@@ -30,7 +30,7 @@ export default class Profile extends React.Component {
             state: "",
             nationality: "",
             errorMessage: "",
-            vortexId:"",
+            vortexId: "",
             campusAmbassador: false,
             campusAmbassadorID: null
         }
@@ -75,8 +75,6 @@ export default class Profile extends React.Component {
                     username: user.username,
                     email: user.email,
                     gender: user.sex,
-                    college: user.college,
-                    otherCollege: user.otherCollege,
                     degree: user.degree,
                     year: user.year,
                     branch: user.branch,
@@ -89,6 +87,18 @@ export default class Profile extends React.Component {
                     campusAmbassador: user.isCA,
                     campusAmbassadorID: user.vIdOfCA
                 });
+
+                if (collegeList.includes(user.college)) {
+                    this.setState({
+                        college: user.college
+                    });
+                } else {
+                    this.setState({
+                        college: 'Others',
+                        otherCollege: user.college
+                    });
+                }
+
                 console.log(data);
             } else {
                 this.setState({
@@ -111,6 +121,8 @@ export default class Profile extends React.Component {
             });
         }
 
+        let college = (this.state.college === 'Others') ? this.state.otherCollege : this.state.college;
+
         fetch(`${SERVER_BASE_URL}/api/user/update`, {
             method: 'PUT',
             credentials: "include",
@@ -121,8 +133,8 @@ export default class Profile extends React.Component {
                 fullname: this.state.fullName,
                 username: this.state.username,
                 sex: this.state.gender,
-                college: this.state.college,
-                otherCollege:this.state.otherCollege,
+                college: college,
+                otherCollege: this.state.otherCollege,
                 degree: this.state.degree,
                 year: this.state.year,
                 branch: this.state.branch,
@@ -187,10 +199,10 @@ export default class Profile extends React.Component {
 
     render() {
         const {
-            isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college,otherCollege,
-            degree, nationality, phone, state, year,vortexId,campusAmbassador,campusAmbassadorID
+            isEditing, isLoggedIn, errorMessage, fullName, username, email, address, gender, branch, city, college, otherCollege,
+            degree, nationality, phone, state, year, vortexId, campusAmbassador, campusAmbassadorID
         } = this.state;
-        
+
         if (!isLoggedIn) {
             return <Redirect to={'/'}/>
         }
@@ -205,7 +217,7 @@ export default class Profile extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row style={{ marginBottom: 0, paddingBottom: 40}} className={'profile-row edit-button'}>
+                    <Row style={{marginBottom: 0, paddingBottom: 40}} className={'profile-row edit-button'}>
                         <Col sm={4}/>
                         <Col sm={4} className={'profile-button-col'}>
                             {isEditing
@@ -227,7 +239,7 @@ export default class Profile extends React.Component {
 
                     {errorMessage !== "" ? <Row className={'profile-row'}>
                         <Col md={1}/>
-                        <Col md={10} className={'input-field-tag'} style={{ color: 'red', fontSize: 14 }}>
+                        <Col md={10} className={'input-field-tag'} style={{color: 'red', fontSize: 14}}>
                             <p>*{errorMessage}</p>
                         </Col>
                         <Col md={1}/>
@@ -309,27 +321,31 @@ export default class Profile extends React.Component {
                         <Col md={4} className={'input-field-tag'}><p>College</p></Col>
                         <Col md={6} className={'input-field-col'}>
                             {isEditing
-                                ? <select className={'input-field'} disabled={!isEditing} placeholder="select" value={college}
-                                   onChange={(e) => this.changeField('college', e.target.value)}
-                                    placeholder={'Select College'}>
-                                {collegeList.map((college) =>  <option style={{maxWidth: '100%'}}  value={college}>{college}</option>)}
-                            </select>
-                                : <input className={'input-field'} disabled value={college} placeholder={'College'} type="text"/>}
+                                ? <select className={'input-field'} disabled={!isEditing}
+                                          value={college}
+                                          onChange={(e) => this.changeField('college', e.target.value)}
+                                          placeholder={'Select College'}>
+                                    {collegeList.map((college) => <option style={{maxWidth: '100%'}}
+                                                                          value={college}>{college}</option>)}
+                                </select>
+                                : <input className={'input-field'} disabled value={college} placeholder={'College'}
+                                         type="text"/>}
                         </Col>
                         <Col md={1}/>
                     </Row>
 
 
-                    {college=="Others"?<Row className={'profile-row'}>
+                    {(college === "Others") ? <Row className={'profile-row'}>
                         <Col md={1}/>
-                        <Col md={4} className={'input-field-tag'}><p>If Others,Enter College</p></Col>
+                        <Col md={4} className={'input-field-tag'}><p>College name</p></Col>
                         <Col md={6} className={'input-field-col'}>
-                            <input className={'input-field'} disabled={!isEditing} value={otherCollege} placeholder={'College Name'}
+                            <input className={'input-field'} disabled={!isEditing} value={otherCollege}
+                                   placeholder={'College Name'}
                                    onChange={(e) => this.changeField('otherCollege', e.target.value)}
                                    type="text"/>
                         </Col>
                         <Col md={1}/>
-                    </Row>:null}
+                    </Row> : null}
 
                     <Row className={'profile-row'}>
                         <Col md={1}/>
