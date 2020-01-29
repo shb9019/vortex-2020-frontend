@@ -7487,4 +7487,10 @@
     line-height: 1.5em !important;
     text-align: justify;
   }
+
+  .detail-name {
+    text-align: center;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 }
