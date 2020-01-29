@@ -44,15 +44,12 @@ export default class VortexNavbar extends React.Component {
     };
 
     logout = () => {
-        const {logout} = this.props;
-
         fetch(`${SERVER_BASE_URL}/api/user/logout`, {
             method: 'GET',
             credentials: "include",
         }).then((response) => {
             return response.json();
         }).then(() => {
-            logout();
             this.setState({
                 isLoggedIn: false
             });
