@@ -73,10 +73,6 @@ export default class Details extends React.Component {
             }).then((data) => {
                 if (data.success) {
                     let {description, prerequisites, contactDetails} = data.workshop;
-                    description = description.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-                    prerequisites = prerequisites.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-                    contactDetails = contactDetails.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-                    console.log(contactDetails);
                     this.setState({
                         r1: description,
                         r2: prerequisites,
@@ -117,6 +113,7 @@ export default class Details extends React.Component {
             '--word-index': `1`
         };
 
+        let {r1, r2, r3} = this.state;
 
         return (
             <div>
@@ -177,7 +174,7 @@ export default class Details extends React.Component {
                                                                                style={{wordIndex1}}><span
                                                         id="head1">{this.state.l1}</span></span></h3></div>
                                                 <div className="c-procedure__content" style={{opacity: 1}}>
-                                                    <p id="first">{this.state.r1}</p>
+                                                    <p id="first" dangerouslySetInnerHTML={{__html: this.state.r1}}/>
                                                 </div>
                                             </div>
 
@@ -190,7 +187,7 @@ export default class Details extends React.Component {
                                                                                style={{wordIndex1}}><span
                                                         id="head2">{this.state.l2}</span></span></h3></div>
                                                 <div className="c-procedure__content" style={{opacity: 1}}>
-                                                    <p id="second">{this.state.r2}</p>
+                                                    <p id="second" dangerouslySetInnerHTML={{__html: this.state.r2}} />
 
                                                 </div>
                                             </div>
@@ -204,7 +201,7 @@ export default class Details extends React.Component {
                                                                                style={{wordIndex1}}><span
                                                         id="head3">{this.state.l3}</span></span></h3></div>
                                                 <div className="c-procedure__content" style={{opacity: 1}}>
-                                                    <p id="third">{this.state.r3}</p>
+                                                    <p id="third" dangerouslySetInnerHTML={{__html: this.state.r3}}/>
                                                 </div>
                                             </div>
                                         </div>
