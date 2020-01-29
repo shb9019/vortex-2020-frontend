@@ -7,6 +7,7 @@ import PopUp from "./PopUp";
 import Button from "./Button";
 import axios from 'axios';
 import {SERVER_BASE_URL} from "../config/config";
+import {Redirect} from "react-router-dom";
 
 
 export default class Details extends React.Component {
@@ -19,9 +20,30 @@ export default class Details extends React.Component {
             r1: '',
             r2: '',
             r3: '',
-            title: ''
+            title: '',
+            isLoggedIn: true
         };
     }
+
+    setIsLoggedIn = async () => {
+        try {
+            const response = await fetch(`${SERVER_BASE_URL}/api/user/isLoggedIn`, {
+                credentials: "include",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            this.setState({
+                isLoggedIn: data.isLoggedIn
+            });
+        } catch (err) {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
+    };
 
     handleClick = (id) => {
         let slide = document.getElementsByClassName('c-procedure__slide');
@@ -86,9 +108,14 @@ export default class Details extends React.Component {
         }
 
         this.handleClick(1);
+
+        if (isWorkshop) {
+            this.setIsLoggedIn();
+        }
     };
 
     render() {
+
         const styles = {
             transform: `translate(0%, 100%) matrix(1, 0, 0, 1, 0, 0)`
         };
@@ -113,8 +140,7 @@ export default class Details extends React.Component {
             '--word-index': `1`
         };
 
-        let {r1, r2, r3} = this.state;
-
+        let {r1, r2, r3, isLoggedIn} = this.state;
         return (
             <div>
                 <Navbar/>
@@ -212,11 +238,11 @@ export default class Details extends React.Component {
                         <Col md={1}/>
                     </Row>
 
-                    <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                    {isLoggedIn && <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
                         <Col sm={12}>
                             <Button text="Register" href="https://www.thecollegefever.com/events/vortex-20"/>
                         </Col>
-                    </Row>
+                    </Row>}
                 </section>
                 <Footer/>
             </div>
