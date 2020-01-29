@@ -73,6 +73,9 @@ export default class Details extends React.Component {
             }).then((data) => {
                 console.log(data);
                 if (data.success) {
+                    data.workshop.description = data.workshop.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                    data.workshop.prerequisites = data.workshop.prerequisites.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                    data.workshop.contactDetails = data.workshop.contactDetails.replace(/(?:\r\n|\r|\n)/g, '<br>');
                     this.setState({
                         r1: data.workshop.description,
                         r2: data.workshop.prerequisites,
