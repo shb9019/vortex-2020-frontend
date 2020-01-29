@@ -76,7 +76,7 @@ export default class VortexNavbar extends React.Component {
                     </Button>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end navbar-logo">
-                        <a className={'custom-navbar-link'}>HOME</a>
+                        <a className={'custom-navbar-link'} href={'/'}>HOME</a>
                         {isLoggedIn && <a className={'custom-navbar-link'} onClick={this.logout}>LOGOUT</a>}
                     </Navbar.Collapse>
                 </Navbar>

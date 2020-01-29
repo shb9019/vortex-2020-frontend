@@ -38,11 +38,16 @@
 .custom-navbar-link {
     padding-left: 10px;
     padding-right: 10px;
+    text-decoration: none;
+    color: black;
+    outline: none;
 }
 
 .custom-navbar-link:hover {
     cursor: pointer;
     font-weight: 200;
+    color: black;
+    outline: none;
 }
 
 @media only screen and (min-width: 600px) {
