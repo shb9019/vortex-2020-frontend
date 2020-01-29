@@ -53,6 +53,7 @@ export default class VortexNavbar extends React.Component {
             this.setState({
                 isLoggedIn: false
             });
+            window.location.reload();
         }).catch((err) => {
             console.log(err);
         });
