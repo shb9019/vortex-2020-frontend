@@ -148,7 +148,8 @@ export default class Details extends React.Component {
 
                     <Row style={{width: '100%', paddingTop: 80}}>
                         <Col sm={12}>
-                            <div className={'event-list-title detail-name'}><b><PopUp text={this.state.title}/></b></div>
+                            <div className={'event-list-title detail-name'}><b><PopUp text={this.state.title}/></b>
+                            </div>
                         </Col>
                     </Row>
 
@@ -166,21 +167,27 @@ export default class Details extends React.Component {
                                         <div className="c-procedure__nav">
 
                                             <div id="1" className="c-procedure__step m-active">
-                                                <button onClick={(e) => {this.handleClick(e.currentTarget.parentElement.id)}} className="m-active">
+                                                <button onClick={(e) => {
+                                                    this.handleClick(e.currentTarget.parentElement.id)
+                                                }} className="m-active">
                                                     <div className="a-plus"/>
                                                     <span className="t-h6"><b>01. </b>{this.state.l1}</span>
                                                 </button>
                                             </div>
 
                                             <div id="2" className="c-procedure__step">
-                                                <button onClick={(e) => {this.handleClick(e.currentTarget.parentElement.id)}} className="">
+                                                <button onClick={(e) => {
+                                                    this.handleClick(e.currentTarget.parentElement.id)
+                                                }} className="">
                                                     <div className="a-plus"/>
                                                     <span className="t-h6"><b>02. </b>{this.state.l2}</span>
                                                 </button>
                                             </div>
 
                                             <div id="3" className="c-procedure__step">
-                                                <button onClick={(e) => {this.handleClick(e.currentTarget.parentElement.id)}} className="">
+                                                <button onClick={(e) => {
+                                                    this.handleClick(e.currentTarget.parentElement.id)
+                                                }} className="">
                                                     <div className="a-plus"/>
                                                     <span className="t-h6"><b>03. </b>{this.state.l3}</span>
                                                 </button>
@@ -213,7 +220,7 @@ export default class Details extends React.Component {
                                                                                style={{wordIndex1}}><span
                                                         id="head2">{this.state.l2}</span></span></h3></div>
                                                 <div className="c-procedure__content" style={{opacity: 1}}>
-                                                    <p id="second" dangerouslySetInnerHTML={{__html: this.state.r2}} />
+                                                    <p id="second" dangerouslySetInnerHTML={{__html: this.state.r2}}/>
 
                                                 </div>
                                             </div>
@@ -238,11 +245,17 @@ export default class Details extends React.Component {
                         <Col md={1}/>
                     </Row>
 
-                    {isLoggedIn && <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
-                        <Col sm={12}>
-                            <Button text="Register" href="https://www.thecollegefever.com/events/vortex-20"/>
-                        </Col>
-                    </Row>}
+                    {isLoggedIn
+                        ? <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                            <Col sm={12}>
+                                <Button text="Register" href="https://www.thecollegefever.com/events/vortex-20"/>
+                            </Col>
+                        </Row>
+                        : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                            <Col sm={12}>
+                                <Button text="Log In to register" href="/login"/>
+                            </Col>
+                        </Row>}
                 </section>
                 <Footer/>
             </div>
