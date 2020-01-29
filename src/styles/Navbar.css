@@ -35,6 +35,16 @@
     height: 2px;
 }
 
+.custom-navbar-link {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.custom-navbar-link:hover {
+    cursor: pointer;
+    font-weight: 200;
+}
+
 @media only screen and (min-width: 600px) {
     .vortex-navbar {
         padding-left: 40px;
