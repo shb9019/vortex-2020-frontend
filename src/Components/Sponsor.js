@@ -10,7 +10,8 @@ export default class Sponsor extends React.Component {
             totalCount: 3,
             windowWidth: this.getWindowWidth(),
             sponsorImgs: ['souled-store.png', 'zoomin.svg', 'tcf.svg'],
-            sponsorDescriptions: ['Official Gifting Partner', 'Associate Partner', 'Official Ticketing Partner']
+            sponsorDescriptions: ['Official Gifting Partner', 'Associate Partner', 'Official Ticketing Partner'],
+            sponsorLinks: ['https://www.thesouledstore.com/', 'https://www.zoomin.com/', 'https://www.thecollegefever.com/']
         };
         window.addEventListener('resize', () => {
             this.setState({
@@ -40,7 +41,7 @@ export default class Sponsor extends React.Component {
     };
 
     render() {
-        const {currentIndex, windowWidth, sponsorImgs, sponsorDescriptions} = this.state;
+        const {currentIndex, windowWidth, sponsorImgs, sponsorDescriptions, sponsorLinks} = this.state;
         const sponsorDivs = [];
 
         console.log(currentIndex);
@@ -48,8 +49,8 @@ export default class Sponsor extends React.Component {
         sponsorImgs.forEach((sponsorImg, index) => {
             sponsorDivs.push(
                 <div className={'logo-div'} style={{display: 'inline', padding: ((currentIndex !== index) ? 40 : 10)}}>
-                    <img src={`images/${sponsorImg}`} className={'logo-img'} alt={sponsorImg}
-                         width={((currentIndex !== index) ? 200 : 260)}/>
+                    <a href={sponsorLinks[index]} target={'_blank'}><img src={`images/${sponsorImg}`} className={'logo-img'} alt={sponsorImg}
+                         width={((currentIndex !== index) ? 200 : 260)}/></a>
                 </div>
             );
         });
