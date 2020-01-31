@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css?family=Modern+Antiqua");
+.clueless {
+  background-image: url("/images/astoBackground.png");
+
+  height: auto;
+  min-height: 100%;
+}
+
+.question-row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.thankyou {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 35%;
+  color: white;
+}
+
+.question-img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 0px;
+  height: 300px;
+  width: auto;
+}
+
+.question-form-group {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: max-content;
+}
+
+.leaderboard-button {
+  background-color: #4d1a00;
+  border: 0px;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  float: right;
+  margin-top: -50px;
+  margin-right: 10px;
+}
+
+.leaderboard-button:hover {
+  background-color: wheat;
+}
+
+.leaderboard-button:hover #leaderboard {
+  color: #4d1a00;
+}
+
+#leaderboard {
+  font-size: 36px;
+  color: wheat;
+}
+.home-fa-button {
+  background-color: #4d1a00;
+  border: 0px;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  float: left;
+  margin-top: 0px;
+  margin-left: 10px;
+  position: absolute;
+}
+.home-fa-button:hover {
+  background-color: wheat;
+}
+
+.home-fa-button:hover #home-fa {
+  color: #4d1a00;
+}
+
+#home-fa {
+  font-size: 36px;
+  color: wheat;
+}
+
+#answer-label {
+  display: inline;
+  color: white;
+  font-family: "Modern Antiqua", cursive;
+  font-size: 24px;
+  padding-right: 10px;
+}
+
+#clueless-heading {
+  color: white;
+  font-family: "Courier New", Courier, monospace, cursive, Cambria, Cochin,
+    Georgia, Times, "Times New Roman", serif, "Modern Antiqua", cursive;
+  font-size: 28px;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+#answer {
+  width: 250px;
+  display: inline;
+}
+
+.clueless-submit-button {
+  color: wheat;
+  font-family: "Modern Antiqua", cursive;
+  font-size: 24px;
+  background-color: #4d1a00;
+  border: 0px;
+  width: 150px;
+  height: 50px;
+  margin-left: calc(50% - 75px);
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.clueless-submit-button:hover {
+  color: #4d1a00;
+  background-color: wheat;
+}
+
+.leaderboard-table {
+  color: #4d1a00;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.clueless-page a {
+  background-color: #4d1a00 !important;
+  border-color: #4d1a00 !important;
+}
+
+@media only screen and (max-width: 500px) {
+  #answer {
+    width: 170px;
+  }
+  #leaderboard,
+  #home-fa {
+    font-size: 26px;
+  }
+}
+
+#wrong-img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 0px;
+  height: 300px;
+  width: auto;
+}
+
+#back-link {
+  color: wheat;
+  font-family: "Modern Antiqua", cursive;
+  font-size: 20px;
+  background-color: #4d1a00;
+  border: 0px;
+  width: 200px;
+  height: 50px;
+  margin-left: calc(50% - 100px);
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+#back-link:hover {
+  color: #4d1a00;
+  background-color: wheat;
+}
+
+#back-link-a {
+  color: wheat;
+}
+
+#back-link-a:hover {
+  color: #4d1a00;
+  text-decoration: none;
+}
