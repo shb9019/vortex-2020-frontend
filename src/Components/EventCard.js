@@ -33,6 +33,7 @@ export default class EventCard extends React.Component {
               <li>{shortDescription[1]}</li>
               <li>{shortDescription[2]}</li>
               <li>{shortDescription[3]}</li>
+              {shortDescription[4] && <li>{shortDescription[4]}</li>}
             </ul>
           </Row>
         </div>

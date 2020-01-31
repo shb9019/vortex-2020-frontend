@@ -8,6 +8,7 @@ import Button from "./Button";
 import axios from 'axios';
 import {SERVER_BASE_URL} from "../config/config";
 import {Redirect} from "react-router-dom";
+import Link from "react-router-dom/Link";
 
 
 export default class Details extends React.Component {
@@ -253,7 +254,7 @@ export default class Details extends React.Component {
                         </Row>
                         : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
                             <Col sm={12}>
-                                <Button text="Log In to register" href="/login"/>
+                                <Button text="Log In to register" href={'/login'}/>
                             </Col>
                         </Row>}
                 </section>
