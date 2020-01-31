@@ -6,20 +6,17 @@ import "../styles/styled-buttons.css";
 export default class EventCard extends React.Component {
   render() {
     const {details, isWorkshop} = this.props;
-    console.log(details);
-
     const shortDescription = details.shortDescription.split("|");
-    console.log(shortDescription);
 
     return (
       <div className={"card-wrapper"}>
         <div className={"card-sec-1"}>
           <Row style={{ width: "100%" }}>
             <Col sm={1} />
-            <Col sm={8} className={"event-title"}>
+            <Col sm={10} className={"event-title"}>
               <p style={{ margin: 0 }}>{details.name}</p>
             </Col>
-            <Col sm={4}/>
+            <Col sm={1}/>
           </Row>
         </div>
         <div className={"card-sec-2"}>
