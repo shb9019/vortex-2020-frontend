@@ -34,7 +34,6 @@ export default class Login extends React.Component {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         if (!data.success) {
           this.changeErrorMessage(data.error);
         } else {
@@ -69,8 +68,6 @@ export default class Login extends React.Component {
   render() {
     const { isLoggedIn } = this.props;
     const { username, password, errorMessage } = this.state;
-
-    console.log(isLoggedIn);
 
     if (isLoggedIn) {
       return <Redirect to="/" />;

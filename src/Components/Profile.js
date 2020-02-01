@@ -99,7 +99,6 @@ export default class Profile extends React.Component {
                     });
                 }
 
-                console.log(data);
             } else {
                 this.setState({
                     errorMessage: data.error
@@ -155,7 +154,6 @@ export default class Profile extends React.Component {
                 });
                 this.getUser();
             }
-            console.log(data);
         }).catch((err) => {
             console.log(err);
         });

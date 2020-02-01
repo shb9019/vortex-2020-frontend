@@ -44,8 +44,6 @@ export default class Sponsor extends React.Component {
         const {currentIndex, windowWidth, sponsorImgs, sponsorDescriptions, sponsorLinks} = this.state;
         const sponsorDivs = [];
 
-        console.log(currentIndex);
-
         sponsorImgs.forEach((sponsorImg, index) => {
             sponsorDivs.push(
                 <div className={'logo-div'} style={{display: 'inline', padding: ((currentIndex !== index) ? 40 : 10)}}>

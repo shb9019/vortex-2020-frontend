@@ -20,7 +20,6 @@ export default class EventList extends React.Component {
     }
 
     fetchWorkshopDetails = () => {
-        console.log(SERVER_BASE_URL);
         fetch(`${SERVER_BASE_URL}/api/workshops/getAll`, {
             method: 'GET',
             credentials: "include",

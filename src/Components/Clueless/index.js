@@ -1,114 +1,214 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import Question from './Question/Question';
-import Comment from './Question/Comment';
-import ThankYou from './ThankYou';
+import {SERVER_BASE_URL} from "../../config/config";
 
 class Clueless extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            user: this.props.user,
-            authStatus: this.props.authStatus,
-            clplayer: null,
-            question: null
+            isLoggedIn: true,
+            user: null,
+            question: null,
+            redirectUrl: null
         };
     }
+
 
     componentDidMount() {
-        const { urlClue } = this.props.match.params;
-        const { user } = this.state;
-
-        if(user && urlClue) {
-            this.getQuestion(user, urlClue);
-        }
-        else if(user && user.isClplayer){
-            this.getCurrentClplayer();
-        }
-        else if(user && !user.isClplayer) {
-            //Ask user to register
-            alert("You have not registered for Clueless, Please register in the events page");
-            this.props.history.push('/events/5');
-        }
+        this.reload();
     }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.reload();
+        this.setState({
+            redirectUrl: null
+        });
+    }
+
+    getIsLoggedIn = async () => {
+        try {
+            const response = await fetch(`${SERVER_BASE_URL}/api/user/isLoggedIn`, {
+                credentials: "include",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            this.setState({
+                isLoggedIn: data.isLoggedIn
+            });
+        } catch (err) {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
+    };
+
+    createCluelessUser = async (user) => {
+        try {
+            const response = await fetch(`${SERVER_BASE_URL}/api/clplayer/register`, {
+                credentials: "include",
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: user.id
+                })
+            });
+            const data = await response.json();
+        } catch (err) {
+            console.log(err);
+            this.setState({
+                isLoggedIn: false
+            });
+        }
+    };
+
+    getUser = async () => {
+        try {
+            const response = await fetch(`${SERVER_BASE_URL}/api/user/getUserData`, {
+                method: 'GET',
+                credentials: "include",
+            });
+            const data = await response.json();
+            this.setState({
+                user: data.user
+            });
+            return data.user;
+        } catch (err) {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
+    };
+
+    reload = async (refresh = false) => {
+        this.getIsLoggedIn();
+        const user = await this.getUser();
+        await this.createCluelessUser(user);
+
+        let {urlClue} = this.props;
+
+        if (user && urlClue) {
+            await this.getQuestion(user, urlClue);
+        } else if (user) {
+            await this.getCurrentPlayer(user);
+        } else {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
+    };
 
     getQuestion = async (user, urlClue) => {
-        const res = await (axios.get('/api/question/getByUrl/' + user.id + '/' + urlClue));
+        try {
+            const res = await fetch(SERVER_BASE_URL + '/api/question/getByUrl/' + user.id + '/' + urlClue, {
+                method: "GET",
+                credentials: "include"
+            });
 
-        if(res.data.success) {
-            this.setState(Object.assign({}, this.state, {question: res.data.question}));
-            document.title = res.data.question.title;
-        }
-        else {
-            this.props.history.push('/clueless');
-        }
-    }
+            const data = await res.json();
 
-    getCurrentClplayer = async () => {
-        const res = await (axios.get('/api/clplayer/getClplayerByUserId/' + this.state.user.id));
-
-        if(res.data.success) {
-            const clplayer = res.data.clplayer;
-
-            this.props.history.push('/clueless/' + clplayer.levelUrl);
+            if (data.success) {
+                this.setState({
+                    question: data.question
+                });
+                document.title = data.question.title;
+            } else {
+                this.setState({
+                    redirectUrl: '/clueless'
+                });
+            }
+        } catch (err) {
+            console.log(err);
         }
-        else {
-            this.props.history.push('/login');
+    };
+
+    getCurrentPlayer = async (user) => {
+        try {
+            const res = await fetch(SERVER_BASE_URL + '/api/clplayer/getClplayerByUserId/' + user.id, {
+                method: 'GET',
+                credentials: "include"
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                const player = data.clplayer;
+                this.setState({
+                    redirectUrl: '/clueless/' + player.levelUrl
+                });
+            } else {
+                this.setState({
+                    isLoggedIn: false
+                });
+            }
+        } catch (err) {
+            console.log(err);
         }
-    }
+    };
 
     checkAnswer = async (qId, answer) => {
-        let data = {
-            qId: qId,
-            answer: answer
-        };
-
-        let config = {
+        const response = await fetch(SERVER_BASE_URL + '/api/clplayer/checkAnswer', {
+            credentials: "include",
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
-            }
-        };
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                qId,
+                answer
+            })
+        });
 
-        const res = await (axios.post('/api/clplayer/checkAnswer', data, config));
+        const data = await response.json();
 
-        if(res.data.success) {
-            if(res.data.isCorrect) {
-                alert("Good job !");
-                this.props.history.push('/clueless/' + res.data.nextQuestion.url);
-            }
-            else {
-                this.props.history.push('/clueless/wrong_answer');
+        if (data.success) {
+            if (data.completed) {
+                alert("Congrats! You have completed Clueless!");
+                this.setState({
+                    redirectUrl: "/clueless/leaderboard/1"
+                });
+            } else if (data.isCorrect) {
+                alert("Correct Answer!");
+                this.setState({
+                    redirectUrl: "/clueless/" + data.nextQuestion.url
+                });
+            } else {
+                this.setState({
+                    redirectUrl: "/clueless/wrong-answer"
+                });
             }
         }
-    }
+    };
 
     render() {
-        const { user, authStatus, question } = this.state;
+        const {question, isLoggedIn, redirectUrl} = this.state;
 
-        if(user && authStatus === 'A' && question) {
-            return (
-                <ThankYou />
-            );
+        if (!isLoggedIn) {
+            return <Redirect to={'/login'}/>;
         }
-        else if(authStatus === 'LOADING') {
-            return (
-                <div>
-                    Loading...
-                </div>
-            );
+
+        if (redirectUrl) {
+            return <Redirect to={redirectUrl}/>;
         }
-        else if(authStatus === 'A' && !question) {
+
+        if (question) {
             return (
-                <div>
-                    Loading...
-                </div>
+                <Question question={question} checkAnswer={this.checkAnswer}/>
             );
-        }
-        else {
-            return (<Redirect to='/login' />);
+        } else {
+            return (
+                <p>Loading...</p>
+            );
         }
     }
 }

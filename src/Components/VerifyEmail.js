@@ -33,7 +33,6 @@ export default class VerifyEmail extends React.Component {
 
     verifyEmail = () => {
         const {code} = this.props;
-        console.log(code);
         fetch(`${SERVER_BASE_URL}/api/user/verifyUser/${code}`, {
             method: 'GET',
             credentials: "include",

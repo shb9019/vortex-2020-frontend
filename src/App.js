@@ -15,6 +15,10 @@ import ComingSoon from "./Components/ComingSoon";
 import ContactUs from "./Components/ContactUs";
 import NotFound from "./Components/NotFound";
 import GuestLectures from "./Components/GuestLectures";
+import Clueless from "./Components/Clueless";
+import {SERVER_BASE_URL} from "./config/config";
+import Leaderboard from "./Components/Clueless/Leaderboard";
+import WrongAnswer from "./Components/Clueless/WrongAnswer";
 
 class App extends Component {
     constructor(props) {
@@ -35,7 +39,7 @@ class App extends Component {
     };
 
     getIsLoggedIn = async () => {
-        const response = await fetch("https://delta.nitt.edu/vortex-api/api/user/isLoggedIn", {
+        const response = await fetch(`${SERVER_BASE_URL}/api/user/isLoggedIn`, {
             credentials: "include",
             headers: {
                 'Accept': 'application/json',
@@ -46,7 +50,6 @@ class App extends Component {
         this.setState({
             isLoggedIn: data.isLoggedIn
         });
-        console.log(data);
     };
 
     render() {
@@ -64,7 +67,8 @@ class App extends Component {
                             <Route exact path="/events" render={() => (<ComingSoon/>)}/>
                             {/*<Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>*/}
                             <Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>
-                            <Route exact path="/workshop/:id" render={({match}) => (<Details isWorkshop={true} id={match.params.id}/>)}/>
+                            <Route exact path="/workshop/:id"
+                                   render={({match}) => (<Details isWorkshop={true} id={match.params.id}/>)}/>
                             <Route exact path="/profile" render={() => (
                                 <Profile logout={() => {
                                     this.changeIsLoggedIn(false);
@@ -78,6 +82,12 @@ class App extends Component {
                                    render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
                             <Route path="/accommodation" render={() => (<ComingSoon/>)}/>
                             <Route path="/guest-lectures" render={() => (<GuestLectures/>)}/>
+                            <Route path="/clueless" exact render={() => (<Clueless/>)}/>
+                            <Route path="/clueless/leaderboard/:pageNo" exact
+                                   render={({match}) => (<Leaderboard pageNo={match.params.pageNo}/>)}/>
+                            <Route path="/clueless/wrong-answer" render={() => (<WrongAnswer/>)}/>
+                            <Route path="/clueless/:urlClue"
+                                   render={({match}) => (<Clueless urlClue={match.params.urlClue}/>)}/>
                             <Route path="*" exact render={() => (<NotFound/>)}/>
                         </Switch>
                     </div>

@@ -32,6 +32,13 @@
   margin-right: auto;
   margin-top: 50px;
   width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leaderboard {
+  font-family: Axiforma;
 }
 
 .leaderboard-button {
@@ -51,6 +58,21 @@
 
 .leaderboard-button:hover #leaderboard {
   color: #4d1a00;
+}
+
+.leaderboard-table {
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
+}
+
+.leaderboard-table tbody {
+  font-size: 20px;
+}
+
+.leaderboard-table tbody td {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 #leaderboard {
@@ -83,10 +105,15 @@
 
 #answer-label {
   display: inline;
-  color: white;
-  font-family: "Modern Antiqua", cursive;
-  font-size: 24px;
+  color: black;
   padding-right: 10px;
+  margin: 0 20px 0 0;
+  font-family: "axiforma", cursive;
+  font-size: 25px;
+}
+
+.page-item:before {
+  content: "";
 }
 
 #clueless-heading {
@@ -106,7 +133,7 @@
 
 .clueless-submit-button {
   color: wheat;
-  font-family: "Modern Antiqua", cursive;
+  font-family: "axiforma";
   font-size: 24px;
   background-color: #4d1a00;
   border: 0px;
@@ -154,7 +181,7 @@
 
 #back-link {
   color: wheat;
-  font-family: "Modern Antiqua", cursive;
+  font-family: "axiforma", cursive;
   font-size: 20px;
   background-color: #4d1a00;
   border: 0px;

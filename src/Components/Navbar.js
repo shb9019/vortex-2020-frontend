@@ -61,6 +61,7 @@ export default class VortexNavbar extends React.Component {
 
     render() {
         const {isNavbarOpen, isLoggedIn} = this.state;
+        const {clueless} = this.props;
 
         return (
             <div>
@@ -76,8 +77,16 @@ export default class VortexNavbar extends React.Component {
                     </Button>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end navbar-logo">
-                        <a className={'custom-navbar-link'} href={'/'}>HOME</a>
-                        {isLoggedIn && <a className={'custom-navbar-link'} onClick={this.logout}>LOGOUT</a>}
+                        {!clueless
+                            ? <a className={'custom-navbar-link'} href={'/'}>HOME</a>
+                            : <a className={'custom-navbar-link'} href={'/clueless'}>QUESTION</a>
+                        }
+                        {clueless && <a className={'custom-navbar-link'} href={'/clueless/leaderboard/1'}>
+                            <i className="fa fa-trophy" style={{ fontSize: 20 }}/>
+                        </a>}
+                        {isLoggedIn && <a className={'custom-navbar-link'} onClick={this.logout}>
+                            <i className="fa fa-sign-out" id="logout" style={{ fontSize: 20 }}/>
+                        </a>}
                     </Navbar.Collapse>
                 </Navbar>
                 <NavbarMenu isOpen={isNavbarOpen}/>

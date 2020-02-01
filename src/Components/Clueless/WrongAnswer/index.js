@@ -1,4 +1,6 @@
 import React from 'react';
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 class WrongAnswer extends React.Component {
     constructor(props) {
@@ -16,18 +18,17 @@ class WrongAnswer extends React.Component {
         const { images, imageIdx } = this.state;
         return (
             <div className="container-fluid clueless">
-                <div>
-                    <div>
+                <Row>
+                    <Col sm={12} className={'text-center'}>
                         <img
                             className="img-responsive"
                             id="wrong-img"
                             src={'/images/clueless/' + images[imageIdx]}
                             alt="Loading"
                             height="40px"
-                            download="asdf.jpg"
                         />
-                    </div>
-                </div>
+                    </Col>
+                </Row>
                 <div>
                       <a id="back-link-a" href="/clueless">
                         <button id="back-link">Back to Question</button>
