@@ -9,23 +9,31 @@ class Comment extends React.Component {
         };
     }
 
+    setComment = (text) => {
+
+    };
+
     componentDidMount() {
         this.setState({
             text: this.props.text
         });
-        document.getElementById('clue').innerHTML = `<-- ${this.props.text} -->`;
+        let el = ReactDOM.findDOMNode(this);
+        ReactDOM.unmountComponentAtNode(el);
+        el.outerHTML = this.props.text;
     }
+
 
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({
             text: nextProps.text
         });
-        document.getElementById('clue').innerHTML = `<-- ${nextProps.text} -->`;
+        let el = ReactDOM.findDOMNode(this);
+        ReactDOM.unmountComponentAtNode(el);
+        el.outerHTML = nextProps.text;
     }
 
-
     render() {
-        return <div id={'clue'}/>;
+        return <div/>;
     }
 }
 
