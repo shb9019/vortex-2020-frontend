@@ -55,12 +55,15 @@ export default class CluelessComingSoon extends React.Component {
 
             // If the count down is finished, write some text
             if (distance < 0) {
-                clearInterval(this.timer);
                 this.setState({
                     redirectNow: true
                 });
             }
         }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
     }
 
     render() {
