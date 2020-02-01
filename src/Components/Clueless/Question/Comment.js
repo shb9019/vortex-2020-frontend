@@ -9,17 +9,10 @@ class Comment extends React.Component {
         };
     }
 
-    setComment = (text) => {
-
-    };
-
     componentDidMount() {
         this.setState({
             text: this.props.text
         });
-        let el = ReactDOM.findDOMNode(this);
-        ReactDOM.unmountComponentAtNode(el);
-        el.outerHTML = this.props.text;
     }
 
 
@@ -27,13 +20,10 @@ class Comment extends React.Component {
         this.setState({
             text: nextProps.text
         });
-        let el = ReactDOM.findDOMNode(this);
-        ReactDOM.unmountComponentAtNode(el);
-        el.outerHTML = nextProps.text;
     }
 
     render() {
-        return <div/>;
+        return <div dangerouslySetInnerHTML={{ __html: `<!-- ${this.state.text} -->` }}/>;
     }
 }
 
