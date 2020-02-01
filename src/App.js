@@ -19,6 +19,7 @@ import Clueless from "./Components/Clueless";
 import {SERVER_BASE_URL} from "./config/config";
 import Leaderboard from "./Components/Clueless/Leaderboard";
 import WrongAnswer from "./Components/Clueless/WrongAnswer";
+import CluelessComingSoon from "./Components/CluelessComingSoon";
 
 class App extends Component {
     constructor(props) {
@@ -65,6 +66,7 @@ class App extends Component {
                             }}/>)}/>
                             <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
                             <Route exact path="/events" render={() => (<ComingSoon/>)}/>
+                            <Route exact path="/events/clueless" render={() => (<CluelessComingSoon/>)}/>
                             {/*<Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>*/}
                             <Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>
                             <Route exact path="/workshop/:id"
