@@ -2,20 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class Comment extends React.Component {
-    componentDidMount() {
-        let el = ReactDOM.findDOMNode(this);
-        ReactDOM.unmountComponentAtNode(el);
-        el.outerHTML = this.createComment();
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: ""
+        };
     }
 
-    createComment() {
-        let text = this.props.text;
-        document.getElementById("clue").innerHTML = `<!-- ${text} -->`;
-        return `<!-- ${text} -->`;
+    componentDidMount() {
+        this.setState({
+            text: this.props.text
+        });
+        document.getElementById('clue').innerHTML = `<-- ${this.props.text} -->`;
     }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({
+            text: nextProps.text
+        });
+        document.getElementById('clue').innerHTML = `<-- ${nextProps.text} -->`;
+    }
+
 
     render() {
-        return <div />;
+        return <div id={'clue'}/>;
     }
 }
 
