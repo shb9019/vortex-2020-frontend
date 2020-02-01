@@ -10,7 +10,7 @@ class Comment extends React.Component {
 
     createComment() {
         let text = this.props.text;
-
+        document.getElementById("clue").innerHTML = `<!-- ${text} -->`;
         return `<!-- ${text} -->`;
     }
 
