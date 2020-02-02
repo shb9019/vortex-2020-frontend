@@ -11,16 +11,16 @@ export default class EventList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            workshops: []
+            events: []
         };
     }
 
     componentDidMount() {
-        this.fetchWorkshopDetails();
+        this.fetchEventDetails();
     }
 
-    fetchWorkshopDetails = () => {
-        fetch(`${SERVER_BASE_URL}/api/workshops/getAll`, {
+    fetchEventDetails = () => {
+        fetch(`${SERVER_BASE_URL}/api/events/getAll`, {
             method: 'GET',
             credentials: "include",
         }).then((response) => {
@@ -28,7 +28,7 @@ export default class EventList extends React.Component {
         }).then((data) => {
             if (data.success) {
                 this.setState({
-                    workshops: data.workshops
+                    events: data.events
                 });
             } else {
                 console.log(data.error);
@@ -37,21 +37,21 @@ export default class EventList extends React.Component {
     };
 
     render() {
-        const {workshops} = this.state;
+        const {events} = this.state;
 
         let rows = [];
 
         let index = 0;
-        while (index < workshops.length) {
+        while (index < events.length) {
             rows.push(<Row className={'event-list-row'}>
                 <Col md={4} className={'event-list-card'}>
-                    <EventCard details={workshops[index]}/>
+                    <EventCard isWorkshop={false} details={events[index]}/>
                 </Col>
-                {(index + 1 < workshops.length) ? <Col md={4} className={'event-list-card'}>
-                    <EventCard details={workshops[index+1]}/>
+                {(index + 1 < events.length) ? <Col md={4} className={'event-list-card'}>
+                    <EventCard isWorkshop={false} details={events[index+1]}/>
                 </Col> : null}
-                {(index + 2 < workshops.length) ? <Col md={4} className={'event-list-card'}>
-                    <EventCard details={workshops[index+2]}/>
+                {(index + 2 < events.length) ? <Col md={4} className={'event-list-card'}>
+                    <EventCard isWorkshop={false} details={events[index+2]}/>
                 </Col> : null}
             </Row>);
             index += 3;

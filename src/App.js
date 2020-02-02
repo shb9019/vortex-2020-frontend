@@ -67,7 +67,12 @@ class App extends Component {
                             <Route exact path="/register" render={() => (<Register isLoggedIn={isLoggedIn}/>)}/>
                             <Route exact path="/events" render={() => (<ComingSoon/>)}/>
                             <Route exact path="/events/clueless" render={() => (<CluelessComingSoon/>)}/>
-                            {/*<Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>*/}
+                           
+                            {/* <Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>
+                            <Route exact path="/events" render={() => (<EventList isLoggedIn={isLoggedIn}/>)}/>
+                            <Route exact path="/event/:id"
+                                   render={({match}) => (<Details isWorkshop={false} id={match.params.id}/>)}/> */}
+
                             <Route exact path="/workshops" render={() => (<WorkshopList isLoggedIn={isLoggedIn}/>)}/>
                             <Route exact path="/workshop/:id"
                                    render={({match}) => (<Details isWorkshop={true} id={match.params.id}/>)}/>
