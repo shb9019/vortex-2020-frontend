@@ -108,11 +108,37 @@ export default class Details extends React.Component {
             })
         }
 
+        else{
+            this.setState({
+                l1: 'Description',
+                l2: 'Format',
+                l3: 'Rules'
+            });
+
+            fetch(`${SERVER_BASE_URL}/api/events/getById/${id}`, {
+                method: 'GET',
+                credentials: "include",
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                if (data.success) {
+                    let {description, format, rules } = data.event;
+                    this.setState({
+                        r1: description,
+                        r2: format,
+                        r3: rules,
+                        title: data.event.name
+                    });
+                } else {
+                    console.log(data.error);
+                }
+            })
+       }
+
         this.handleClick(1);
 
-        if (isWorkshop) {
-            this.setIsLoggedIn();
-        }
+        this.setIsLoggedIn();
+
     };
 
     render() {
@@ -245,8 +271,8 @@ export default class Details extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
-
-                    {isLoggedIn
+                    {this.props.isWorkshop?
+                    isLoggedIn
                         ? <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
                             <Col sm={12}>
                                 <Button text="Register" href="https://www.thecollegefever.com/events/vortex-20"/>
@@ -256,7 +282,9 @@ export default class Details extends React.Component {
                             <Col sm={12}>
                                 <Button text="Log In to register" href={'/login'}/>
                             </Col>
-                        </Row>}
+                        </Row>:null
+                    }
+
                 </section>
                 <Footer/>
             </div>
