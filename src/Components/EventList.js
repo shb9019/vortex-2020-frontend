@@ -20,20 +20,29 @@ export default class EventList extends React.Component {
     }
 
     fetchEventDetails = () => {
-        fetch(`${SERVER_BASE_URL}/api/events/getAll`, {
-            method: 'GET',
-            credentials: "include",
-        }).then((response) => {
-            return response.json();
-        }).then((data) => {
-            if (data.success) {
-                this.setState({
-                    events: data.events
-                });
-            } else {
-                console.log(data.error);
-            }
-        })
+        try {
+            fetch(`${SERVER_BASE_URL}/api/events/getEvents`, {
+                method: 'GET',
+                credentials: "include",
+            }).then((response) => {
+                console.log(response);
+                return response.json();
+            }).then((data) => {
+                console.log(data);
+                if (data.success) {
+                    this.setState({
+                        events: data.events
+                    });
+                    console.log(data.events);
+                } else {
+                    console.log(data.error);
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     render() {
@@ -62,12 +71,11 @@ export default class EventList extends React.Component {
                 <Navbar/>
                 <div className={'event-list-wrapper'}>
                     <section>
-                        <Row style={{width: '100%', paddingTop: 60}}>
+                        <Row style={{width: '100%', paddingTop: 30, margin: 0, minHeight: 240}}>
                             <Col sm={12}>
                                 <div className={'event-list-title'}><b><PopUp text="Events"/></b></div>
                             </Col>
                         </Row>
-                        <Row style={{width: '100%'}}><br/><br/><br/></Row>
                         {rows}
                     </section>
                 </div>

@@ -11,7 +11,7 @@ export default class Button extends React.Component {
             <div className="cover">
                 <div className="wrapper">
                     <a href={this.props.href} style={{padding: '15px 30px', border: '2px solid #FFF'}}
-                       className="btn10">
+                       className="btn10" onClick={this.props.onClick}>
                         <span>{this.props.text}</span>
                         <div className="transition"/>
                     </a>

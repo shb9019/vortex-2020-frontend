@@ -107,7 +107,7 @@
   box-sizing: border-box;
 }
 #details .c-procedure__slides,.c-procedure__nav {
-  height:500px!important;
+  height: 600px!important;
 }
 
 #details .s-game-procedure__container{
@@ -2920,7 +2920,7 @@
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  min-height: 164px;
+  min-height: 120px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

@@ -18,11 +18,14 @@ export default class Details extends React.Component {
             l1: 'Description',
             l2: 'Rules',
             l3: 'Format',
+            l4: '',
             r1: '',
             r2: '',
             r3: '',
+            r4: '',
             title: '',
-            isLoggedIn: true
+            isLoggedIn: true,
+            isRegistered: false
         };
     }
 
@@ -66,7 +69,6 @@ export default class Details extends React.Component {
             });
     };
 
-
     componentDidMount() {
         if (window.innerWidth <= 700) {
             let slide = document.getElementsByClassName('c-procedure__slide');
@@ -106,39 +108,82 @@ export default class Details extends React.Component {
                     console.log(data.error);
                 }
             })
-        }
-
-        else{
+        } else {
             this.setState({
                 l1: 'Description',
                 l2: 'Format',
-                l3: 'Rules'
+                l3: 'Rules',
+                l4: 'Resources'
             });
 
-            fetch(`${SERVER_BASE_URL}/api/events/getById/${id}`, {
+            fetch(`${SERVER_BASE_URL}/api/events/getEventById/${id}`, {
                 method: 'GET',
                 credentials: "include",
             }).then((response) => {
                 return response.json();
             }).then((data) => {
                 if (data.success) {
-                    let {description, format, rules } = data.event;
+                    let {description, format, rules, resources} = data.event;
                     this.setState({
                         r1: description,
                         r2: format,
                         r3: rules,
+                        r4: resources,
                         title: data.event.name
                     });
                 } else {
                     console.log(data.error);
                 }
             })
-       }
+        }
 
         this.handleClick(1);
-
         this.setIsLoggedIn();
+        this.checkRegistered();
+    };
 
+    registerEvent = async () => {
+        try {
+            const {id} = this.props;
+            const response = await fetch(`${SERVER_BASE_URL}/api/events/register/${id}`, {
+                credentials: "include",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            this.checkRegistered();
+        } catch (err) {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
+    };
+
+    checkRegistered = async () => {
+        try {
+            const {id} = this.props;
+            const response = await fetch(`${SERVER_BASE_URL}/api/events/checkRegistered/${id}`, {
+                credentials: "include",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            if (data.success) {
+                if (data.eventRegistration) {
+                    this.setState({
+                        isRegistered: true
+                    });
+                }
+            }
+        } catch (err) {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
     };
 
     render() {
@@ -167,11 +212,13 @@ export default class Details extends React.Component {
             '--word-index': `1`
         };
 
-        let {r1, r2, r3, isLoggedIn} = this.state;
+        let {r1, r2, r3, isLoggedIn, isRegistered} = this.state;
+        const {isWorkshop} = this.props;
         return (
             <div>
                 <Navbar/>
-                <section id="details" style={{backgroundColor: '#1C222F'}} className="s-game-procedure">
+                <section id="details" style={{backgroundColor: '#1C222F'}}
+                         className={`s-game-procedure ${!isWorkshop ? 'events-details-99' : ''}`}>
 
                     <Row style={{width: '100%', paddingTop: 80}}>
                         <Col sm={12}>
@@ -220,6 +267,15 @@ export default class Details extends React.Component {
                                                 </button>
                                             </div>
 
+                                            {!isWorkshop ? <div id="4" className="c-procedure__step">
+                                                <button onClick={(e) => {
+                                                    this.handleClick(e.currentTarget.parentElement.id)
+                                                }} className="">
+                                                    <div className="a-plus"/>
+                                                    <span className="t-h6"><b>04. </b>{this.state.l4}</span>
+                                                </button>
+                                            </div> : null}
+
                                         </div>
 
                                         <div className="c-procedure__slides"
@@ -227,9 +283,9 @@ export default class Details extends React.Component {
 
                                             <div className="c-procedure__slide g-full" style={{display: 'none'}}>
                                                 <div className="c-procedure__title splitting words" style={wordTotal}>
-                                                    <span className="c-procedure__slide-count"><span className="word"
-                                                                                                     data-word="01"
-                                                                                                     style={{wordIndex0}}><span>1</span></span></span>
+                             <span className="c-procedure__slide-count"><span className="word"
+                                                                              data-word="01"
+                                                                              style={{wordIndex0}}><span>1</span></span></span>
                                                     <h3 className="t-h3"><span className="word" data-word="Briefing"
                                                                                style={{wordIndex1}}><span
                                                         id="head1">{this.state.l1}</span></span></h3></div>
@@ -240,9 +296,9 @@ export default class Details extends React.Component {
 
                                             <div className="c-procedure__slide g-full">
                                                 <div className="c-procedure__title splitting words" style={wordTotal}>
-                                                    <span className="c-procedure__slide-count"><span className="word"
-                                                                                                     data-word="02"
-                                                                                                     style={{wordIndex0}}><span>2</span></span></span>
+                             <span className="c-procedure__slide-count"><span className="word"
+                                                                              data-word="02"
+                                                                              style={{wordIndex0}}><span>2</span></span></span>
                                                     <h3 className="t-h3"><span className="word" data-word="Game"
                                                                                style={{wordIndex1}}><span
                                                         id="head2">{this.state.l2}</span></span></h3></div>
@@ -254,9 +310,9 @@ export default class Details extends React.Component {
 
                                             <div className="c-procedure__slide g-full" style={{display: 'none'}}>
                                                 <div className="c-procedure__title splitting words" style={wordTotal}>
-                                                    <span className="c-procedure__slide-count"><span className="word"
-                                                                                                     data-word="03"
-                                                                                                     style={{wordIndex0}}><span>3</span></span></span>
+                             <span className="c-procedure__slide-count"><span className="word"
+                                                                              data-word="03"
+                                                                              style={{wordIndex0}}><span>3</span></span></span>
                                                     <h3 className="t-h3"><span className="word" data-word="Debriefing"
                                                                                style={{wordIndex1}}><span
                                                         id="head3">{this.state.l3}</span></span></h3></div>
@@ -264,6 +320,19 @@ export default class Details extends React.Component {
                                                     <p id="third" dangerouslySetInnerHTML={{__html: this.state.r3}}/>
                                                 </div>
                                             </div>
+
+                                            {!isWorkshop ? <div className="c-procedure__slide g-full" style={{display: 'none'}}>
+                                                <div className="c-procedure__title splitting words" style={wordTotal}>
+                             <span className="c-procedure__slide-count"><span className="word"
+                                                                              data-word="04"
+                                                                              style={{wordIndex0}}><span>4</span></span></span>
+                                                    <h3 className="t-h3"><span className="word" data-word="Debriefing"
+                                                                               style={{wordIndex1}}><span
+                                                        id="head4">{this.state.l4}</span></span></h3></div>
+                                                <div className="c-procedure__content" style={{opacity: 1}}>
+                                                    <p id="fourth" dangerouslySetInnerHTML={{__html: this.state.r4}}/>
+                                                </div>
+                                            </div> : null}
                                         </div>
                                     </div>
                                 </div>
@@ -271,18 +340,35 @@ export default class Details extends React.Component {
                         </Col>
                         <Col md={1}/>
                     </Row>
-                    {this.props.isWorkshop?
-                    isLoggedIn
-                        ? <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
-                            <Col sm={12}>
-                                <Button text="Register" href="https://www.thecollegefever.com/events/vortex-20"/>
-                            </Col>
-                        </Row>
-                        : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
-                            <Col sm={12}>
-                                <Button text="Log In to register" href={'/login'}/>
-                            </Col>
-                        </Row>:null
+                    {this.props.isWorkshop
+                        ? (isLoggedIn
+                            ? <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                                <Col sm={12}>
+                                    <Button text="Register" href="https://www.thecollegefever.com/events/vortex-20"/>
+                                </Col>
+                            </Row>
+                            : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                                <Col sm={12}>
+                                    <Button text="Log In to register" href={'/login'}/>
+                                </Col>
+                            </Row>)
+                        : (isLoggedIn
+                            ? (!isRegistered
+                                ? <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                                    <Col sm={12}>
+                                        <Button text="Register" onClick={this.registerEvent}/>
+                                    </Col>
+                                </Row>
+                                : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                                    <Col sm={12}>
+                                        <Button text="Registered!" disabled/>
+                                    </Col>
+                                </Row>)
+                            : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
+                                <Col sm={12}>
+                                    <Button text="Log In to register" href={'/login'}/>
+                                </Col>
+                            </Row>)
                     }
 
                 </section>
