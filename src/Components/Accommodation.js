@@ -77,6 +77,7 @@ export default class Accommodation extends React.Component {
 
             const data = await response.json();
             console.log(data);
+            alert("Saved!");
         } catch (error) {
             console.log(error);
             this.setState({
