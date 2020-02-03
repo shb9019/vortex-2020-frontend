@@ -1,7 +1,7 @@
-#ambassadorlist{text-align: justify;
+#ambassadorlist{
+    text-align: justify;
     font-weight: 300;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    letter-spacing: 0.1em;
+    font-family: 'Axiforma', Arial, sans-serif;
 }
 
 #ambassadorlist li{

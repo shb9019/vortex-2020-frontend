@@ -4,16 +4,37 @@ import Footer from "./Footer";
 import PopUp from "./PopUp";
 import {Col, Row} from "react-bootstrap";
 import '../styles/CampusAmbassador.css';
+import {SERVER_BASE_URL} from "../config/config";
 
 export default class CampusAmbassador extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            title:'Campus Ambassador',
-            text:"<ol> <li>One One One One One One </li>  <li>Two</li>  <li>Three</li>  <li>Four</li>   <li>Five</li>   <li>Six</li></ol>"
+            text:""
         };
     }
+
+    componentDidMount() {
+        this.getContent();
+    }
+
+    getContent = async () => {
+        try {
+            const response = await fetch(`${SERVER_BASE_URL}/api/cacontent/`, {
+                method: 'GET',
+                credentials: "include",
+            });
+            const data = await response.json();
+            if (data.content) {
+                this.setState({
+                    text: data.content.content
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     render() {
         return (
@@ -24,7 +45,7 @@ export default class CampusAmbassador extends React.Component {
                         
                         <Row style={{width: '100%', paddingTop: 30, margin: 0, minHeight: 240}}>
                             <Col sm={12}>
-                                <div className={'event-list-title'}><b><PopUp color="#3A505D" weight="300" text={this.state.title}/></b></div>
+                                <div className={'contact-us-title acco-title'}><h1>Campus <b>Ambassador</b></h1></div>
                             </Col>
                         </Row>
 
