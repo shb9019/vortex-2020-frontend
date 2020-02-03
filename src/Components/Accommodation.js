@@ -16,8 +16,8 @@ export default class Accommodation extends React.Component {
         this.state = {
             isLoggedIn: true,
             accoNeeded: false,
-            startDate: "06/02/2020",
-            endDate: "10/02/2020"
+            startDate: "02/06/2020",
+            endDate: "02/10/2020"
         };
     }
 
@@ -105,8 +105,8 @@ export default class Accommodation extends React.Component {
     };
 
     getEstimatedCost = () => {
-        let startDate = moment(this.state.startDate);
-        let endDate = moment(this.state.endDate);
+        let startDate = moment(moment(this.state.startDate).format('MM/DD/YYYY'));
+        let endDate = moment(moment(this.state.endDate).format('MM/DD/YYYY'));
 
         console.log(startDate, endDate, startDate.diff(endDate, 'days'));
         return endDate.diff(startDate, 'days') * 150;
