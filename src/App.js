@@ -20,6 +20,7 @@ import {SERVER_BASE_URL} from "./config/config";
 import Leaderboard from "./Components/Clueless/Leaderboard";
 import WrongAnswer from "./Components/Clueless/WrongAnswer";
 import CluelessComingSoon from "./Components/CluelessComingSoon";
+import Accommodation from "./Components/Accommodation";
 
 class App extends Component {
     constructor(props) {
@@ -85,7 +86,7 @@ class App extends Component {
                             <Route path="/forgotpassword" render={() => (<ForgotPassword/>)}/>
                             <Route path="/changepassword/:code"
                                    render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
-                            <Route path="/accommodation" render={() => (<ComingSoon/>)}/>
+                            <Route path="/accommodation" render={() => (<Accommodation/>)}/>
                             <Route path="/guest-lectures" render={() => (<GuestLectures/>)}/>
                             <Route path="/clueless" exact render={() => (<Clueless/>)}/>
                             <Route path="/clueless/leaderboard/:pageNo" exact
