@@ -213,6 +213,7 @@ export default class Details extends React.Component {
         };
 
         let {r1, r2, r3, isLoggedIn, isRegistered} = this.state;
+
         const {isWorkshop} = this.props;
         return (
             <div>
@@ -321,18 +322,22 @@ export default class Details extends React.Component {
                                                 </div>
                                             </div>
 
-                                            {!isWorkshop ? <div className="c-procedure__slide g-full" style={{display: 'none'}}>
-                                                <div className="c-procedure__title splitting words" style={wordTotal}>
+                                            {!isWorkshop ?
+                                                <div className="c-procedure__slide g-full" style={{display: 'none'}}>
+                                                    <div className="c-procedure__title splitting words"
+                                                         style={wordTotal}>
                              <span className="c-procedure__slide-count"><span className="word"
                                                                               data-word="04"
                                                                               style={{wordIndex0}}><span>4</span></span></span>
-                                                    <h3 className="t-h3"><span className="word" data-word="Debriefing"
-                                                                               style={{wordIndex1}}><span
-                                                        id="head4">{this.state.l4}</span></span></h3></div>
-                                                <div className="c-procedure__content" style={{opacity: 1}}>
-                                                    <p id="fourth" dangerouslySetInnerHTML={{__html: this.state.r4}}/>
-                                                </div>
-                                            </div> : null}
+                                                        <h3 className="t-h3"><span className="word"
+                                                                                   data-word="Debriefing"
+                                                                                   style={{wordIndex1}}><span
+                                                            id="head4">{this.state.l4}</span></span></h3></div>
+                                                    <div className="c-procedure__content" style={{opacity: 1}}>
+                                                        <p id="fourth"
+                                                           dangerouslySetInnerHTML={{__html: this.state.r4}}/>
+                                                    </div>
+                                                </div> : null}
                                         </div>
                                     </div>
                                 </div>
@@ -342,11 +347,19 @@ export default class Details extends React.Component {
                     </Row>
                     {this.props.isWorkshop
                         ? (isLoggedIn
-                            ? <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
-                                <Col sm={12}>
-                                    <Button text="Register" href="https://www.thecollegefever.com/events/vortex-20"/>
-                                </Col>
-                            </Row>
+                            ? <div>
+                                <Row style={{width: '100%', paddingBottom: 5, paddingTop: 30}}>
+                                    <Col sm={12} className={'text-center'}>
+                                        <p>Note: Complete your <a href={'/profile'}><b><u>profile</u></b></a> to be eligible for certificates</p>
+                                    </Col>
+                                </Row>
+                                <Row style={{width: '100%', paddingBottom: 30, paddingTop: 0}}>
+                                    <Col sm={12}>
+                                        <Button text="Register"
+                                                href="https://www.thecollegefever.com/events/vortex-20"/>
+                                    </Col>
+                                </Row>
+                            </div>
                             : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
                                 <Col sm={12}>
                                     <Button text="Log In to register" href={'/login'}/>
