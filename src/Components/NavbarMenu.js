@@ -42,15 +42,20 @@ export default class NavbarMenu extends React.Component {
                             }}><a className="size" href={'/accommodation'}>Accommodation</a></Col>
                         </Row>
                         <Row className={'navbar-menu-row'}>
-                            <Col lg={6} className={'navbar-link'} style={{
+                            <Col lg={4} className={'navbar-link'} style={{
                                 top: (isOpen ? 0 : 80),
                                 opacity: (isOpen ? 1 : 0),
                                 transitionDelay: '0.8s'
                             }}><a className="size" href={'/guest-lectures'}>Guest Lectures</a></Col>
-                            <Col lg={6} className={'navbar-link'} style={{
+                            <Col lg={4} className={'navbar-link'} style={{
                                 top: (isOpen ? 0 : 80),
                                 opacity: (isOpen ? 1 : 0),
                                 transitionDelay: '0.9s'
+                            }}><a className="size" href={'/campus-ambassador'}>Campus Ambassador</a></Col>
+                            <Col lg={4} className={'navbar-link'} style={{
+                                top: (isOpen ? 0 : 80),
+                                opacity: (isOpen ? 1 : 0),
+                                transitionDelay: '1.0s'
                             }}><a className="size" href={'/contacts'}>Contact Us</a></Col>
                         </Row>
                     </Container>

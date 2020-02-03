@@ -22,7 +22,7 @@
     text-decoration: none;
     color: black;
     font-family: axiforma;
-    font-size: 30px;
+    font-size: 25px;
     -webkit-transition: font-size 0.1s ease-in
 }
 
@@ -34,7 +34,7 @@
 }
 
 .navbar-link a:hover {
-    font-size: 38px;
+    font-size: 30px;
     cursor: pointer;
 }
 
