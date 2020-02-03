@@ -3,8 +3,10 @@ import '../styles/newPopUp.css';
 import {Row} from "react-bootstrap";
 
 export default function PopUp(prop){
+
     let text=prop.text;
     let res = text.split(" ");
+    let styles={"color":prop.color,"fontWeight":prop.weight};
   
     // starting delay
     const delay=1.5;
@@ -19,7 +21,7 @@ export default function PopUp(prop){
             {res.map(function(val, index){ 
               return (
               <h1  style={{"animationDelay":delay+(index*delayBetweenWords)+"s","WebkitAnimationDelay":(delay+index*delayBetweenWords)+"s"}} className="animated fadeInUp ease-out-circ d2 a-1 f2 fw3">
-                <code id="wowWow" className="db black-40">{val}&nbsp;</code>
+                <code id="wowWow" style={styles} className="db black-40">{val}&nbsp;</code>
               </h1>); 
               })
              }

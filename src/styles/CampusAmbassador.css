@@ -1,0 +1,10 @@
+#ambassadorlist{text-align: justify;
+    font-weight: 300;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 0.1em;
+}
+
+#ambassadorlist li{
+    margin:1.5em;
+}
+
