@@ -1,0 +1,221 @@
+.newPopUp #wowWow{
+  color:white;
+  font-family: axiforma;
+  font-size: 50px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  }
+  
+  .newPopUp .measure {
+    max-width: 30em;
+  }
+  .newPopUp .measure-wide {
+    max-width: 34em;
+  }
+  .newPopUp .measure-narrow {
+    max-width: 20em;
+  }
+  
+    .newPopUp .measure-ns {
+      max-width: 30em;
+    }
+    .newPopUp .measure-wide-ns {
+      max-width: 34em;
+    }
+    .newPopUp .measure-narrow-ns {
+      max-width: 20em;
+    }
+  
+      .newPopUp .measure-m {
+      max-width: 30em;
+    }
+    .newPopUp .measure-wide-m {
+      max-width: 34em;
+    }
+    .newPopUp .measure-narrow-m {
+      max-width: 20em;
+    }
+  
+      .newPopUp .measure-l {
+      max-width: 30em;
+    }
+    .newPopUp .measure-wide-l {
+      max-width: 34em;
+    }
+    .newPopUp .measure-narrow-l {
+      max-width: 20em;
+    }
+  
+    .newPopUp .center {
+    margin-left: auto;
+  }
+  .newPopUp .center, .newPopUp .mr-auto {
+    margin-right: auto;
+  }
+  
+    .newPopUp .center-ns {
+      margin-left: auto;
+    }
+    .newPopUp .center-ns, .newPopUp .mr-auto-ns {
+      margin-right: auto;
+    }
+  
+      .newPopUp .center-m {
+      margin-left: auto;
+    }
+    .newPopUp .center-m, .newPopUp .mr-auto-m {
+      margin-right: auto;
+    }
+  
+      .newPopUp .center-l {
+      margin-left: auto;
+    }
+    .newPopUp .center-l, .newPopUp .mr-auto-l {
+      margin-right: auto;
+    }
+  
+    .newPopUp .tc {
+    text-align: center;
+  }
+  
+    .newPopUp .tc-ns {
+      text-align: center;
+    }
+  
+      .newPopUp .tc-m {
+      text-align: center;
+    }
+  
+      .newPopUp .tc-l {
+      text-align: center;
+    }
+  
+    .newPopUp .sans-serif {
+    font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+  }
+  .newPopUp .black-80 {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+    .newPopUp .absolute--fill-ns {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+      .newPopUp .absolute-ns {
+      position: absolute;
+    }
+      .newPopUp .absolute--fill-m {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  
+      .newPopUp .absolute-m {
+      position: absolute;
+    }
+      .newPopUp .absolute--fill-l {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  
+      .newPopUp .absolute-l {
+      position: absolute;
+    }
+  
+  
+    .newPopUp .absolute--fill {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .newPopUp .flex {
+    display: flex;
+  }
+  .newPopUp .flex-column {
+    flex-direction: column;
+  }
+  
+  .newPopUp .justify-center {
+    justify-content: center;
+  }
+  .newPopUp .items-center {
+    align-items: center;
+  }
+  .newPopUp .h-100 {
+    height: 100%;
+  }
+  
+  
+   .newPopUp .animated {
+      -webkit-animation-duration: 2s;
+      animation-duration: 2s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+  
+      .newPopUp .animated.flip {
+      -webkit-backface-visibility: visible;
+      backface-visibility: visible;
+      -webkit-animation-name: flip;
+      animation-name: flip;
+    }
+  
+  
+  
+  
+     @-webkit-keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
+    .newPopUp .fadeInUp {
+      -webkit-animation-name: fadeInUp;
+      animation-name: fadeInUp;
+    }
+  
+  
+      newPopUp .ease-out-circ {
+      -webkit-animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+      animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+      newPopUp .d2 {
+      -webkit-animation-delay: 300ms;
+      animation-delay: 300ms;
+    }
+  
+      newPopUp .a-1 {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+    }
+    .newPopUp .f2 {
+    font-size: 2.25rem;
+  }
+  .newPopUp .fw3 {
+    font-weight: 300;
+  }

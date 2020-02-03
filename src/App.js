@@ -7,6 +7,7 @@ import Register from "./Components/Register";
 import EventList from "./Components/EventList";
 import Details from "./Components/Details";
 import Profile from "./Components/Profile";
+import CampusAmbassador from "./Components/CampusAmbassador";
 import WorkshopList from "./Components/WorkshopList";
 import VerifyEmail from "./Components/VerifyEmail";
 import ForgotPassword from "./Components/ForgotPassword";
@@ -87,6 +88,8 @@ class App extends Component {
                             <Route path="/changepassword/:code"
                                    render={({match}) => (<ResetPassword code={match.params.code}/>)}/>
                             <Route path="/accommodation" render={() => (<Accommodation/>)}/>
+                            <Route path="/campus-ambassador" render={() => (<CampusAmbassador/>)}/>
+                            <Route path="/accommodation" render={() => (<ComingSoon/>)}/>
                             <Route path="/guest-lectures" render={() => (<GuestLectures/>)}/>
                             <Route path="/clueless" exact render={() => (<Clueless/>)}/>
                             <Route path="/clueless/leaderboard/:pageNo" exact
