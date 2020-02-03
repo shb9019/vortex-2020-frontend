@@ -6,12 +6,12 @@ export default class Sponsor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentIndex: 0,
+            currentIndex: 2,
             totalCount: 4,
             windowWidth: this.getWindowWidth(),
-            sponsorImgs: ['practisc.svg', 'souled-store.png', 'zoomin.svg', 'tcf.svg'],
-            sponsorDescriptions: ['PractiSc Labs - Memento Sponsor', 'Official Gifting Partner', 'Associate Partner', 'Official Ticketing Partner'],
-            sponsorLinks: ['https://www.practisclabs.com/', 'https://www.thesouledstore.com/', 'https://www.zoomin.com/', 'https://www.thecollegefever.com/']
+            sponsorImgs: ['souled-store.png', 'practisc.svg', 'zoomin.svg', 'tcf.svg', 'uniq.jpeg'],
+            sponsorDescriptions: ['Official Gifting Partner', 'Memento Sponsor', 'Associate Partner', 'Official Ticketing Partner', 'Merchandise Sponsor'],
+            sponsorLinks: ['https://www.thesouledstore.com/', 'https://www.practisclabs.com', 'https://www.zoomin.com/', 'https://www.thecollegefever.com/', 'https://www.uniqtechnologies.co.in/']
         };
         window.addEventListener('resize', () => {
             this.setState({
