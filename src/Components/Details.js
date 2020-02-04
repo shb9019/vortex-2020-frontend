@@ -113,7 +113,7 @@ export default class Details extends React.Component {
                 l1: 'Description',
                 l2: 'Format',
                 l3: 'Rules',
-                l4: 'Resources'
+                l4: 'Contact'
             });
 
             fetch(`${SERVER_BASE_URL}/api/events/getEventById/${id}`, {
