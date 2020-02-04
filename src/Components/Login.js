@@ -90,7 +90,7 @@ export default class Login extends React.Component {
             <Col md={4} className={"input-field-col"}>
               <input
                 className={"input-field"}
-                placeholder={"Username*"}
+                placeholder={"Username/Email*"}
                 value={username}
                 onChange={this.changeUsername}
                 type="text"
