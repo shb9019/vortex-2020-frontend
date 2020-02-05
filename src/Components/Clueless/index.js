@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 
 import Question from './Question/Question';
 import {SERVER_BASE_URL} from "../../config/config";
+import ThankYou from "./ThankYou";
 
 class Clueless extends React.Component {
     constructor(props) {
@@ -203,7 +204,7 @@ class Clueless extends React.Component {
 
         if (question) {
             return (
-                <Question question={question} checkAnswer={this.checkAnswer}/>
+                <ThankYou/>
             );
         } else {
             return (

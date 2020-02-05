@@ -1,4 +1,6 @@
 import React from 'react';
+import Navbar from "../../Navbar";
+import Footer from "../../Footer";
 
 class ThankYou extends React.Component {
     constructor(props) {
@@ -7,10 +9,12 @@ class ThankYou extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid clueless">
-                <div class="thankyou">
-                Thank you for playing clueless
-                </div>
+            <div>
+                <Navbar clueless={true}/>
+                <section style={{minHeight: '100vh'}} className={'coming-soon-section'}>
+                    <h1>Thank you for playing clueless</h1>
+                </section>
+                <Footer/>
             </div>
         );
     }
