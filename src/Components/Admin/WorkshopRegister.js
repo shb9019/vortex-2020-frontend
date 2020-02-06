@@ -19,7 +19,8 @@ export default class WorkshopRegister extends React.Component {
             workshops: [],
             selectedWorkshop: -1,
             registeredWorkshops: null,
-            vortexId: ""
+            vortexId: "",
+            payment: "-1"
         };
     }
 
@@ -153,10 +154,15 @@ export default class WorkshopRegister extends React.Component {
 
     register = async () => {
         try {
-            const {vortexId, selectedWorkshop} = this.state;
+            const {vortexId, payment, selectedWorkshop} = this.state;
 
             if (selectedWorkshop === -1) {
                 alert("No Workshop is selected");
+                return;
+            }
+
+            if (payment === "-1") {
+                alert("No payment method is selected");
                 return;
             }
 
@@ -168,7 +174,8 @@ export default class WorkshopRegister extends React.Component {
                 },
                 body: JSON.stringify({
                     vortexId,
-                    workshopId: selectedWorkshop
+                    workshopId: selectedWorkshop,
+                    paymentMethod: payment
                 })
             });
 
@@ -178,7 +185,7 @@ export default class WorkshopRegister extends React.Component {
                 alert("Registered Successfully!");
                 this.setState({
                     vortexId: "",
-                    registeredWorkshops: null
+                    registeredWorkshops: null,
                 });
             } else {
                 alert(data.error);
@@ -198,6 +205,12 @@ export default class WorkshopRegister extends React.Component {
     setVortexId = (e) => {
         this.setState({
             vortexId: e.target.value
+        });
+    };
+
+    setPayment = (payment) => {
+        this.setState({
+            payment
         });
     };
 
@@ -237,6 +250,17 @@ export default class WorkshopRegister extends React.Component {
                         <Col sm={3}>
                             <select onChange={(e) => this.setWorkshop(e.target.value)}>
                                 {workshopOptions}
+                            </select>
+                        </Col>
+                    </Row>
+                    <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
+                        <Col sm={1}/>
+                        <Col sm={3}>Payment Method</Col>
+                        <Col sm={3}>
+                            <select onChange={(e) => this.setPayment(e.target.value)}>
+                                <option value={'-1'}>Choose payment method</option>
+                                <option value={'online'}>Online</option>
+                                <option value={'offline'}>Offline</option>
                             </select>
                         </Col>
                     </Row>
