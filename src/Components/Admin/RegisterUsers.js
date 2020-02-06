@@ -83,14 +83,7 @@ export default class RegisterUsers extends React.Component {
 
     render() {
         const {isLoggedIn, isAdmin} = this.state;
-
-        if (!isLoggedIn) {
-            return <Redirect to={'/login'}/>
-        }
-
-        if (!isAdmin) {
-            return <Redirect to={'/'}/>
-        }
+        console.log(isLoggedIn, isAdmin);
 
         return null;
     }
