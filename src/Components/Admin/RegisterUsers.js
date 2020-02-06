@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {SERVER_BASE_URL} from "../../config/config";
 import {Redirect} from "react-router-dom";
+import { ethical } from './workshopRegs/ethical';
 
 export default class RegisterUsers extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class RegisterUsers extends React.Component {
     componentDidMount() {
         this.getIsLoggedIn().then(() => {
             this.getUserRole();
-            this.getUserByEmail('18eucs055@skcet.ac.in');
+            this.getAllUserIds();
         });
     }
 
@@ -62,7 +63,10 @@ export default class RegisterUsers extends React.Component {
 
     getUserByEmail = async (emailId) => {
         try {
+            console.log(emailId);
+            return;
             const response = await fetch(`${SERVER_BASE_URL}/api/user/getUserByEmail`, {
+                method: "POST",
                 credentials: "include",
                 headers: {
                     'Accept': 'application/json',
@@ -77,6 +81,12 @@ export default class RegisterUsers extends React.Component {
         } catch (err) {
             console.log(err);
         }
+    };
+
+    getAllUserIds = () => {
+        ethical.S1[0].forEach((user) => {
+            this.getUserByEmail(user[1]);
+        });
     };
 
     render() {
