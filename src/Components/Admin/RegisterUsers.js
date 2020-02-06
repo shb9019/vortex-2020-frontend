@@ -75,9 +75,7 @@ export default class RegisterUsers extends React.Component {
             const data = await response.json();
             console.log(data);
         } catch (err) {
-            this.setState({
-                isLoggedIn: false
-            });
+            console.log(err);
         }
     };
 
