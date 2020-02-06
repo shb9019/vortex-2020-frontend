@@ -23,6 +23,7 @@ import WrongAnswer from "./Components/Clueless/WrongAnswer";
 import CluelessComingSoon from "./Components/CluelessComingSoon";
 import Accommodation from "./Components/Accommodation";
 import WorkshopRegister from "./Components/Admin/WorkshopRegister";
+import WorkshopStats from "./Components/Admin/WorkshopStats";
 
 class App extends Component {
     constructor(props) {
@@ -99,6 +100,7 @@ class App extends Component {
                             <Route path="/clueless/:urlClue"
                                    render={({match}) => (<Clueless urlClue={match.params.urlClue}/>)}/>
                             <Route path={'/admin/workshop/register'} exact render={() => (<WorkshopRegister/>)}/>
+                            <Route path={'/admin/workshop/stats'} exact render={() => (<WorkshopStats/>)}/>
                             <Route path="*" exact render={() => (<NotFound/>)}/>
                         </Switch>
                     </div>
