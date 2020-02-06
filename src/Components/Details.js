@@ -156,7 +156,7 @@ export default class Details extends React.Component {
                 }
             });
             const data = await response.json();
-            this.checkRegistered();
+            this.checkEventRegistered();
         } catch (err) {
             this.setState({
                 isLoggedIn: false
