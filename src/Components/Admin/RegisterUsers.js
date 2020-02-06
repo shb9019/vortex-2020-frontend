@@ -63,8 +63,6 @@ export default class RegisterUsers extends React.Component {
 
     getUserByEmail = async (emailId) => {
         try {
-            console.log(emailId);
-            return;
             const response = await fetch(`${SERVER_BASE_URL}/api/user/getUserByEmail`, {
                 method: "POST",
                 credentials: "include",
@@ -77,7 +75,37 @@ export default class RegisterUsers extends React.Component {
                 })
             });
             const data = await response.json();
-            console.log(data);
+            if (data.success) {
+                this.register(data.user.vId, 2);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    register = async (vortexId, workshopId) => {
+        try {
+            console.log(vortexId, workshopId);
+            return;
+            const response = await fetch(`${SERVER_BASE_URL}/api/workshops/register`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    vortexId,
+                    workshopId
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                console.log("Registered: ", vortexId);
+            } else {
+                alert(data.error);
+            }
         } catch (err) {
             console.log(err);
         }
@@ -92,6 +120,14 @@ export default class RegisterUsers extends React.Component {
     render() {
         const {isLoggedIn, isAdmin} = this.state;
         console.log(isLoggedIn, isAdmin);
+
+        if (!isLoggedIn) {
+            return <Redirect to={'/login'}/>
+        }
+
+        if (!isAdmin)  {
+            return <Redirect to={'/'}/>
+        }
 
         return null;
     }
