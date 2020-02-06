@@ -76,7 +76,7 @@ export default class RegisterUsers extends React.Component {
             });
             const data = await response.json();
             if (data.success) {
-                this.register(data.user.vId, 2);
+                this.register(data.user.vId, 6);
             }
         } catch (err) {
             console.log(err);
@@ -86,7 +86,6 @@ export default class RegisterUsers extends React.Component {
     register = async (vortexId, workshopId) => {
         try {
             console.log(vortexId, workshopId);
-            return;
             const response = await fetch(`${SERVER_BASE_URL}/api/workshops/register`, {
                 method: "POST",
                 credentials: "include",
@@ -111,10 +110,11 @@ export default class RegisterUsers extends React.Component {
         }
     };
 
-    getAllUserIds = () => {
-        ethical.S1[0].forEach((user) => {
-            this.getUserByEmail(user[1]);
-        });
+    getAllUserIds = async () => {
+        // for (let i = 0; i < ethical.S1.length; i++) {
+        //     this.getUserByEmail(ethical.S1[i][1]);
+        //     await new Promise(r => setTimeout(r, 200));
+        // }
     };
 
     render() {

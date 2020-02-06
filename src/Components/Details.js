@@ -107,7 +107,10 @@ export default class Details extends React.Component {
                 } else {
                     console.log(data.error);
                 }
-            })
+            });
+
+            this.setIsLoggedIn();
+            this.checkWorkshopRegistered();
         } else {
             this.setState({
                 l1: 'Description',
@@ -139,7 +142,7 @@ export default class Details extends React.Component {
 
         this.handleClick(1);
         this.setIsLoggedIn();
-        this.checkRegistered();
+        this.checkEventRegistered();
     };
 
     registerEvent = async () => {
@@ -161,7 +164,7 @@ export default class Details extends React.Component {
         }
     };
 
-    checkRegistered = async () => {
+    checkEventRegistered = async () => {
         try {
             const {id} = this.props;
             const response = await fetch(`${SERVER_BASE_URL}/api/events/checkRegistered/${id}`, {
@@ -174,6 +177,35 @@ export default class Details extends React.Component {
             const data = await response.json();
             if (data.success) {
                 if (data.eventRegistration) {
+                    this.setState({
+                        isRegistered: true
+                    });
+                }
+            }
+        } catch (err) {
+            this.setState({
+                isLoggedIn: false
+            });
+        }
+    };
+
+    checkWorkshopRegistered = async () => {
+        try {
+            const {id} = this.props;
+            const response = await fetch(`${SERVER_BASE_URL}/api/workshops/checkRegistered`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    workshopId: id
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                if (data.workshopRegistrations) {
                     this.setState({
                         isRegistered: true
                     });
@@ -347,7 +379,7 @@ export default class Details extends React.Component {
                     </Row>
                     {this.props.isWorkshop
                         ? (isLoggedIn
-                            ? <div>
+                            ? (!isRegistered ? <div>
                                 <Row style={{width: '100%', paddingBottom: 5, paddingTop: 30}}>
                                     <Col sm={12} className={'text-center'}>
                                         <p>Note: Complete your <a href={'/profile'}><b><u>profile</u></b></a> to be eligible for certificates</p>
@@ -360,6 +392,11 @@ export default class Details extends React.Component {
                                     </Col>
                                 </Row>
                             </div>
+                            : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 0}}>
+                                    <Col sm={12}>
+                                        <Button text="Registered!"/>
+                                    </Col>
+                                </Row>)
                             : <Row style={{width: '100%', paddingBottom: 30, paddingTop: 15}}>
                                 <Col sm={12}>
                                     <Button text="Log In to register" href={'/login'}/>
