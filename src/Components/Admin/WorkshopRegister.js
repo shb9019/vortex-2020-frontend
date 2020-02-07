@@ -15,7 +15,8 @@ export default class WorkshopRegister extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: true,
-            username: "",
+            fullname: "",
+            email: "",
             isAdmin: true,
             workshops: [],
             selectedWorkshop: -1,
@@ -53,6 +54,25 @@ export default class WorkshopRegister extends React.Component {
         }
     };
 
+    getUserData = (vortexId) => {
+        fetch(`${SERVER_BASE_URL}/api/user/getUserByVortexId/${vortexId}`, {
+            method: 'GET',
+            credentials: "include",
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            if (data.success) {
+                const user = data.user;
+                this.setState({
+                    fullname: user.fullname,
+                    email: user.email
+                });
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+
     getUserRole = () => {
         fetch(`${SERVER_BASE_URL}/api/user/getUserData`, {
             method: 'GET',
@@ -64,7 +84,6 @@ export default class WorkshopRegister extends React.Component {
                 const user = data.user;
                 this.setState({
                     isAdmin: (user.role === 'ADMIN'),
-                    username: user.fullname
                 });
             } else {
                 alert(data.error);
@@ -188,6 +207,8 @@ export default class WorkshopRegister extends React.Component {
                 this.setState({
                     vortexId: "",
                     registeredWorkshops: null,
+                    fullname: "",
+                    email: ""
                 });
             } else {
                 alert(data.error);
@@ -217,6 +238,8 @@ export default class WorkshopRegister extends React.Component {
                 this.setState({
                     vortexId: "",
                     registeredWorkshops: null,
+                    fullname: "",
+                    email: ""
                 });
             } else {
                 alert(data.error);
@@ -251,7 +274,7 @@ export default class WorkshopRegister extends React.Component {
     };
 
     render() {
-        const {onlyPR, workshops, vortexId, registeredWorkshops, isLoggedIn, isAdmin} = this.state;
+        const {onlyPR, workshops, vortexId, registeredWorkshops, isLoggedIn, isAdmin, fullname, email} = this.state;
 
         if (!isLoggedIn) {
             return <Redirect to={'/login'}/>
@@ -276,8 +299,10 @@ export default class WorkshopRegister extends React.Component {
                             <input type={'text'} value={vortexId} onChange={this.setVortexId}/>
                         </Col>
                         <Col sm={3}>
-                            <Button className={'primary'} onClick={this.getRegisteredWorkshops}>Fetch Registered
-                                Workshops</Button>
+                            <Button className={'primary'} onClick={() => {
+                                this.getRegisteredWorkshops();
+                                this.getUserData(vortexId);
+                            }}>Fetch User Details</Button>
                         </Col>
                         <Col sm={1}/>
                     </Row>
@@ -322,6 +347,20 @@ export default class WorkshopRegister extends React.Component {
                                     return <li>{name}</li>;
                                 })}
                             </ul>
+                        </Col>
+                    </Row>}
+                    {(fullname !== "") && <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
+                        <Col sm={1}/>
+                        <Col sm={3}>Full Name of User</Col>
+                        <Col sm={6}>
+                            {fullname}
+                        </Col>
+                    </Row>}
+                    {(email !== "") && <Row style={{width: '100%', margin: 0, paddingTop: 10}}>
+                        <Col sm={1}/>
+                        <Col sm={3}>Email of User</Col>
+                        <Col sm={6}>
+                            {email}
                         </Col>
                     </Row>}
                     <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
