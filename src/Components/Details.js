@@ -137,12 +137,13 @@ export default class Details extends React.Component {
                 } else {
                     console.log(data.error);
                 }
-            })
+            });
+
+            this.setIsLoggedIn();
+            this.checkEventRegistered();
         }
 
         this.handleClick(1);
-        this.setIsLoggedIn();
-        this.checkEventRegistered();
     };
 
     registerEvent = async () => {
