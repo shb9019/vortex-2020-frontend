@@ -15,10 +15,12 @@ export default class WorkshopRegister extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: true,
+            username: "",
             isAdmin: true,
             workshops: [],
             selectedWorkshop: -1,
             registeredWorkshops: null,
+            onlyPR: 'no',
             vortexId: "",
             payment: "-1"
         };
@@ -60,10 +62,9 @@ export default class WorkshopRegister extends React.Component {
         }).then((data) => {
             if (data.success) {
                 const user = data.user;
-                console.log(data.user);
-                console.log(user.role === 'ADMIN');
                 this.setState({
-                    isAdmin: (user.role === 'ADMIN')
+                    isAdmin: (user.role === 'ADMIN'),
+                    username: user.fullname
                 });
             } else {
                 alert(data.error);
@@ -82,41 +83,37 @@ export default class WorkshopRegister extends React.Component {
             const {workshops, vortexId} = this.state;
             let registeredWorkshopIds = [], registeredWorkshopNames = [];
 
-                fetch(`${SERVER_BASE_URL}/api/workshops/getUserRegistrations`, {
-                    method: "POST",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        vortexId
-                    })
-                }).then((response) => {
-                    return response.json();
-                }).then((data) => {
-                    if (data.success) {
-                        console.log(data);
-                        if (data.workshopRegistrations) {
-                            console.log(data.workshopRegistrations);
-                            data.workshopRegistrations.forEach((registration) => {
-                                registeredWorkshopIds.push(registration.workshopId);
-                            });
-                            console.log(registeredWorkshopIds);
-                            workshops.forEach((workshop) => {
-                                if (registeredWorkshopIds.includes(workshop.id)) {
-                                    registeredWorkshopNames.push(workshop.name);
-                                }
-                            });
-                        }
-                        console.log(registeredWorkshopNames);
-                        this.setState({
-                            registeredWorkshops: registeredWorkshopNames
+            fetch(`${SERVER_BASE_URL}/api/workshops/getUserRegistrations`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    vortexId
+                })
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                if (data.success) {
+                    if (data.workshopRegistrations) {
+                        data.workshopRegistrations.forEach((registration) => {
+                            registeredWorkshopIds.push(registration.workshopId);
                         });
-                    } else {
-                        console.log(data);
-                        alert(data.error);
+                        workshops.forEach((workshop) => {
+                            if (registeredWorkshopIds.includes(workshop.id)) {
+                                registeredWorkshopNames.push(workshop.name);
+                            }
+                        });
                     }
-                });
+                    this.setState({
+                        registeredWorkshops: registeredWorkshopNames
+                    });
+                } else {
+                    console.log(data);
+                    alert(data.error);
+                }
+            });
         } catch (err) {
             console.log(err);
         }
@@ -154,7 +151,12 @@ export default class WorkshopRegister extends React.Component {
 
     register = async () => {
         try {
-            const {vortexId, payment, selectedWorkshop} = this.state;
+            const {vortexId, payment, selectedWorkshop, onlyPR} = this.state;
+
+            if (onlyPR === 'yes') {
+                await this.registerOnlyPR(vortexId);
+                return;
+            }
 
             if (selectedWorkshop === -1) {
                 alert("No Workshop is selected");
@@ -195,8 +197,36 @@ export default class WorkshopRegister extends React.Component {
         }
     };
 
+    registerOnlyPR = async (vortexId) => {
+        try {
+            const response = await fetch(`${SERVER_BASE_URL}/api/workshops/register_pr`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    vortexId,
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Registered Successfully!");
+                this.setState({
+                    vortexId: "",
+                    registeredWorkshops: null,
+                });
+            } else {
+                alert(data.error);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     setWorkshop = (id) => {
-        console.log(id);
         this.setState({
             selectedWorkshop: id
         });
@@ -214,8 +244,14 @@ export default class WorkshopRegister extends React.Component {
         });
     };
 
+    setOnlyPR = (onlyPR) => {
+        this.setState({
+            onlyPR
+        });
+    };
+
     render() {
-        const {workshops, vortexId, registeredWorkshops, isLoggedIn, isAdmin} = this.state;
+        const {onlyPR, workshops, vortexId, registeredWorkshops, isLoggedIn, isAdmin} = this.state;
 
         if (!isLoggedIn) {
             return <Redirect to={'/login'}/>
@@ -240,30 +276,43 @@ export default class WorkshopRegister extends React.Component {
                             <input type={'text'} value={vortexId} onChange={this.setVortexId}/>
                         </Col>
                         <Col sm={3}>
-                            <Button className={'primary'} onClick={this.getRegisteredWorkshops}>Fetch Registered Workshops</Button>
+                            <Button className={'primary'} onClick={this.getRegisteredWorkshops}>Fetch Registered
+                                Workshops</Button>
                         </Col>
                         <Col sm={1}/>
                     </Row>
                     <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
                         <Col sm={1}/>
-                        <Col sm={3}>Choose Workshop</Col>
+                        <Col sm={3}>Only PR?</Col>
                         <Col sm={3}>
-                            <select onChange={(e) => this.setWorkshop(e.target.value)}>
-                                {workshopOptions}
+                            <select onChange={(e) => this.setOnlyPR(e.target.value)}>
+                                <option value={'no'}>No</option>
+                                <option value={'yes'}>Yes</option>
                             </select>
                         </Col>
                     </Row>
-                    <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
-                        <Col sm={1}/>
-                        <Col sm={3}>Payment Method</Col>
-                        <Col sm={3}>
-                            <select onChange={(e) => this.setPayment(e.target.value)}>
-                                <option value={'-1'}>Choose payment method</option>
-                                <option value={'online'}>Online</option>
-                                <option value={'offline'}>Offline</option>
-                            </select>
-                        </Col>
-                    </Row>
+                    {(onlyPR === 'no') && <React.Fragment>
+                        <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
+                            <Col sm={1}/>
+                            <Col sm={3}>Choose Workshop</Col>
+                            <Col sm={3}>
+                                <select onChange={(e) => this.setWorkshop(e.target.value)}>
+                                    {workshopOptions}
+                                </select>
+                            </Col>
+                        </Row>
+                        <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
+                            <Col sm={1}/>
+                            <Col sm={3}>Payment Method</Col>
+                            <Col sm={3}>
+                                <select onChange={(e) => this.setPayment(e.target.value)}>
+                                    <option value={'-1'}>Choose payment method</option>
+                                    <option value={'online'}>Online</option>
+                                    <option value={'offline'}>Offline</option>
+                                </select>
+                            </Col>
+                        </Row>
+                    </React.Fragment>}
                     {registeredWorkshops && <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
                         <Col sm={1}/>
                         <Col sm={3}>Registered Workshops</Col>
@@ -275,7 +324,7 @@ export default class WorkshopRegister extends React.Component {
                             </ul>
                         </Col>
                     </Row>}
-                    <Row  style={{width: '100%', margin: 0, paddingTop: 40}}>
+                    <Row style={{width: '100%', margin: 0, paddingTop: 40}}>
                         <Col sm={1}/>
                         <Col sm={4}>
                             <Button variant="success" onClick={this.register}>Register User</Button>

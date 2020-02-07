@@ -111,10 +111,10 @@ export default class RegisterUsers extends React.Component {
     };
 
     getAllUserIds = async () => {
-        for (let i = 0; i < ethical.S1.length; i++) {
-            this.getUserByEmail(ethical.S1[i][1]);
-            await new Promise(r => setTimeout(r, 200));
-        }
+        // for (let i = 0; i < ethical.S1.length; i++) {
+        //     this.getUserByEmail(ethical.S1[i][1]);
+        //     await new Promise(r => setTimeout(r, 200));
+        // }
     };
 
     render() {
