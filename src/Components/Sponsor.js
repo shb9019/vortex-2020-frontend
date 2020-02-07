@@ -9,9 +9,9 @@ export default class Sponsor extends React.Component {
             currentIndex: 2,
             totalCount: 4,
             windowWidth: this.getWindowWidth(),
-            sponsorImgs: ['souled-store.png', 'zoomin.svg', 'practisc.svg', 'tcf.svg', 'uniq.jpeg'],
-            sponsorDescriptions: ['Official Gifting Partner', 'Associate Partner', 'Memento Sponsor', 'Official Ticketing Partner', 'Merchandise Sponsor'],
-            sponsorLinks: ['https://www.thesouledstore.com/', 'https://www.zoomin.com/', 'https://www.practisclabs.com', 'https://www.thecollegefever.com/', 'https://www.uniqtechnologies.co.in/']
+            sponsorImgs: ['souled-store.png', 'zoomin.svg', 'infoview.png', 'practisc.svg', 'tcf.svg', 'uniq.jpeg'],
+            sponsorDescriptions: ['Official Gifting Partner', 'Associate Partner', 'Title Sponsor', 'Memento Sponsor', 'Official Ticketing Partner', 'Merchandise Sponsor'],
+            sponsorLinks: ['https://www.thesouledstore.com/', 'https://www.zoomin.com/', 'https://www.ivtlinfoview.com/', 'https://www.practisclabs.com', 'https://www.thecollegefever.com/', 'https://www.uniqtechnologies.co.in/']
         };
         window.addEventListener('resize', () => {
             this.setState({
